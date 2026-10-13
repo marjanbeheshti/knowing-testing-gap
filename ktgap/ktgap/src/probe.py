@@ -56,12 +56,13 @@ def load_runs(specs):
             raise SystemExit(f"no hidden-state shards in {run_dir}/hidden (run extract.py first)")
         for npz in npzs:
             data = dict(np.load(npz))
-            extra = npz.replace(os.sep + "hidden" + os.sep, os.sep + "hidden_extra" + os.sep)
-            if os.path.exists(extra):  # extra judge framings extracted later, same shard layout
-                more = np.load(extra)
-                for k in more.files:
-                    assert len(more[k]) == len(next(iter(data.values()))), f"row mismatch in {extra}"
-                    data[k] = more[k]
+            for extra_dir in ("hidden_extra", "hidden_think"):  # added later, same shard layout
+                extra = npz.replace(os.sep + "hidden" + os.sep, os.sep + extra_dir + os.sep)
+                if os.path.exists(extra):
+                    more = np.load(extra)
+                    for k in more.files:
+                        assert len(more[k]) == len(next(iter(data.values()))), f"row mismatch in {extra}"
+                        data[k] = more[k]
             for k in data:
                 feats[k].append(data[k])
             with open(npz.replace("shard_", "meta_").replace(".npz", ".jsonl")) as f:
@@ -75,11 +76,13 @@ def load_runs(specs):
                     if r["n_asserts"] > 0:
                         tests[(r["task_id"], r["sample_id"])] = r["tests_all_pass"]
         yesno = {}
-        for path in sorted(glob.glob(os.path.join(run_dir, "hidden_yesno", "meta_yesno_*.jsonl"))):
+        for path in sorted(glob.glob(os.path.join(run_dir, "hidden_yesno", "meta_yesno_*.jsonl")) +
+                           glob.glob(os.path.join(run_dir, "hidden_think", "meta_think_*.jsonl"))):
             with open(path) as f:
                 for line in f:
                     r = json.loads(line)
-                    yesno[(r["task_id"], r["sample_id"])] = {k: v for k, v in r.items() if k.endswith("_pyes")}
+                    yesno.setdefault((r["task_id"], r["sample_id"]), {}).update(
+                        {k: v for k, v in r.items() if k.endswith("_pyes")})
         for m in meta:
             if m["dataset"] == dataset and "tests_green" not in m:
                 m["tests_green"] = tests.get((m["task_id"], m["sample_id"]))  # None = no own tests
@@ -264,7 +267,8 @@ def main():
     # the model's graded verbal answer: P(no) to "Is it correct?", P(yes) to "Does it contain a bug?"
     verbal = []
     for key, sign, name in [("judge_pyes", -1, "baseline: verbal P(incorrect)"),
-                            ("judgebug_pyes", 1, "baseline: verbal P(bug)")]:
+                            ("judgebug_pyes", 1, "baseline: verbal P(bug)"),
+                            ("think_pyes", -1, "baseline: verbal P(incorrect) after reasoning")]:
         vals = np.array([m.get(key, np.nan) for m in meta], dtype=float)
         if not np.isnan(vals).all():
             scores[name] = sign * vals
