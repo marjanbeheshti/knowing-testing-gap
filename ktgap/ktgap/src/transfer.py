@@ -19,8 +19,8 @@ import json
 
 import numpy as np
 
-from probe import (BASELINE_POSITION, boot_auc, boot_auc_diff, load_runs, logistic_scores, meandiff_scores,
-                   select_config)
+from probe import (BASELINE_POSITION, boot_auc, boot_auc_diff, center_features, load_runs, logistic_scores,
+                   meandiff_scores, mixed_task_mask, select_config)
 
 
 def main():
@@ -32,6 +32,8 @@ def main():
     ap.add_argument("--n-boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--center-features", action="store_true",
+                    help="within-task probe (see probe.py): centered features, trained on mixed tasks only")
     args = ap.parse_args()
 
     feats, meta = load_runs(args.runs)
@@ -40,6 +42,10 @@ def main():
     groups = np.array([f'{m["dataset"]}::{m["task_id"]}' for m in meta])
     green = np.array([m.get("tests_green") is True for m in meta])
     tr, te = np.where(ds == args.train)[0], np.where(ds == args.test)[0]
+    if args.center_features:
+        center_features(feats, groups)
+        tr = tr[mixed_task_mask(y, groups)[tr]]
+        print(f"within-task probe: centered features; training on {len(tr)} solutions from mixed tasks")
     print(f"train: {args.train} ({len(tr)} solutions, {y[tr].sum()} buggy) -> "
           f"test: {args.test} ({len(te)} solutions, {y[te].sum()} buggy; "
           f"gap set {(green[te] & (y[te] == 1)).sum()} missed bugs vs {(green[te] & (y[te] == 0)).sum()} correct)")

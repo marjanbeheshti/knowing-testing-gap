@@ -92,6 +92,28 @@ def load_runs(specs):
     return feats, meta
 
 
+# ---------------------------------------------------------------- within-task features
+
+def center_features(feats, groups):
+    """Subtract each task's mean hidden state (over all its solutions) in place. Uses no labels,
+    so it is available at deployment whenever several solutions per task are sampled."""
+    for k, x in feats.items():
+        for g in np.unique(groups):
+            idx = np.where(groups == g)[0]
+            block = x[idx].astype(np.float32)
+            x[idx] = (block - block.mean(0, keepdims=True)).astype(x.dtype)
+
+
+def mixed_task_mask(y, groups):
+    """True for solutions of tasks that have both buggy and correct solutions (the contrastive pairs)."""
+    mask = np.zeros(len(y), bool)
+    for g in np.unique(groups):
+        m = groups == g
+        if 0 < y[m].sum() < m.sum():
+            mask |= m
+    return mask
+
+
 # ---------------------------------------------------------------- probes
 
 def standardize(train, *others):
@@ -132,10 +154,12 @@ def select_config(feats, positions, y, groups, idx_train, seed):
     return best
 
 
-def cross_validated_scores(feats, positions, y, groups, n_folds, c, seed):
+def cross_validated_scores(feats, positions, y, groups, n_folds, c, seed, train_mask=None):
     oof = {"meandiff": np.full(len(y), np.nan), "logistic": np.full(len(y), np.nan)}
     chosen = []
     for fold, (tr, te) in enumerate(GroupKFold(n_splits=n_folds).split(y, y, groups)):
+        if train_mask is not None:
+            tr = tr[train_mask[tr]]
         val_auc, pos, layer = select_config(feats, positions, y, groups, tr, seed + fold)
         x = feats[pos][:, layer]
         oof["meandiff"][te] = meandiff_scores(x[tr], y[tr], x[te])
@@ -200,6 +224,9 @@ def main():
     ap.add_argument("--n-boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default=None, help="save out-of-fold scores and summary as JSON")
+    ap.add_argument("--center-features", action="store_true",
+                    help="within-task probe: subtract each task's mean hidden state and train only on tasks "
+                         "with both buggy and correct solutions (contrastive, cf. Ribeiro et al.)")
     ap.add_argument("--positions", nargs="*", default=None,
                     help="probe read-out positions to select from (default: all except prompt_end); "
                          "e.g. --positions judgebug_end to evaluate one framing alone")
@@ -216,8 +243,15 @@ def main():
 
     positions = args.positions or [k for k in feats if k != BASELINE_POSITION]
     print(f"probe positions: {positions}")
+    train_mask = None
+    if args.center_features:
+        center_features(feats, groups)
+        train_mask = mixed_task_mask(y, groups)
+        print(f"within-task probe: features centered per task; training on {train_mask.sum()} solutions "
+              f"from {len(np.unique(groups[train_mask]))} tasks with both buggy and correct solutions")
     scores, chosen = {}, {}
-    oof, chosen["probe"] = cross_validated_scores(feats, positions, y, groups, args.folds, args.c, args.seed)
+    oof, chosen["probe"] = cross_validated_scores(feats, positions, y, groups, args.folds, args.c, args.seed,
+                                                  train_mask)
     scores["probe: mean-diff"], scores["probe: logistic"] = oof["meandiff"], oof["logistic"]
     oof_b, chosen["prompt-only"] = cross_validated_scores(feats, [BASELINE_POSITION], y, groups, args.folds,
                                                           args.c, args.seed)
