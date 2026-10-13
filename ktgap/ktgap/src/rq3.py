@@ -114,8 +114,13 @@ def main():
         if args.verdicts and os.path.exists(os.path.join(run_dir, args.verdicts)):
             for r in load_jsonl(os.path.join(run_dir, args.verdicts)):
                 verdicts[(dataset, r["task_id"], r["sample_id"])] = r.get("verdict")
-    comb, comb_cols = combined_scores(table, COMBINED_INPUTS, args.seed)
-    print(f"combined policy uses: {comb_cols}")
+    probe_json = json.load(open(args.probe))
+    if "train" in probe_json:  # transferred scores: a combined policy would train on the test benchmark
+        comb = {k: None for k in table}
+        print(f"transfer scores (probe trained on {probe_json['train']}): combined policy disabled")
+    else:
+        comb, comb_cols = combined_scores(table, COMBINED_INPUTS, args.seed)
+        print(f"combined policy uses: {comb_cols}")
 
     # ---- the green set ---------------------------------------------------------------------------
     rows = []
