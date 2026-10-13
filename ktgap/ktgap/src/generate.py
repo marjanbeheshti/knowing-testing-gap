@@ -37,7 +37,7 @@ Implementation:
 {solution}
 ```
 
-Write {k} unit tests for `{entry}` as Python assert statements. Each test must check that a specific input produces the output the task description requires. Respond with a single ```python code block that contains only the assert statements."""
+Write {k} unit tests for `{entry}` as Python assert statements. Each test must check that a specific input produces the output the task description requires. Write each test as a plain top-level `assert` statement that calls `{entry}` directly (do not use unittest or pytest, and do not redefine `{entry}`). Respond with a single ```python code block that contains only the assert statements."""
 
 TEST_PROMPT_SPEC = """Below is a programming task.
 
@@ -46,7 +46,7 @@ Task:
 {prompt}
 ```
 
-Write {k} unit tests for `{entry}` as Python assert statements. Each test must check that a specific input produces the output the task description requires. Respond with a single ```python code block that contains only the assert statements."""
+Write {k} unit tests for `{entry}` as Python assert statements. Each test must check that a specific input produces the output the task description requires. Write each test as a plain top-level `assert` statement that calls `{entry}` directly (do not use unittest or pytest, and do not redefine `{entry}`). Respond with a single ```python code block that contains only the assert statements."""
 
 
 # ---------------------------------------------------------------- backends
@@ -69,7 +69,7 @@ class HFBackend:
         dtype = torch.bfloat16 if device == "cuda" and torch.cuda.is_bf16_supported() else (
             torch.float16 if device == "cuda" else torch.float32)
         # full precision weights (no quantization): hidden states must match the real model
-        self.model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=dtype).to(device)
+        self.model = AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype).to(device)
         self.model.eval()
         self.device = device
         self.batch_size = batch_size
@@ -171,7 +171,8 @@ def run_tests(args):
         rows.append({"task_id": r["task_id"], "sample_id": r["sample_id"], "dataset": args.dataset,
                      "solution_model": r.get("solution_model"), "test_model": args.model,
                      "mode": args.mode, "prompt_text": prompt_text, "raw": raw,
-                     "asserts": extract_asserts(raw, max_asserts=args.k)})
+                     "asserts": extract_asserts(raw, max_asserts=args.k,
+                                               entry_point=problems[r["task_id"]]["entry_point"])})
     write_jsonl(args.out, rows)
     empty = sum(1 for r in rows if not r["asserts"])
     print(f"wrote {len(rows)} test sets to {args.out} in {time.time() - t0:.0f}s "
