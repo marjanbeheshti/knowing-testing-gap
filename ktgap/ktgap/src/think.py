@@ -35,15 +35,22 @@ Solution:
 {solution}
 ```
 
-Check the solution by tracing it by hand. Use the example from the task and one tricky edge case. For each, write the input, the output the task requires, and the output the solution actually returns. Be brief. Finish with one line: "Final answer: yes" if the solution is correct, or "Final answer: no" if it is not."""
+Check the solution by tracing it by hand on the example from the task and on one tricky edge case. Reply in exactly this format, with no other text:
+Example: input = <input>; required = <output the task requires>; returned = <output the solution returns>
+Edge case: input = <input>; required = <output the task requires>; returned = <output the solution returns>
+Final answer: <yes if the solution is correct, no if it is not>"""
 
-_FINAL = re.compile(r"final answer\s*:", re.IGNORECASE)
+# The reply is started for the model, which keeps every trace short and in the same format.
+TRACE_PREFIX = "Example: input ="
+
+_FINAL = re.compile(r"final answer\b\s*:?", re.IGNORECASE)  # generation may stop before the colon
 
 
 def build_prompt(tok, task_prompt, solution):
+    """Chat prompt with the assistant reply already started with TRACE_PREFIX."""
     msgs = [{"role": "system", "content": SYSTEM},
             {"role": "user", "content": THINK_PROMPT.format(prompt=task_prompt.strip(), solution=solution)}]
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True) + TRACE_PREFIX
 
 
 def cut_trace(trace):
@@ -57,9 +64,18 @@ def cut_trace(trace):
 
 
 def readout_text(prompt_text, trace):
-    """The text whose last token is read: prompt + reasoning + 'Final answer:'."""
+    """The text whose last token is read: prompt (incl. TRACE_PREFIX) + reasoning + 'Final answer:'."""
     reasoning, _ = cut_trace(trace)
     return prompt_text + reasoning + "\nFinal answer:"
+
+
+def generate_traces(model, tok, enc, max_new_tokens):
+    """Greedy generation that stops as soon as the model writes 'Final answer'."""
+    kwargs = dict(max_new_tokens=max_new_tokens, do_sample=False, pad_token_id=tok.pad_token_id)
+    try:
+        return model.generate(**enc, stop_strings=["Final answer"], tokenizer=tok, **kwargs)
+    except (TypeError, ValueError):  # older transformers without stop_strings
+        return model.generate(**enc, **kwargs)
 
 
 def answer_token_ids(tok):
@@ -80,7 +96,7 @@ def main():
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--shard-size", type=int, default=64, help="must match the hidden/ extraction (default 64)")
     ap.add_argument("--batch-size", type=int, default=8)
-    ap.add_argument("--max-new-tokens", type=int, default=320)
+    ap.add_argument("--max-new-tokens", type=int, default=200)
     ap.add_argument("--limit", type=int, default=None, help="first N solutions only (smoke test)")
     args = ap.parse_args()
 
@@ -118,11 +134,12 @@ def main():
             # 1) the model reasons (greedy, deterministic)
             enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to(device)
             with torch.no_grad():
-                gen = model.generate(**enc, max_new_tokens=args.max_new_tokens, do_sample=False,
-                                     pad_token_id=tok.pad_token_id)
-            traces = tok.batch_decode(gen[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
+                gen = generate_traces(model, tok, enc, args.max_new_tokens)
+            traces = [TRACE_PREFIX + t for t in
+                      tok.batch_decode(gen[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)]
             # 2) read hidden states and P(yes) at "Final answer:"
-            seqs = [tok(readout_text(p, tr), add_special_tokens=False)["input_ids"] for p, tr in zip(prompts, traces)]
+            base = [p[:-len(TRACE_PREFIX)] for p in prompts]  # prompt without the prefix (the trace has it)
+            seqs = [tok(readout_text(b_, tr), add_special_tokens=False)["input_ids"] for b_, tr in zip(base, traces)]
             maxlen = max(len(s) for s in seqs)
             ids = torch.full((len(seqs), maxlen), tok.pad_token_id, dtype=torch.long)
             mask = torch.zeros((len(seqs), maxlen), dtype=torch.long)
@@ -138,9 +155,12 @@ def main():
                     probs = torch.softmax(model.lm_head(out.last_hidden_state[b, last]).float(), dim=-1)
                     py, pn = float(probs[yes_ids].sum()), float(probs[no_ids].sum())
                     _, own = cut_trace(traces[b])
+                    complete = bool(_FINAL.search(traces[b]))
                     metas.append({"task_id": batch[b]["task_id"], "sample_id": batch[b]["sample_id"],
                                   "dataset": args.dataset, "think_pyes": py / max(py + pn, 1e-12),
-                                  "think_answer_mass": py + pn, "think_own_answer": own, "trace": traces[b]})
+                                  "think_answer_mass": py + pn,
+                                  "think_answer": own or ("yes" if py >= pn else "no"),
+                                  "trace_complete": complete, "trace": traces[b]})
         tmp = npz_path + ".tmp.npz"
         np.savez(tmp, think_end=np.stack(states))
         os.replace(tmp, npz_path)
@@ -152,8 +172,10 @@ def main():
         rate = (time.time() - t0) / done_now
         remaining = sum(1 for k in range(si + 1, len(shards))
                         if not os.path.exists(os.path.join(args.out_dir, f"shard_{k:05d}.npz")))
-        print(f"shard {si + 1}/{len(shards)} saved ({rate:.0f}s/shard, ~{rate * remaining / 60:.0f} min left)",
-              flush=True)
+        n_complete = sum(m["trace_complete"] for m in metas)
+        n_no = sum(m["think_answer"] == "no" for m in metas)
+        print(f"shard {si + 1}/{len(shards)} saved ({rate:.0f}s/shard, ~{rate * remaining / 60:.0f} min left; "
+              f"{n_complete}/{len(metas)} traces complete, {n_no} answered 'no')", flush=True)
     print(f"done: {len(shards)} shards in {args.out_dir}")
 
 
