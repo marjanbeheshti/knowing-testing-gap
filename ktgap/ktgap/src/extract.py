@@ -6,7 +6,11 @@ state of every layer at a few token positions. Two framings (cf. Ribeiro et al. 
   gen    the exact generation context: chat prompt + the model's own response
          positions: prompt_end (before any code; task-difficulty baseline),
                     code_end   (last token of the code), resp_end (last token of the response)
-  judge  a new chat asking "Is this solution correct?"; position: judge_end (last prompt token)
+  judge* a new chat asking the model about the solution; position: <framing>_end (last prompt token).
+         Framings: judge ("Is this solution correct?"), judgebug ("Does it contain a bug?"),
+         judgetrace ("Mentally run it ... does it produce the required outputs?"),
+         judgetest ("Would a thorough test suite pass?"). Which question makes the internal
+         assessment most visible is itself a result.
 
 We also store cheap baselines from the gen pass: mean and min token log-probability of the
 response, and response length.
@@ -30,7 +34,7 @@ import numpy as np
 from common import load_problems, read_jsonl
 
 SYSTEM = "You are a careful Python programmer."
-JUDGE_PROMPT = """Below is a programming task and a proposed solution.
+_JUDGE_HEAD = """Below is a programming task and a proposed solution.
 
 Task:
 ```python
@@ -42,9 +46,17 @@ Solution:
 {solution}
 ```
 
-Is this solution correct? Answer yes or no."""
-
-POSITIONS = ["prompt_end", "code_end", "resp_end", "judge_end"]
+"""
+# Different questions that may make the model's internal assessment more or less visible.
+JUDGE_FRAMINGS = {
+    "judge": _JUDGE_HEAD + "Is this solution correct? Answer yes or no.",
+    "judgebug": _JUDGE_HEAD + "Does this solution contain a bug? Answer yes or no.",
+    "judgetrace": _JUDGE_HEAD + ("Mentally run the solution on the examples in the task and on one tricky edge case. "
+                                 "Does it produce exactly the outputs the task requires? Answer yes or no."),
+    "judgetest": _JUDGE_HEAD + ("Would a thorough unit test suite written from the task description pass "
+                                "on this solution? Answer yes or no."),
+}
+GEN_POSITIONS = ["prompt_end", "code_end", "resp_end"]
 
 
 def gen_inputs(tok, row):
@@ -70,12 +82,13 @@ def gen_inputs(tok, row):
     return enc["input_ids"], {"prompt_end": prompt_end, "code_end": code_end, "resp_end": resp_end}
 
 
-def judge_inputs(tok, row, task_prompt):
+def judge_inputs(tok, row, task_prompt, framing="judge"):
     msgs = [{"role": "system", "content": SYSTEM},
-            {"role": "user", "content": JUDGE_PROMPT.format(prompt=task_prompt.strip(), solution=row["solution"])}]
+            {"role": "user", "content": JUDGE_FRAMINGS[framing].format(prompt=task_prompt.strip(),
+                                                                     solution=row["solution"])}]
     text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     ids = tok(text, add_special_tokens=False)["input_ids"]
-    return ids, {"judge_end": len(ids) - 1}
+    return ids, {f"{framing}_end": len(ids) - 1}
 
 
 def plan_shards(rows, shard_size):
@@ -125,6 +138,10 @@ def main():
     ap.add_argument("--shard-size", type=int, default=64)
     ap.add_argument("--batch-size", type=int, default=4)
     ap.add_argument("--limit", type=int, default=None, help="first N solutions only (smoke test)")
+    ap.add_argument("--framings", default="gen,judge",
+                    help="comma list from: gen," + ",".join(JUDGE_FRAMINGS) + ". To add new judge framings to "
+                         "an existing run, write them to a separate dir, e.g. --framings judgebug,judgetrace "
+                         "--out-dir RUN/hidden_extra (probe.py merges RUN/hidden and RUN/hidden_extra)")
     args = ap.parse_args()
 
     import torch
@@ -147,6 +164,11 @@ def main():
     dtype = torch.bfloat16 if device == "cuda" and torch.cuda.is_bf16_supported() else torch.float32
     model = AutoModelForCausalLM.from_pretrained(args.model, dtype=dtype).to(device).eval()
 
+    framings = [f.strip() for f in args.framings.split(",") if f.strip()]
+    bad = [f for f in framings if f != "gen" and f not in JUDGE_FRAMINGS]
+    if bad:
+        raise SystemExit(f"unknown framings: {bad}")
+    positions = (GEN_POSITIONS if "gen" in framings else []) + [f"{f}_end" for f in framings if f != "gen"]
     shards = plan_shards(rows, args.shard_size)
     t0, done_before = time.time(), 0
     for i, shard in enumerate(shards):
@@ -154,19 +176,27 @@ def main():
         if os.path.exists(npz_path) and os.path.exists(meta_path):
             done_before += 1
             continue
-        feats = {p: [] for p in POSITIONS}
+        feats = {p: [] for p in positions}
         meta = []
         for j in range(0, len(shard), args.batch_size):
             batch = shard[j:j + args.batch_size]
-            g = [gen_inputs(tok, r) for r in batch]
-            n_prompt = [pos["prompt_end"] + 1 for _, pos in g]
-            gen_out = forward_states(torch, model, [s for s, _ in g], [p for _, p in g], device, True, n_prompt)
-            jd = [judge_inputs(tok, r, problems[r["task_id"]]["prompt"]) for r in batch]
-            judge_out = forward_states(torch, model, [s for s, _ in jd], [p for _, p in jd], device, False)
-            for r, (gs, stats), (js, _) in zip(batch, gen_out, judge_out):
-                for p in ("prompt_end", "code_end", "resp_end"):
-                    feats[p].append(gs[p])
-                feats["judge_end"].append(js["judge_end"])
+            stats_list = [{} for _ in batch]
+            if "gen" in framings:
+                g = [gen_inputs(tok, r) for r in batch]
+                n_prompt = [pos["prompt_end"] + 1 for _, pos in g]
+                gen_out = forward_states(torch, model, [s for s, _ in g], [p for _, p in g], device, True, n_prompt)
+                for b, (gs, stats) in enumerate(gen_out):
+                    for p in GEN_POSITIONS:
+                        feats[p].append(gs[p])
+                    stats_list[b] = stats
+            for f in framings:
+                if f == "gen":
+                    continue
+                jd = [judge_inputs(tok, r, problems[r["task_id"]]["prompt"], f) for r in batch]
+                judge_out = forward_states(torch, model, [s for s, _ in jd], [p for _, p in jd], device, False)
+                for js, _ in judge_out:
+                    feats[f"{f}_end"].append(js[f"{f}_end"])
+            for r, stats in zip(batch, stats_list):
                 meta.append({"task_id": r["task_id"], "sample_id": r["sample_id"], "dataset": args.dataset,
                              "correct": r["correct"], "code_chars": len(r["solution"]), **stats})
         tmp = npz_path + ".tmp.npz"

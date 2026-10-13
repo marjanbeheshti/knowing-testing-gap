@@ -49,6 +49,114 @@ Task:
 Write {k} unit tests for `{entry}` as Python assert statements. Each test must check that a specific input produces the output the task description requires. Write each test as a plain top-level `assert` statement that calls `{entry}` directly (do not use unittest or pytest, and do not redefine `{entry}`). Respond with a single ```python code block that contains only the assert statements."""
 
 
+_ASSERT_RULES = ("Write each test as a plain top-level `assert` statement that calls `{entry}` directly "
+                 "(do not use unittest or pytest, and do not redefine `{entry}`). "
+                 "Respond with a single ```python code block that contains only the assert statements.")
+
+# RQ3 test-writing conditions. All show the implementation except `spec`.
+TEST_PROMPT_WARN = """Below is a programming task and an implementation of it. Note: this implementation may contain a bug.
+
+Task:
+```python
+{prompt}
+```
+
+Implementation:
+```python
+{solution}
+```
+
+Write {k} unit tests for `{entry}` that would reveal a bug if there is one. Each test must check that a specific input produces the output the task description requires. """ + _ASSERT_RULES
+
+TEST_PROMPT_SPEC_FIRST = """Below is a programming task and an implementation of it.
+
+Task:
+```python
+{prompt}
+```
+
+Implementation:
+```python
+{solution}
+```
+
+Write {k} unit tests for `{entry}`. For each test, first work out the expected output from the task description ALONE, ignoring what the implementation would return, and write that reasoning as a short comment; then write the assert. Use plain top-level `assert` statements that call `{entry}` directly (no unittest or pytest, do not redefine `{entry}`). Respond with a single ```python code block."""
+
+FEWSHOT_EXAMPLES = """Here are two examples of good tests: each expected output comes from the task description, so the test catches the bug in the implementation.
+
+Example 1
+Task: Return the second-largest number in a list of at least two distinct numbers.
+Implementation:
+```python
+def second_largest(nums):
+    return max(nums)
+```
+Tests:
+```python
+assert second_largest([1, 5, 3]) == 3
+assert second_largest([10, 2]) == 2
+```
+
+Example 2
+Task: Count the vowels (a, e, i, o, u) in a lowercase string.
+Implementation:
+```python
+def count_vowels(s):
+    return sum(1 for c in s[1:] if c in "aeiou")
+```
+Tests:
+```python
+assert count_vowels("apple") == 2
+assert count_vowels("echo") == 2
+```
+
+Now do the same for the following task.
+
+"""
+
+JUDGE_TURN = """Below is a programming task and an implementation of it.
+
+Task:
+```python
+{prompt}
+```
+
+Implementation:
+```python
+{solution}
+```
+
+Review the implementation carefully against the task description, including edge cases. Is it correct? Explain briefly, then end with exactly one line: "Verdict: correct" or "Verdict: buggy"."""
+
+JUDGE_FOLLOWUP = ("Now write {k} unit tests for `{entry}`. Each test must check that a specific input produces the "
+                  "output the task description requires. " + _ASSERT_RULES)
+
+PER_SOLUTION_MODES = ["code", "warn", "spec_first", "fewshot", "judge_first"]
+ALL_MODES = PER_SOLUTION_MODES + ["spec"]
+
+
+def build_test_prompt(mode, problem, solution, k):
+    f = dict(prompt=problem["prompt"].strip(), solution=solution, entry=problem["entry_point"], k=k)
+    if mode == "code":
+        return TEST_PROMPT_CODE.format(**f)
+    if mode == "warn":
+        return TEST_PROMPT_WARN.format(**f)
+    if mode == "spec_first":
+        return TEST_PROMPT_SPEC_FIRST.format(**f)
+    if mode == "fewshot":
+        return FEWSHOT_EXAMPLES + TEST_PROMPT_CODE.format(**f)
+    if mode == "spec":
+        return TEST_PROMPT_SPEC.format(**f)
+    raise ValueError(mode)
+
+
+def parse_verdict(text):
+    t = text.lower()
+    i_b, i_c = t.rfind("verdict: buggy"), t.rfind("verdict: correct")
+    if i_b < 0 and i_c < 0:
+        return None
+    return "buggy" if i_b > i_c else "correct"
+
 # ---------------------------------------------------------------- backends
 
 class HFBackend:
@@ -74,8 +182,8 @@ class HFBackend:
         self.device = device
         self.batch_size = batch_size
 
-    def chat_text(self, user_msg):
-        msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user_msg}]
+    def chat_text(self, user_msg, history=None):
+        msgs = [{"role": "system", "content": SYSTEM}] + (history or []) + [{"role": "user", "content": user_msg}]
         return self.tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
 
     def generate(self, prompts, n, temperature, top_p, max_new_tokens):
@@ -108,8 +216,8 @@ class VLLMBackend:
         self.tok = self.llm.get_tokenizer()
         self.seed = seed
 
-    def chat_text(self, user_msg):
-        msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user_msg}]
+    def chat_text(self, user_msg, history=None):
+        msgs = [{"role": "system", "content": SYSTEM}] + (history or []) + [{"role": "user", "content": user_msg}]
         return self.tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
 
     def generate(self, prompts, n, temperature, top_p, max_new_tokens):
@@ -149,34 +257,51 @@ def run_solutions(args):
 def run_tests(args):
     problems = load_problems(args.dataset)
     backend = make_backend(args)
-    if args.mode == "code":
-        targets = read_jsonl(args.solutions)  # one test set per solution (white-box)
+    extra = {}
+    if args.mode in PER_SOLUTION_MODES:
+        targets = read_jsonl(args.solutions)  # one test set per solution
         if args.only_buggy_and_n_correct is not None:
             targets = _subsample(targets, args.only_buggy_and_n_correct)
-        prompts = [backend.chat_text(TEST_PROMPT_CODE.format(
-            prompt=problems[r["task_id"]]["prompt"].strip(), solution=r["solution"],
-            entry=problems[r["task_id"]]["entry_point"], k=args.k)) for r in targets]
+        if args.only_ids:  # e.g. only the solutions a probe flagged
+            keep = {(d["task_id"], d["sample_id"]) for d in read_jsonl(args.only_ids)}
+            targets = [r for r in targets if (r["task_id"], r["sample_id"]) in keep]
+        if args.mode == "judge_first":
+            # turn 1: the model reviews the code; turn 2: it writes tests in the same conversation
+            judge_msgs = [JUDGE_TURN.format(prompt=problems[r["task_id"]]["prompt"].strip(), solution=r["solution"])
+                          for r in targets]
+            judgments = [o[0] for o in backend.generate([backend.chat_text(m) for m in judge_msgs], 1,
+                                                         args.temperature, args.top_p, 256)]
+            prompts = [backend.chat_text(
+                JUDGE_FOLLOWUP.format(entry=problems[r["task_id"]]["entry_point"], k=args.k),
+                history=[{"role": "user", "content": m}, {"role": "assistant", "content": j}])
+                for r, m, j in zip(targets, judge_msgs, judgments)]
+            extra = {i: {"judgment": j, "verdict": parse_verdict(j)} for i, j in enumerate(judgments)}
+        else:
+            prompts = [backend.chat_text(build_test_prompt(args.mode, problems[r["task_id"]], r["solution"], args.k))
+                       for r in targets]
     else:  # spec: one test set per task (black-box), shared by all solutions of that task
         sols = read_jsonl(args.solutions)
         task_ids = sorted({r["task_id"] for r in sols}, key=list(problems).index)
         targets = [{"task_id": t, "sample_id": None, "solution_model": None} for t in task_ids]
-        prompts = [backend.chat_text(TEST_PROMPT_SPEC.format(
-            prompt=problems[t]["prompt"].strip(), entry=problems[t]["entry_point"], k=args.k))
-            for t in task_ids]
+        prompts = [backend.chat_text(build_test_prompt("spec", problems[t], None, args.k)) for t in task_ids]
     t0 = time.time()
     outs = backend.generate(prompts, 1, args.temperature, args.top_p, args.max_new_tokens)
     rows = []
-    for r, prompt_text, samples in zip(targets, prompts, outs):
+    for i, (r, prompt_text, samples) in enumerate(zip(targets, prompts, outs)):
         raw = samples[0]
         rows.append({"task_id": r["task_id"], "sample_id": r["sample_id"], "dataset": args.dataset,
                      "solution_model": r.get("solution_model"), "test_model": args.model,
                      "mode": args.mode, "prompt_text": prompt_text, "raw": raw,
                      "asserts": extract_asserts(raw, max_asserts=args.k,
-                                               entry_point=problems[r["task_id"]]["entry_point"])})
+                                                entry_point=problems[r["task_id"]]["entry_point"]),
+                     **extra.get(i, {})})
     write_jsonl(args.out, rows)
     empty = sum(1 for r in rows if not r["asserts"])
     print(f"wrote {len(rows)} test sets to {args.out} in {time.time() - t0:.0f}s "
           f"({empty} produced no parsable asserts)")
+    if args.mode == "judge_first":
+        v = [r.get("verdict") for r in rows]
+        print(f"verdicts: {v.count('buggy')} buggy, {v.count('correct')} correct, {v.count(None)} unparsed")
 
 
 def _subsample(rows, n_correct):
@@ -205,8 +330,12 @@ def main():
     ap.add_argument("--n", type=int, default=5, help="solutions per problem")
     ap.add_argument("--k", type=int, default=5, help="asserts requested per test set")
     ap.add_argument("--solutions", help="(tests stage) solutions file, labeled or not")
-    ap.add_argument("--mode", choices=["code", "spec"], default="code",
-                    help="code = tester sees the solution (own-code tests); spec = docstring only")
+    ap.add_argument("--mode", choices=ALL_MODES, default="code",
+                    help="code = sees the solution; spec = task only; warn = told it may be buggy; "
+                         "spec_first = derive outputs from the task; fewshot = examples of bug-catching tests; "
+                         "judge_first = reviews the code, then writes tests")
+    ap.add_argument("--only-ids", default=None,
+                    help="(tests stage) jsonl with task_id/sample_id: only these solutions (e.g. probe-flagged)")
     ap.add_argument("--only-buggy-and-n-correct", type=int, default=None,
                     help="(tests stage) keep all buggy solutions + N correct ones per task")
     ap.add_argument("--temperature", type=float, default=None)

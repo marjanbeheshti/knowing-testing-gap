@@ -42,7 +42,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import GroupKFold, GroupShuffleSplit
 
-PROBE_POSITIONS = ["code_end", "resp_end", "judge_end"]
 BASELINE_POSITION = "prompt_end"
 
 
@@ -56,8 +55,14 @@ def load_runs(specs):
         if not npzs:
             raise SystemExit(f"no hidden-state shards in {run_dir}/hidden (run extract.py first)")
         for npz in npzs:
-            data = np.load(npz)
-            for k in data.files:
+            data = dict(np.load(npz))
+            extra = npz.replace(os.sep + "hidden" + os.sep, os.sep + "hidden_extra" + os.sep)
+            if os.path.exists(extra):  # extra judge framings extracted later, same shard layout
+                more = np.load(extra)
+                for k in more.files:
+                    assert len(more[k]) == len(next(iter(data.values()))), f"row mismatch in {extra}"
+                    data[k] = more[k]
+            for k in data:
                 feats[k].append(data[k])
             with open(npz.replace("shard_", "meta_").replace(".npz", ".jsonl")) as f:
                 meta += [json.loads(l) for l in f]
@@ -72,7 +77,11 @@ def load_runs(specs):
         for m in meta:
             if m["dataset"] == dataset and "tests_green" not in m:
                 m["tests_green"] = tests.get((m["task_id"], m["sample_id"]))  # None = no own tests
-    feats = {k: np.concatenate(v) for k, v in feats.items()}
+    n_parts = max(len(v) for v in feats.values())
+    missing = [k for k, v in feats.items() if len(v) != n_parts]
+    if missing:
+        print(f"note: positions {missing} are missing for some runs and will be ignored")
+    feats = {k: np.concatenate(v) for k, v in feats.items() if len(v) == n_parts}
     return feats, meta
 
 
@@ -166,6 +175,9 @@ def main():
     ap.add_argument("--n-boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default=None, help="save out-of-fold scores and summary as JSON")
+    ap.add_argument("--positions", nargs="*", default=None,
+                    help="probe read-out positions to select from (default: all except prompt_end); "
+                         "e.g. --positions judgebug_end to evaluate one framing alone")
     args = ap.parse_args()
 
     feats, meta = load_runs(args.runs)
@@ -177,8 +189,10 @@ def main():
           f"with own tests: {has_tests.sum()}")
     print(f"GAP set: {(green & (y == 1)).sum()} missed bugs vs {(green & (y == 0)).sum()} test-passing correct")
 
+    positions = args.positions or [k for k in feats if k != BASELINE_POSITION]
+    print(f"probe positions: {positions}")
     scores, chosen = {}, {}
-    oof, chosen["probe"] = cross_validated_scores(feats, PROBE_POSITIONS, y, groups, args.folds, args.c, args.seed)
+    oof, chosen["probe"] = cross_validated_scores(feats, positions, y, groups, args.folds, args.c, args.seed)
     scores["probe: mean-diff"], scores["probe: logistic"] = oof["meandiff"], oof["logistic"]
     oof_b, chosen["prompt-only"] = cross_validated_scores(feats, [BASELINE_POSITION], y, groups, args.folds,
                                                           args.c, args.seed)
