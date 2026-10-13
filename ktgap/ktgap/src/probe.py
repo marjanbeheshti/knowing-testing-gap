@@ -162,6 +162,24 @@ def boot_auc(y, s, groups, n_boot, seed):
     return est, lo, hi, p_le_half
 
 
+def boot_auc_diff(y, s1, s2, groups, n_boot, seed):
+    """Paired bootstrap over tasks: AUROC(s1) - AUROC(s2) on the same resampled solutions."""
+    ok = ~np.isnan(s1) & ~np.isnan(s2)
+    y, s1, s2, groups = y[ok], s1[ok], s2[ok], groups[ok]
+    est = safe_auc(y, s1) - safe_auc(y, s2)
+    uniq = np.unique(groups)
+    members = {g: np.where(groups == g)[0] for g in uniq}
+    rng = np.random.default_rng(seed)
+    d = []
+    for _ in range(n_boot):
+        pick = np.concatenate([members[g] for g in rng.choice(uniq, len(uniq))])
+        a, b = safe_auc(y[pick], s1[pick]), safe_auc(y[pick], s2[pick])
+        if not (np.isnan(a) or np.isnan(b)):
+            d.append(a - b)
+    lo, hi = np.percentile(d, [2.5, 97.5]) if d else (np.nan, np.nan)
+    return est, lo, hi
+
+
 def within_task_pairs(y, s, groups):
     """Share of (bug, correct) pairs from the SAME task where the bug gets the higher score."""
     wins, n = 0.0, 0
@@ -250,6 +268,16 @@ def main():
         gap = summary["results"][name]["GAP"]
         print(f"KNOWING-TESTING GAP ({name}): AUROC {gap['auroc']:.3f} "
               f"[{gap['ci'][0]:.3f}, {gap['ci'][1]:.3f}], one-sided p(AUROC <= 0.5) = {gap['p_auc_le_0.5']:.4f}")
+    if "baseline: verbal P(incorrect)" in scores:
+        print("\npaired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)")
+        for a, b in [("probe: logistic", "baseline: verbal P(incorrect)"),
+                     ("probe: logistic [task-centered]", "baseline: verbal P(incorrect) [task-centered]"),
+                     ("probe: mean-diff [task-centered]", "baseline: verbal P(incorrect) [task-centered]")]:
+            for k in ("ALL", "GAP"):
+                m = sets[k]
+                est, lo, hi = boot_auc_diff(y[m], scores[a][m], scores[b][m], groups[m], args.n_boot, args.seed)
+                print(f"  {k:4s} {a:34s} vs verbal: {est:+.3f} [{lo:+.3f}, {hi:+.3f}]")
+                summary.setdefault("probe_vs_verbal", {})[f"{k}|{a}"] = {"diff": est, "ci": [lo, hi]}
     print("\nselected (position, layer) per fold:")
     for k, v in chosen.items():
         print(f"  {k}: " + ", ".join(f"{c['position']}@{c['layer']} (val {c['val_auc']})" for c in v))
