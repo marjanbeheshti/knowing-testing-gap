@@ -91,6 +91,35 @@ def judge_inputs(tok, row, task_prompt, framing="judge"):
     return ids, {f"{framing}_end": len(ids) - 1}
 
 
+def answer_token_ids(tok):
+    """First-token ids for yes/no answers (the reply starts right after the chat template)."""
+    def ids(words):
+        enc = [tok.encode(w, add_special_tokens=False) for w in words]
+        single = sorted({e[0] for e in enc if len(e) == 1})  # only words that are one whole token
+        if not single:
+            raise SystemExit(f"none of {words} is a single token for this tokenizer")
+        return single
+    return ids(["Yes", "yes", "YES"]), ids(["No", "no", "NO"])
+
+
+def yes_probability(torch, model, seqs, yes_ids, no_ids, device):
+    """P(yes) / (P(yes) + P(no)) for the next token after each prompt: the model's graded verbal answer."""
+    maxlen = max(len(s) for s in seqs)
+    pad = model.config.pad_token_id if model.config.pad_token_id is not None else 0
+    ids = torch.full((len(seqs), maxlen), pad, dtype=torch.long)
+    mask = torch.zeros((len(seqs), maxlen), dtype=torch.long)
+    for b, s in enumerate(seqs):
+        ids[b, :len(s)] = torch.tensor(s)
+        mask[b, :len(s)] = 1
+    with torch.no_grad():
+        out = model.model(input_ids=ids.to(device), attention_mask=mask.to(device))
+        last = torch.stack([out.last_hidden_state[b, len(s) - 1] for b, s in enumerate(seqs)])
+        probs = torch.softmax(model.lm_head(last).float(), dim=-1)
+        p_yes = probs[:, yes_ids].sum(1)
+        p_no = probs[:, no_ids].sum(1)
+        return [(float(y / (y + n)), float(y + n)) for y, n in zip(p_yes, p_no)]
+
+
 def plan_shards(rows, shard_size):
     return [rows[i:i + shard_size] for i in range(0, len(rows), shard_size)]
 
@@ -138,6 +167,9 @@ def main():
     ap.add_argument("--shard-size", type=int, default=64)
     ap.add_argument("--batch-size", type=int, default=4)
     ap.add_argument("--limit", type=int, default=None, help="first N solutions only (smoke test)")
+    ap.add_argument("--yesno-only", action="store_true",
+                    help="only compute the model's verbal answer probabilities P(yes) for the judge framings "
+                         "(no hidden states); writes meta_yesno_*.jsonl, e.g. into RUN/hidden_yesno")
     ap.add_argument("--framings", default="gen,judge",
                     help="comma list from: gen," + ",".join(JUDGE_FRAMINGS) + ". To add new judge framings to "
                          "an existing run, write them to a separate dir, e.g. --framings judgebug,judgetrace "
@@ -170,6 +202,30 @@ def main():
         raise SystemExit(f"unknown framings: {bad}")
     positions = (GEN_POSITIONS if "gen" in framings else []) + [f"{f}_end" for f in framings if f != "gen"]
     shards = plan_shards(rows, args.shard_size)
+    if args.yesno_only:
+        judge_fr = [f for f in framings if f != "gen"]
+        yes_ids, no_ids = answer_token_ids(tok)
+        print(f"yes tokens {yes_ids}, no tokens {no_ids}; framings {judge_fr}")
+        for i, shard in enumerate(shards):
+            path = os.path.join(args.out_dir, f"meta_yesno_{i:05d}.jsonl")
+            if os.path.exists(path):
+                continue
+            recs = [{"task_id": r["task_id"], "sample_id": r["sample_id"], "dataset": args.dataset} for r in shard]
+            for f in judge_fr:
+                for j in range(0, len(shard), args.batch_size):
+                    batch = shard[j:j + args.batch_size]
+                    seqs = [judge_inputs(tok, r, problems[r["task_id"]]["prompt"], f)[0] for r in batch]
+                    for k, (py, mass) in enumerate(yes_probability(torch, model, seqs, yes_ids, no_ids, device)):
+                        recs[j + k][f"{f}_pyes"] = py
+                        recs[j + k][f"{f}_answer_mass"] = mass
+            tmp = path + ".tmp"
+            with open(tmp, "w") as fh:
+                for rec in recs:
+                    fh.write(json.dumps(rec) + "\n")
+            os.replace(tmp, path)
+            print(f"yes/no shard {i + 1}/{len(shards)} saved", flush=True)
+        print(f"done: {len(shards)} yes/no shards in {args.out_dir}")
+        return
     t0, done_before = time.time(), 0
     for i, shard in enumerate(shards):
         npz_path, meta_path = shard_paths(args.out_dir, i)

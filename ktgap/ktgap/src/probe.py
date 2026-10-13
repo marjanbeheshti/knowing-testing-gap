@@ -74,9 +74,16 @@ def load_runs(specs):
                     r = json.loads(line)
                     if r["n_asserts"] > 0:
                         tests[(r["task_id"], r["sample_id"])] = r["tests_all_pass"]
+        yesno = {}
+        for path in sorted(glob.glob(os.path.join(run_dir, "hidden_yesno", "meta_yesno_*.jsonl"))):
+            with open(path) as f:
+                for line in f:
+                    r = json.loads(line)
+                    yesno[(r["task_id"], r["sample_id"])] = {k: v for k, v in r.items() if k.endswith("_pyes")}
         for m in meta:
             if m["dataset"] == dataset and "tests_green" not in m:
                 m["tests_green"] = tests.get((m["task_id"], m["sample_id"]))  # None = no own tests
+                m.update(yesno.get((m["task_id"], m["sample_id"]), {}))
     n_parts = max(len(v) for v in feats.values())
     missing = [k for k, v in feats.items() if len(v) != n_parts]
     if missing:
@@ -202,9 +209,18 @@ def main():
                             ("code_chars", 1, "baseline: code length")]:
         scores[name] = sign * np.array([m.get(key, np.nan) for m in meta], dtype=float)
 
+    # the model's graded verbal answer: P(no) to "Is it correct?", P(yes) to "Does it contain a bug?"
+    verbal = []
+    for key, sign, name in [("judge_pyes", -1, "baseline: verbal P(incorrect)"),
+                            ("judgebug_pyes", 1, "baseline: verbal P(bug)")]:
+        vals = np.array([m.get(key, np.nan) for m in meta], dtype=float)
+        if not np.isnan(vals).all():
+            scores[name] = sign * vals
+            verbal.append(name)
+
     # task-centered versions (primary for the gap): remove the task-level component of each score
     for name in ["probe: mean-diff", "probe: logistic", "baseline: prompt-only probe",
-                 "baseline: low mean log-prob"]:
+                 "baseline: low mean log-prob"] + verbal:
         s = scores[name]
         centered = s.copy()
         for g in np.unique(groups):

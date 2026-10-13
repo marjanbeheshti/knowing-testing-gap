@@ -12,6 +12,7 @@ Policies (higher score = escalate first):
   probe            out-of-fold hidden-state probe score (from probe.py --out)
   probe-centered   same, minus the mean over the task's other solutions
   confidence       low mean token log-probability of the response
+  verbal-prob      the model's graded verbal answer: P(no) to "Is this solution correct?"
   verdict          the model's own spoken verdict from judge_first ("Verdict: buggy" first)
   random           expected value of a random choice at the same budget
   all              escalate every green solution (budget 100%)
@@ -93,12 +94,17 @@ def main():
                          "probe": o.get("probe: logistic"),
                          "probe-centered": o.get("probe: logistic [task-centered]"),
                          "confidence": o.get("baseline: low mean log-prob"),
+                         "verbal-prob": o.get("baseline: verbal P(incorrect)"),
                          "verdict": (1.0 if verdicts.get(key) == "buggy" else 0.0) if key in verdicts else None})
     y = np.array([r["buggy"] for r in rows])
     groups = np.array([r["group"] for r in rows])
     print(f"green solutions (own tests all pass): {len(rows)} = {y.sum()} missed bugs + {(~y).sum()} correct")
 
-    policies = ["probe", "probe-centered", "confidence"] + (["verdict"] if verdicts else [])
+    policies = ["probe", "probe-centered", "confidence"]
+    if any(r["verbal-prob"] is not None for r in rows):
+        policies.append("verbal-prob")
+    if verdicts:
+        policies.append("verdict")
     scores = {}
     for p in policies:
         s = np.array([np.nan if r[p] is None else r[p] for r in rows], dtype=float)
