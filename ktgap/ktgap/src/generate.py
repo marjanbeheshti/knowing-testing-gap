@@ -12,6 +12,8 @@ python src/generate.py tests --model Qwen/Qwen2.5-Coder-0.5B-Instruct \
     --mode code --out results/qwen0.5b/selftests.jsonl
 """
 import argparse
+import json
+import os
 import time
 
 from common import extract_asserts, extract_code, load_problems, read_jsonl, select_tasks, write_jsonl
@@ -234,30 +236,87 @@ def make_backend(args):
 
 # ---------------------------------------------------------------- stages
 
+# ---------------------------------------------------------------- save-and-resume
+
+def _partial(out):
+    """Rows already saved by an interrupted run (OUT.partial), so a restart only does what is missing."""
+    path = out + ".partial"
+    return path, (read_jsonl(path) if os.path.exists(path) else [])
+
+
+def _append(path, rows):
+    with open(path, "a") as f:
+        for r in rows:
+            f.write(json.dumps(r) + "\n")
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def _finish(out, path, rows, order_key):
+    write_jsonl(out, sorted(rows, key=order_key))  # same order as an uninterrupted run
+    os.remove(path)
+
+
+# ---------------------------------------------------------------- stages
+
 def run_solutions(args):
     problems = load_problems(args.dataset)
     task_ids = select_tasks(problems, args.limit, args.task_ids)
-    backend = make_backend(args)
-    prompts = [backend.chat_text(SOLUTION_PROMPT.format(prompt=problems[t]["prompt"].strip(),
-                                                        entry=problems[t]["entry_point"]))
-               for t in task_ids]
+    part, rows = _partial(args.out)
+    done = {r["task_id"] for r in rows}
+    todo = [t for t in task_ids if t not in done]
+    if done:
+        print(f"resuming: {len(done)} tasks already saved in {part}, {len(todo)} to go")
     t0 = time.time()
-    outs = backend.generate(prompts, args.n, args.temperature, args.top_p, args.max_new_tokens)
-    rows = []
-    for t, prompt_text, samples in zip(task_ids, prompts, outs):
-        for k, raw in enumerate(samples):
-            rows.append({"task_id": t, "sample_id": k, "dataset": args.dataset,
-                         "solution_model": args.model, "prompt_text": prompt_text,
-                         "raw": raw, "solution": extract_code(raw),
-                         "temperature": args.temperature, "seed": args.seed})
-    write_jsonl(args.out, rows)
+    if todo:
+        backend = make_backend(args)
+        for i in range(0, len(todo), args.chunk):
+            chunk = todo[i:i + args.chunk]
+            prompts = [backend.chat_text(SOLUTION_PROMPT.format(prompt=problems[t]["prompt"].strip(),
+                                                                entry=problems[t]["entry_point"])) for t in chunk]
+            outs = backend.generate(prompts, args.n, args.temperature, args.top_p, args.max_new_tokens)
+            new_rows = [{"task_id": t, "sample_id": k, "dataset": args.dataset, "solution_model": args.model,
+                         "prompt_text": p, "raw": raw, "solution": extract_code(raw),
+                         "temperature": args.temperature, "seed": args.seed}
+                        for t, p, samples in zip(chunk, prompts, outs) for k, raw in enumerate(samples)]
+            _append(part, new_rows)
+            rows += new_rows
+            print(f"saved {len(done) + i + len(chunk)}/{len(task_ids)} tasks", flush=True)
+    order = {t: i for i, t in enumerate(task_ids)}
+    _finish(args.out, part, rows, lambda r: (order[r["task_id"]], r["sample_id"]))
     print(f"wrote {len(rows)} solutions to {args.out} in {time.time() - t0:.0f}s")
+
+
+def _tests_for(chunk, args, problems, backend):
+    """Prompts, generation and rows for one chunk of test targets (both turns for judge_first)."""
+    extra = {}
+    if args.mode == "judge_first":
+        # turn 1: the model reviews the code; turn 2: it writes tests in the same conversation
+        judge_msgs = [JUDGE_TURN.format(prompt=problems[r["task_id"]]["prompt"].strip(), solution=r["solution"])
+                      for r in chunk]
+        judgments = [o[0] for o in backend.generate([backend.chat_text(m) for m in judge_msgs], 1,
+                                                     args.temperature, args.top_p, 256)]
+        prompts = [backend.chat_text(
+            JUDGE_FOLLOWUP.format(entry=problems[r["task_id"]]["entry_point"], k=args.k),
+            history=[{"role": "user", "content": m}, {"role": "assistant", "content": j}])
+            for r, m, j in zip(chunk, judge_msgs, judgments)]
+        extra = {i: {"judgment": j, "verdict": parse_verdict(j)} for i, j in enumerate(judgments)}
+    elif args.mode == "spec":
+        prompts = [backend.chat_text(build_test_prompt("spec", problems[r["task_id"]], None, args.k)) for r in chunk]
+    else:
+        prompts = [backend.chat_text(build_test_prompt(args.mode, problems[r["task_id"]], r["solution"], args.k))
+                   for r in chunk]
+    outs = backend.generate(prompts, 1, args.temperature, args.top_p, args.max_new_tokens)
+    return [{"task_id": r["task_id"], "sample_id": r["sample_id"], "dataset": args.dataset,
+             "solution_model": r.get("solution_model"), "test_model": args.model,
+             "mode": args.mode, "prompt_text": p, "raw": o[0],
+             "asserts": extract_asserts(o[0], max_asserts=args.k, entry_point=problems[r["task_id"]]["entry_point"]),
+             **extra.get(i, {})}
+            for i, (r, p, o) in enumerate(zip(chunk, prompts, outs))]
 
 
 def run_tests(args):
     problems = load_problems(args.dataset)
-    backend = make_backend(args)
-    extra = {}
     if args.mode in PER_SOLUTION_MODES:
         targets = read_jsonl(args.solutions)  # one test set per solution
         if args.only_buggy_and_n_correct is not None:
@@ -265,37 +324,26 @@ def run_tests(args):
         if args.only_ids:  # e.g. only the solutions a probe flagged
             keep = {(d["task_id"], d["sample_id"]) for d in read_jsonl(args.only_ids)}
             targets = [r for r in targets if (r["task_id"], r["sample_id"]) in keep]
-        if args.mode == "judge_first":
-            # turn 1: the model reviews the code; turn 2: it writes tests in the same conversation
-            judge_msgs = [JUDGE_TURN.format(prompt=problems[r["task_id"]]["prompt"].strip(), solution=r["solution"])
-                          for r in targets]
-            judgments = [o[0] for o in backend.generate([backend.chat_text(m) for m in judge_msgs], 1,
-                                                         args.temperature, args.top_p, 256)]
-            prompts = [backend.chat_text(
-                JUDGE_FOLLOWUP.format(entry=problems[r["task_id"]]["entry_point"], k=args.k),
-                history=[{"role": "user", "content": m}, {"role": "assistant", "content": j}])
-                for r, m, j in zip(targets, judge_msgs, judgments)]
-            extra = {i: {"judgment": j, "verdict": parse_verdict(j)} for i, j in enumerate(judgments)}
-        else:
-            prompts = [backend.chat_text(build_test_prompt(args.mode, problems[r["task_id"]], r["solution"], args.k))
-                       for r in targets]
     else:  # spec: one test set per task (black-box), shared by all solutions of that task
         sols = read_jsonl(args.solutions)
         task_ids = sorted({r["task_id"] for r in sols}, key=list(problems).index)
         targets = [{"task_id": t, "sample_id": None, "solution_model": None} for t in task_ids]
-        prompts = [backend.chat_text(build_test_prompt("spec", problems[t], None, args.k)) for t in task_ids]
+    key = lambda r: (r["task_id"], r["sample_id"])
+    part, rows = _partial(args.out)
+    done = {key(r) for r in rows}
+    todo = [r for r in targets if key(r) not in done]
+    if done:
+        print(f"resuming: {len(done)} test sets already saved in {part}, {len(todo)} to go")
     t0 = time.time()
-    outs = backend.generate(prompts, 1, args.temperature, args.top_p, args.max_new_tokens)
-    rows = []
-    for i, (r, prompt_text, samples) in enumerate(zip(targets, prompts, outs)):
-        raw = samples[0]
-        rows.append({"task_id": r["task_id"], "sample_id": r["sample_id"], "dataset": args.dataset,
-                     "solution_model": r.get("solution_model"), "test_model": args.model,
-                     "mode": args.mode, "prompt_text": prompt_text, "raw": raw,
-                     "asserts": extract_asserts(raw, max_asserts=args.k,
-                                                entry_point=problems[r["task_id"]]["entry_point"]),
-                     **extra.get(i, {})})
-    write_jsonl(args.out, rows)
+    if todo:
+        backend = make_backend(args)
+        for i in range(0, len(todo), args.chunk):
+            new_rows = _tests_for(todo[i:i + args.chunk], args, problems, backend)
+            _append(part, new_rows)
+            rows += new_rows
+            print(f"saved {len(done) + i + len(new_rows)}/{len(targets)} test sets", flush=True)
+    order = {key(r): i for i, r in enumerate(targets)}
+    _finish(args.out, part, rows, lambda r: order[key(r)])
     empty = sum(1 for r in rows if not r["asserts"])
     print(f"wrote {len(rows)} test sets to {args.out} in {time.time() - t0:.0f}s "
           f"({empty} produced no parsable asserts)")
@@ -342,6 +390,8 @@ def main():
     ap.add_argument("--top-p", type=float, default=0.95)
     ap.add_argument("--max-new-tokens", type=int, default=512)
     ap.add_argument("--batch-size", type=int, default=4)
+    ap.add_argument("--chunk", type=int, default=64,
+                    help="prompts per saved chunk; an interrupted run resumes from the last saved chunk")
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
     if args.temperature is None:  # diverse solutions (we need bugs); near-deterministic tests

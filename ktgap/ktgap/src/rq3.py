@@ -146,7 +146,9 @@ def main():
         s = np.array([np.nan if r.get(p) is None else r[p] for r in rows], float)
         if np.isnan(s).any():
             print(f"note: '{p}' missing for {int(np.isnan(s).sum())} solutions (ranked last)")
-        scores[p] = np.where(np.isnan(s), -np.inf, s) + 1e-9 * rng.random(len(s))  # random tie-break
+        finite_min = np.nanmin(s) if not np.isnan(s).all() else 0.0
+        # missing scores rank last (finite value: AUROC code rejects infinities); random tie-break
+        scores[p] = np.where(np.isnan(s), finite_min - 1.0, s) + 1e-9 * rng.random(len(s))
 
     tasks = np.unique(groups)
     members = {g: np.where(groups == g)[0] for g in tasks}
