@@ -33,6 +33,9 @@ def main():
     ap.add_argument("--runs", nargs="+", required=True, help="RUN_DIR:dataset")
     ap.add_argument("--probe", required=True)
     ap.add_argument("--score", default=SCORE)
+    ap.add_argument("--extra", default=None,
+                    help="extra own-test results in each run dir (e.g. selftest_results_morecorrect.jsonl): "
+                         "own tests for correct solutions that had none, adding same-task comparisons")
     ap.add_argument("--n-boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
@@ -46,10 +49,26 @@ def main():
         if os.path.exists(dpath):
             for r in load(dpath):
                 info.setdefault((ds, r["task_id"], r["sample_id"]), {})["disagree"] = r.get("disagree")
+    extra_green = {}
+    if args.extra:
+        for spec in args.runs:
+            run_dir, ds = spec.rsplit(":", 1)
+            path = os.path.join(run_dir, args.extra)
+            if os.path.exists(path):
+                for r in load(path):
+                    if r["n_asserts"] > 0:
+                        extra_green[(ds, r["task_id"], r["sample_id"])] = r["tests_all_pass"]
+            else:
+                print(f"note: {path} missing")
+        print(f"extra own-test results: {len(extra_green)} solutions, "
+              f"{sum(extra_green.values())} with all own tests passing")
     rows = []
     for o in json.load(open(args.probe))["oof"]:
         k = (o["dataset"], o["task_id"], o["sample_id"])
-        if o.get("tests_green") is not True or k not in info or o.get(args.score) is None:
+        green = o.get("tests_green")
+        if green is None and k in extra_green:
+            green = extra_green[k]
+        if green is not True or k not in info or o.get(args.score) is None:
             continue
         rows.append({**info[k], "key": k, "group": f"{k[0]}::{k[1]}", "buggy": not o["correct"],
                      "score": o[args.score]})

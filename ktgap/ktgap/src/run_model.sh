@@ -7,7 +7,8 @@
 # Safe to re-run: finished steps are skipped and every generation step resumes where it stopped.
 # Everything is logged to ../results/TAG_log.txt.
 # Optional add-ons (off by default; costly on large models):
-#   THINK=1       E9 think-then-probe          ALLCORRECT=1  own tests for ALL correct solutions
+#   THINK=1       E9 think-then-probe
+#   ALLCORRECT=1  own tests also for the correct solutions that have none (more same-task comparisons)
 #   DRY=1         print the commands without running them
 set -o pipefail
 MODEL=${1:?model name}; TAG=${2:?tag}; GB=${3:-8}; EB=${4:-4}
@@ -77,12 +78,21 @@ open('$R/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); 
       bash -c "python think.py --model '$MODEL' --dataset $DS --solutions $R/solutions_labeled.jsonl --batch-size $EB --out-dir $R/hidden_think && touch $R/hidden_think/DONE"
   fi
   if [ "${ALLCORRECT:-0}" = "1" ]; then
-    step "$DS own tests, all correct" $R/selftests_all.jsonl \
+    # own tests for the correct solutions that have none yet; buggy solutions keep their tests,
+    # so the set of missed bugs is unchanged and only same-task comparisons are added
+    step "$DS ids of correct solutions without own tests" $R/more_correct_ids.jsonl \
+      python -c "
+import json
+done={(r['task_id'],r['sample_id']) for r in map(json.loads, open('$R/selftests.jsonl'))}
+ids=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in map(json.loads, open('$R/solutions_labeled.jsonl'))
+     if r['correct'] and (r['task_id'],r['sample_id']) not in done]
+open('$R/more_correct_ids.jsonl','w').write(''.join(json.dumps(x)+'\\n' for x in ids)); print(len(ids), 'correct solutions to test')"
+    step "$DS own tests, remaining correct solutions" $R/selftests_morecorrect.jsonl \
       python generate.py tests --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode code \
-        --only-buggy-and-n-correct 99 --batch-size $GB --out $R/selftests_all.jsonl
-    step "$DS run own tests, all correct" $R/selftest_results_all.jsonl \
-      python evaluate.py run-tests --dataset $DS --solutions $R/solutions_labeled.jsonl --tests $R/selftests_all.jsonl \
-        --out $R/selftest_results_all.jsonl
+        --only-ids $R/more_correct_ids.jsonl --batch-size $GB --out $R/selftests_morecorrect.jsonl
+    step "$DS run own tests, remaining correct solutions" $R/selftest_results_morecorrect.jsonl \
+      python evaluate.py run-tests --dataset $DS --solutions $R/solutions_labeled.jsonl \
+        --tests $R/selftests_morecorrect.jsonl --out $R/selftest_results_morecorrect.jsonl
   fi
 done
 
@@ -103,11 +113,16 @@ if [ "${THINK:-0}" = "1" ]; then
   save $AN/probe_after.txt python probe.py --runs $HE:humaneval $MB:mbpp --positions think_end --out $AN/probe_after.json
   save $AN/compare_think.txt python compare.py --a $AN/probe_before.json --b $AN/probe_after.json
 fi
+save $AN/diagnose.txt python diagnose.py --runs $HE:humaneval $MB:mbpp --probe $AN/probe.json
+if [ "${ALLCORRECT:-0}" = "1" ]; then
+  save $AN/diagnose_allcorrect.txt python diagnose.py --runs $HE:humaneval $MB:mbpp --probe $AN/probe.json \
+    --extra selftest_results_morecorrect.jsonl
+fi
 # one short summary file with the key lines of every analysis
 { for f in stats_he stats_mbpp; do echo "== $f"; grep -E "buggy solutions|caught by|confirming share|caught drop|confirming increase|sign-flip" $AN/$f.txt; done
   echo "== probe"; grep -E "^solutions|GAP set|KNOWING|within-task pairs|vs verbal" $AN/probe.txt
   for f in transfer_he_to_mbpp transfer_mbpp_to_he; do echo "== $f"; grep -E "^train|selected|probe: logistic|verbal P\(incorrect\)|\[raw\]|\[task-centered\]  " $AN/$f.txt; done
-  for f in rq3 rq3_transfer; do echo "== $f"; sed -n '/^green/,/^$/p;/ranking the green/,/^$/p' $AN/$f.txt; grep -E "escalation|^  *30%|^ +probe +78|escalating everything" $AN/$f.txt; done
+  for f in rq3 rq3_transfer; do echo "== $f"; sed -n '/^green/,/^$/p;/ranking the green/,/^$/p' $AN/$f.txt; grep -E "escalation|escalating everything" $AN/$f.txt; sed -n '/30% random/,/100% random/p' $AN/$f.txt; done
 } > $AN/SUMMARY.txt 2>/dev/null
 say "summary: $AN/SUMMARY.txt"
 say "===== DONE: $TAG. Full log: $LOG ====="
