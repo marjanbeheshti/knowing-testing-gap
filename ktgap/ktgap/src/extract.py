@@ -167,6 +167,10 @@ def main():
     ap.add_argument("--shard-size", type=int, default=64)
     ap.add_argument("--batch-size", type=int, default=4)
     ap.add_argument("--limit", type=int, default=None, help="first N solutions only (smoke test)")
+    ap.add_argument("--allow-other-model", action="store_true",
+                    help="cross-model monitor: let --model read solutions written by ANOTHER model. Only judge "
+                         "framings are allowed (the generation context belongs to the author model); write to a "
+                         "separate dir, e.g. RUN/hidden_reader_qwen3b")
     ap.add_argument("--yesno-only", action="store_true",
                     help="only compute the model's verbal answer probabilities P(yes) for the judge framings "
                          "(no hidden states); writes meta_yesno_*.jsonl, e.g. into RUN/hidden_yesno")
@@ -183,9 +187,14 @@ def main():
     if "correct" not in rows[0]:
         raise SystemExit("needs a labeled solutions file")
     models = {r["solution_model"] for r in rows}
-    if models != {args.model}:
+    reader_mode = models != {args.model}
+    if reader_mode and not args.allow_other_model:
         raise SystemExit(f"solutions were written by {models}, not {args.model}: hidden states must "
-                         "come from the model that wrote the code")
+                         "come from the model that wrote the code (use --allow-other-model for a cross-model monitor)")
+    if reader_mode and "gen" in [f.strip() for f in args.framings.split(",")]:
+        raise SystemExit("cross-model monitor: use judge framings only (e.g. --framings judge,judgebug)")
+    if reader_mode:
+        print(f"cross-model monitor: {args.model} reads solutions written by {sorted(models)}")
     if args.limit:
         rows = rows[:args.limit]
     problems = load_problems(args.dataset)

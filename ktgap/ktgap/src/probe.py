@@ -47,16 +47,16 @@ BASELINE_POSITION = "prompt_end"
 
 # ---------------------------------------------------------------- data
 
-def load_runs(specs):
+def load_runs(specs, hidden_dir="hidden"):
     feats, meta = defaultdict(list), []
     for spec in specs:
         run_dir, dataset = spec.rsplit(":", 1)
-        npzs = sorted(glob.glob(os.path.join(run_dir, "hidden", "shard_*.npz")))
+        npzs = sorted(glob.glob(os.path.join(run_dir, hidden_dir, "shard_*.npz")))
         if not npzs:
-            raise SystemExit(f"no hidden-state shards in {run_dir}/hidden (run extract.py first)")
+            raise SystemExit(f"no hidden-state shards in {run_dir}/{hidden_dir} (run extract.py first)")
         for npz in npzs:
             data = dict(np.load(npz))
-            for extra_dir in ("hidden_extra", "hidden_think"):  # added later, same shard layout
+            for extra_dir in (("hidden_extra", "hidden_think") if hidden_dir == "hidden" else ()):
                 extra = npz.replace(os.sep + "hidden" + os.sep, os.sep + extra_dir + os.sep)
                 if os.path.exists(extra):
                     more = np.load(extra)
@@ -176,6 +176,8 @@ def boot_auc(y, s, groups, n_boot, seed):
     """AUROC with a 95% CI from a bootstrap over tasks."""
     est = safe_auc(y, s)
     uniq = np.unique(groups)
+    if len(uniq) == 0:
+        return np.nan, np.nan, np.nan, np.nan
     members = {g: np.where(groups == g)[0] for g in uniq}
     rng = np.random.default_rng(seed)
     draws = []
@@ -230,12 +232,14 @@ def main():
     ap.add_argument("--center-features", action="store_true",
                     help="within-task probe: subtract each task's mean hidden state and train only on tasks "
                          "with both buggy and correct solutions (contrastive, cf. Ribeiro et al.)")
+    ap.add_argument("--hidden-dir", default="hidden",
+                    help="hidden-state dir in each run, e.g. hidden_reader_qwen3b for a cross-model monitor")
     ap.add_argument("--positions", nargs="*", default=None,
                     help="probe read-out positions to select from (default: all except prompt_end); "
                          "e.g. --positions judgebug_end to evaluate one framing alone")
     args = ap.parse_args()
 
-    feats, meta = load_runs(args.runs)
+    feats, meta = load_runs(args.runs, args.hidden_dir)
     y = np.array([0 if m["correct"] else 1 for m in meta])          # 1 = buggy
     groups = np.array([f'{m["dataset"]}::{m["task_id"]}' for m in meta])
     green = np.array([m.get("tests_green") is True for m in meta])
@@ -256,13 +260,18 @@ def main():
     oof, chosen["probe"] = cross_validated_scores(feats, positions, y, groups, args.folds, args.c, args.seed,
                                                   train_mask)
     scores["probe: mean-diff"], scores["probe: logistic"] = oof["meandiff"], oof["logistic"]
-    oof_b, chosen["prompt-only"] = cross_validated_scores(feats, [BASELINE_POSITION], y, groups, args.folds,
-                                                          args.c, args.seed)
-    scores["baseline: prompt-only probe"] = oof_b["meandiff"]
+    if BASELINE_POSITION in feats:
+        oof_b, chosen["prompt-only"] = cross_validated_scores(feats, [BASELINE_POSITION], y, groups, args.folds,
+                                                              args.c, args.seed)
+        scores["baseline: prompt-only probe"] = oof_b["meandiff"]
     for key, sign, name in [("mean_logprob", -1, "baseline: low mean log-prob"),
                             ("min_logprob", -1, "baseline: low min log-prob"),
                             ("code_chars", 1, "baseline: code length")]:
         scores[name] = sign * np.array([m.get(key, np.nan) for m in meta], dtype=float)
+
+    # signals that are unavailable for this run (e.g. no generation statistics for a cross-model reader)
+    for name in [k for k, v in scores.items() if np.isnan(v).all()]:
+        del scores[name]
 
     # the model's graded verbal answer: P(no) to "Is it correct?", P(yes) to "Does it contain a bug?"
     verbal = []
@@ -277,6 +286,8 @@ def main():
     # task-centered versions (primary for the gap): remove the task-level component of each score
     for name in ["probe: mean-diff", "probe: logistic", "baseline: prompt-only probe",
                  "baseline: low mean log-prob"] + verbal:
+        if name not in scores:
+            continue
         s = scores[name]
         centered = s.copy()
         for g in np.unique(groups):
