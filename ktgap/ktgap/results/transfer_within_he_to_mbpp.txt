@@ -1,0 +1,22 @@
+within-task probe: centered features; training on 230 solutions from mixed tasks
+train: humaneval (230 solutions, 96 buggy) -> test: mbpp (1890 solutions, 741 buggy; gap set 95 missed bugs vs 166 correct)
+selected on humaneval only: judge_end @ layer 25 (validation AUROC 0.893)
+
+AUROC on mbpp (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.540 [0.513,0.566]                     0.605 [0.527,0.686]
+probe: mean-diff                                       0.560 [0.534,0.587]                     0.594 [0.519,0.676]
+baseline: prompt-only probe                            0.500 [0.479,0.521]                     0.517 [0.452,0.588]
+baseline: verbal P(incorrect)                          0.686 [0.640,0.727]                     0.610 [0.501,0.719]
+baseline: low mean log-prob                            0.694 [0.657,0.726]                     0.709 [0.639,0.780]
+probe: logistic [task-centered]                        0.540 [0.513,0.566]                     0.605 [0.527,0.686]
+probe: mean-diff [task-centered]                       0.560 [0.534,0.587]                     0.594 [0.519,0.676]
+baseline: prompt-only probe [task-centered]            0.500 [0.479,0.521]                     0.517 [0.452,0.588]
+baseline: verbal P(incorrect) [task-centered]          0.539 [0.517,0.563]                     0.525 [0.447,0.604]
+baseline: low mean log-prob [task-centered]            0.546 [0.527,0.567]                     0.535 [0.464,0.603]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             -0.146 [-0.196, -0.097]
+  GAP  [raw]             -0.004 [-0.128, +0.122]
+  ALL  [task-centered]   +0.000 [-0.023, +0.022]
+  GAP  [task-centered]   +0.080 [+0.013, +0.149]

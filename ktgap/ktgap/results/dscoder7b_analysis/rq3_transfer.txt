@@ -1,0 +1,33 @@
+transfer scores (probe trained on humaneval): combined policy disabled
+green solutions (own tests all pass): 260 = 110 missed bugs + 150 correct
+note: 'disagreement' missing for 2 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.619 [0.530, 0.704]
+  probe-centered  0.515 [0.451, 0.581]   vs probe -0.104 [-0.183, -0.023]
+  confidence      0.528 [0.448, 0.609]   vs probe -0.091 [-0.190, +0.012]
+  verbal-prob     0.633 [0.530, 0.730]   vs probe +0.014 [-0.104, +0.136]
+  disagreement    0.626 [0.538, 0.716]   vs probe +0.007 [-0.114, +0.126]
+
+=== escalation 'both': extra tests fail on 66/110 missed bugs, 68/150 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     26   0.060     0.045  0.423
+       probe             26   0.136     0.033  0.731   +0.076 [+0.019, +0.133]  
+       probe-centered    26   0.091     0.040  0.577   +0.031 [-0.014, +0.077]    -0.045 [-0.111, +0.020]
+       confidence        26   0.082     0.040  0.500   +0.022 [-0.023, +0.070]    -0.055 [-0.127, +0.020]
+       verbal-prob       26   0.109     0.040  0.577   +0.049 [+0.007, +0.101]    -0.027 [-0.097, +0.049]
+       disagreement      26   0.118     0.027  0.615   +0.058 [+0.022, +0.128]    -0.018 [-0.078, +0.074]
+   20% random (exp.)     52   0.120     0.091  0.423
+       probe             52   0.245     0.060  0.635   +0.125 [+0.046, +0.196]  
+       probe-centered    52   0.145     0.080  0.500   +0.025 [-0.023, +0.090]    -0.100 [-0.165, -0.025]
+       confidence        52   0.155     0.113  0.500   +0.035 [-0.026, +0.099]    -0.091 [-0.173, +0.000]
+       verbal-prob       52   0.182     0.067  0.558   +0.062 [+0.013, +0.147]    -0.064 [-0.141, +0.057]
+       disagreement      52   0.236     0.080  0.615   +0.116 [+0.034, +0.198]    -0.009 [-0.106, +0.088]
+   30% random (exp.)     78   0.180     0.136  0.423
+       probe             78   0.309     0.093  0.564   +0.129 [+0.058, +0.212]  
+       probe-centered    78   0.227     0.133  0.500   +0.047 [-0.020, +0.121]    -0.082 [-0.155, -0.019]
+       confidence        78   0.209     0.187  0.436   +0.029 [-0.030, +0.097]    -0.100 [-0.198, -0.010]
+       verbal-prob       78   0.300     0.113  0.590   +0.120 [+0.049, +0.208]    -0.009 [-0.116, +0.106]
+       disagreement      78   0.245     0.133  0.513   +0.065 [+0.004, +0.164]    -0.064 [-0.144, +0.049]
+  100% random (exp.)    260   0.600     0.453  0.423
+  escalating everything: 44/110 bugs still shipped, 68 false alarms, 260 extra test runs

@@ -1,0 +1,61 @@
+green solutions (own tests all pass): 261 = 95 missed bugs + 166 correct
+
+=== escalation: 'spec' (extra tests fail on: 32/95 missed bugs, 34/166 correct; coverage 100%) ===
+caught = share of the missed bugs caught by escalation; false alarm = share of green correct solutions flagged;
+'vs random' = caught minus the random-policy expectation, 95% CI from a bootstrap over tasks
+ budget policy           escalated   caught  false alarm  precision   vs random
+   10%  random (expected)        26    0.034        0.020      0.364
+        probe                   26    0.084        0.024      0.692   +0.051 [-0.003, +0.131]
+        probe-centered          26    0.084        0.006      0.808   +0.051 [+0.002, +0.111]
+        confidence              26    0.011        0.006      0.538   -0.023 [-0.041, +0.020]
+   20%  random (expected)        52    0.067        0.041      0.364
+        probe                   52    0.189        0.042      0.673   +0.122 [+0.048, +0.207]
+        probe-centered          52    0.105        0.036      0.538   +0.038 [-0.018, +0.103]
+        confidence              52    0.074        0.018      0.596   +0.006 [-0.045, +0.058]
+   30%  random (expected)        78    0.101        0.061      0.364
+        probe                   78    0.253        0.060      0.590   +0.152 [+0.072, +0.226]
+        probe-centered          78    0.147        0.078      0.462   +0.046 [-0.002, +0.125]
+        confidence              78    0.126        0.036      0.577   +0.025 [-0.026, +0.092]
+  100%  random (expected)       261    0.337        0.205      0.364
+
+shipped bugs without escalation: 95. With escalation of everything ('all'): 63 shipped, 34 false alarms, 261 extra test runs.
+
+=== escalation: 'warn' (extra tests fail on: 20/95 missed bugs, 20/166 correct; coverage 100%) ===
+caught = share of the missed bugs caught by escalation; false alarm = share of green correct solutions flagged;
+'vs random' = caught minus the random-policy expectation, 95% CI from a bootstrap over tasks
+ budget policy           escalated   caught  false alarm  precision   vs random
+   10%  random (expected)        26    0.021        0.012      0.364
+        probe                   26    0.032        0.012      0.692   +0.011 [-0.016, +0.061]
+        probe-centered          26    0.032        0.006      0.808   +0.011 [-0.017, +0.048]
+        confidence              26    0.000        0.012      0.538   -0.021 [-0.031, +0.005]
+   20%  random (expected)        52    0.042        0.024      0.364
+        probe                   52    0.074        0.018      0.673   +0.032 [-0.014, +0.088]
+        probe-centered          52    0.053        0.024      0.538   +0.011 [-0.029, +0.060]
+        confidence              52    0.042        0.012      0.596   +0.000 [-0.042, +0.046]
+   30%  random (expected)        78    0.063        0.036      0.364
+        probe                   78    0.095        0.048      0.590   +0.032 [-0.021, +0.088]
+        probe-centered          78    0.074        0.042      0.462   +0.011 [-0.044, +0.069]
+        confidence              78    0.074        0.012      0.577   +0.011 [-0.036, +0.056]
+  100%  random (expected)       261    0.211        0.120      0.364
+
+shipped bugs without escalation: 95. With escalation of everything ('all'): 75 shipped, 20 false alarms, 261 extra test runs.
+
+=== escalation: 'spec_first' (extra tests fail on: 40/95 missed bugs, 45/166 correct; coverage 100%) ===
+caught = share of the missed bugs caught by escalation; false alarm = share of green correct solutions flagged;
+'vs random' = caught minus the random-policy expectation, 95% CI from a bootstrap over tasks
+ budget policy           escalated   caught  false alarm  precision   vs random
+   10%  random (expected)        26    0.042        0.027      0.364
+        probe                   26    0.084        0.030      0.692   +0.042 [+0.005, +0.117]
+        probe-centered          26    0.074        0.012      0.808   +0.032 [-0.011, +0.079]
+        confidence              26    0.042        0.018      0.538   +0.000 [-0.033, +0.045]
+   20%  random (expected)        52    0.084        0.054      0.364
+        probe                   52    0.158        0.054      0.673   +0.074 [+0.014, +0.144]
+        probe-centered          52    0.095        0.060      0.538   +0.011 [-0.039, +0.070]
+        confidence              52    0.105        0.030      0.596   +0.021 [-0.034, +0.079]
+   30%  random (expected)        78    0.126        0.081      0.364
+        probe                   78    0.232        0.090      0.590   +0.105 [+0.028, +0.179]
+        probe-centered          78    0.126        0.084      0.462   +0.000 [-0.054, +0.074]
+        confidence              78    0.179        0.048      0.577   +0.053 [-0.015, +0.116]
+  100%  random (expected)       261    0.421        0.271      0.364
+
+shipped bugs without escalation: 95. With escalation of everything ('all'): 55 shipped, 45 false alarms, 261 extra test runs.

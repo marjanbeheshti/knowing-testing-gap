@@ -1,0 +1,225 @@
+[15:33:12] ===== cross-model monitor: Qwen/Qwen2.5-Coder-3B-Instruct reads dscoder1b =====
+[15:33:12] RUN: python extract.py --model Qwen/Qwen2.5-Coder-3B-Instruct --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --framings judge,judgebug --allow-other-model --batch-size 4 --out-dir ../results/dscoder1b_he/hidden_reader_qwen3b > ../results/dscoder1b_he/hidden_reader_qwen3b_extract.txt
+cross-model monitor: Qwen/Qwen2.5-Coder-3B-Instruct reads solutions written by ['deepseek-ai/deepseek-coder-1.3b-instruct']
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights: 100%|██████████| 434/434 [00:00<00:00, 4675.26it/s]
+shard 1/13 saved (2s/shard, ~0 min left)
+shard 2/13 saved (2s/shard, ~0 min left)
+shard 3/13 saved (2s/shard, ~0 min left)
+shard 4/13 saved (2s/shard, ~0 min left)
+shard 5/13 saved (2s/shard, ~0 min left)
+shard 6/13 saved (2s/shard, ~0 min left)
+shard 7/13 saved (2s/shard, ~0 min left)
+shard 8/13 saved (2s/shard, ~0 min left)
+shard 9/13 saved (2s/shard, ~0 min left)
+shard 10/13 saved (2s/shard, ~0 min left)
+shard 11/13 saved (2s/shard, ~0 min left)
+shard 12/13 saved (2s/shard, ~0 min left)
+shard 13/13 saved (2s/shard, ~0 min left)
+done: 13 shards in ../results/dscoder1b_he/hidden_reader_qwen3b
+[15:33:48] RUN: python extract.py --model Qwen/Qwen2.5-Coder-3B-Instruct --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --framings judge,judgebug --allow-other-model --batch-size 4 --out-dir ../results/dscoder1b_mbpp/hidden_reader_qwen3b > ../results/dscoder1b_mbpp/hidden_reader_qwen3b_extract.txt
+cross-model monitor: Qwen/Qwen2.5-Coder-3B-Instruct reads solutions written by ['deepseek-ai/deepseek-coder-1.3b-instruct']
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights:  81%|████████  | 352/434 [00:00<00:00, 3505.54it/s]Loading weights: 100%|██████████| 434/434 [00:00<00:00, 3709.30it/s]
+shard 1/30 saved (2s/shard, ~1 min left)
+shard 2/30 saved (2s/shard, ~1 min left)
+shard 3/30 saved (2s/shard, ~1 min left)
+shard 4/30 saved (2s/shard, ~1 min left)
+shard 5/30 saved (2s/shard, ~1 min left)
+shard 6/30 saved (2s/shard, ~1 min left)
+shard 7/30 saved (2s/shard, ~1 min left)
+shard 8/30 saved (2s/shard, ~1 min left)
+shard 9/30 saved (2s/shard, ~1 min left)
+shard 10/30 saved (2s/shard, ~1 min left)
+shard 11/30 saved (2s/shard, ~1 min left)
+shard 12/30 saved (2s/shard, ~0 min left)
+shard 13/30 saved (2s/shard, ~0 min left)
+shard 14/30 saved (2s/shard, ~0 min left)
+shard 15/30 saved (2s/shard, ~0 min left)
+shard 16/30 saved (2s/shard, ~0 min left)
+shard 17/30 saved (2s/shard, ~0 min left)
+shard 18/30 saved (2s/shard, ~0 min left)
+shard 19/30 saved (2s/shard, ~0 min left)
+shard 20/30 saved (2s/shard, ~0 min left)
+shard 21/30 saved (2s/shard, ~0 min left)
+shard 22/30 saved (2s/shard, ~0 min left)
+shard 23/30 saved (2s/shard, ~0 min left)
+shard 24/30 saved (2s/shard, ~0 min left)
+shard 25/30 saved (2s/shard, ~0 min left)
+shard 26/30 saved (2s/shard, ~0 min left)
+shard 27/30 saved (2s/shard, ~0 min left)
+shard 28/30 saved (2s/shard, ~0 min left)
+shard 29/30 saved (2s/shard, ~0 min left)
+shard 30/30 saved (2s/shard, ~0 min left)
+done: 30 shards in ../results/dscoder1b_mbpp/hidden_reader_qwen3b
+[15:34:42] RUN: python probe.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --hidden-dir hidden_reader_qwen3b --out ../results/dscoder1b_analysis/probe_reader_qwen3b.json > ../results/dscoder1b_analysis/probe_reader_qwen3b.txt
+solutions: 2710 (1308 buggy) in 542 tasks; with own tests: 1682
+GAP set: 82 missed bugs vs 124 test-passing correct
+probe positions: ['judge_end', 'judgebug_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.757 [0.726,0.786]           0.737 [0.658,0.810]           0.809 [0.768,0.848]
+probe: logistic                                            0.825 [0.798,0.850]           0.728 [0.649,0.804]           0.838 [0.801,0.875]
+baseline: code length                                      0.578 [0.544,0.611]           0.582 [0.491,0.666]           0.629 [0.577,0.686]
+baseline: verbal P(incorrect)                              0.571 [0.538,0.605]           0.569 [0.481,0.661]           0.596 [0.540,0.650]
+baseline: verbal P(bug)                                    0.545 [0.514,0.577]           0.510 [0.425,0.595]           0.565 [0.509,0.620]
+probe: mean-diff [task-centered]                           0.587 [0.565,0.607]           0.532 [0.453,0.615]           0.585 [0.538,0.633]
+probe: logistic [task-centered]                            0.608 [0.584,0.632]           0.519 [0.443,0.595]           0.608 [0.562,0.656]
+baseline: verbal P(incorrect) [task-centered]              0.534 [0.512,0.556]           0.493 [0.410,0.578]           0.552 [0.501,0.600]
+baseline: verbal P(bug) [task-centered]                    0.481 [0.463,0.498]           0.475 [0.392,0.558]           0.470 [0.424,0.515]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.435 of 23 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.532 [0.453, 0.615], one-sided p(AUROC <= 0.5) = 0.2050
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.519 [0.443, 0.595], one-sided p(AUROC <= 0.5) = 0.3090
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.254 [+0.214, +0.297]
+  GAP  probe: logistic                    vs verbal: +0.159 [+0.041, +0.276]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.074 [+0.050, +0.098]
+  GAP  probe: logistic [task-centered]    vs verbal: +0.026 [-0.070, +0.117]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.053 [+0.031, +0.074]
+  GAP  probe: mean-diff [task-centered]   vs verbal: +0.039 [-0.048, +0.120]
+
+selected (position, layer) per fold:
+  probe: judge_end@27 (val 0.735), judge_end@25 (val 0.772), judge_end@27 (val 0.753), judge_end@27 (val 0.74), judge_end@31 (val 0.776)
+
+saved ../results/dscoder1b_analysis/probe_reader_qwen3b.json
+[15:36:54] RUN: python probe.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --positions judge_end --out ../results/dscoder1b_analysis/probe_own_judge.json > ../results/dscoder1b_analysis/probe_own_judge.txt
+solutions: 2710 (1308 buggy) in 542 tasks; with own tests: 1682
+GAP set: 82 missed bugs vs 124 test-passing correct
+probe positions: ['judge_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.731 [0.698,0.765]           0.632 [0.556,0.712]           0.754 [0.705,0.804]
+probe: logistic                                            0.790 [0.762,0.817]           0.713 [0.640,0.781]           0.799 [0.755,0.840]
+baseline: prompt-only probe                                0.711 [0.673,0.746]           0.714 [0.625,0.794]           0.750 [0.701,0.801]
+baseline: low mean log-prob                                0.597 [0.571,0.623]           0.649 [0.569,0.729]           0.608 [0.550,0.662]
+baseline: low min log-prob                                 0.605 [0.581,0.630]           0.634 [0.554,0.713]           0.638 [0.584,0.690]
+baseline: code length                                      0.578 [0.544,0.611]           0.582 [0.491,0.666]           0.629 [0.577,0.686]
+baseline: verbal P(incorrect)                              0.571 [0.538,0.605]           0.569 [0.481,0.661]           0.596 [0.540,0.650]
+baseline: verbal P(bug)                                    0.545 [0.514,0.577]           0.510 [0.425,0.595]           0.565 [0.509,0.620]
+probe: mean-diff [task-centered]                           0.558 [0.534,0.582]           0.477 [0.390,0.567]           0.596 [0.549,0.644]
+probe: logistic [task-centered]                            0.570 [0.546,0.594]           0.472 [0.395,0.555]           0.573 [0.526,0.621]
+baseline: prompt-only probe [task-centered]                0.501 [0.481,0.518]           0.507 [0.428,0.587]           0.523 [0.469,0.576]
+baseline: low mean log-prob [task-centered]                0.522 [0.506,0.538]           0.606 [0.519,0.689]           0.544 [0.489,0.598]
+baseline: verbal P(incorrect) [task-centered]              0.534 [0.512,0.556]           0.493 [0.410,0.578]           0.552 [0.501,0.600]
+baseline: verbal P(bug) [task-centered]                    0.481 [0.463,0.498]           0.475 [0.392,0.558]           0.470 [0.424,0.515]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.522 of 23 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.477 [0.390, 0.567], one-sided p(AUROC <= 0.5) = 0.6830
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.472 [0.395, 0.555], one-sided p(AUROC <= 0.5) = 0.7435
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.220 [+0.176, +0.262]
+  GAP  probe: logistic                    vs verbal: +0.144 [+0.024, +0.266]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.036 [+0.013, +0.059]
+  GAP  probe: logistic [task-centered]    vs verbal: -0.021 [-0.108, +0.067]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.024 [+0.001, +0.047]
+  GAP  probe: mean-diff [task-centered]   vs verbal: -0.017 [-0.108, +0.076]
+
+selected (position, layer) per fold:
+  probe: judge_end@21 (val 0.763), judge_end@13 (val 0.744), judge_end@23 (val 0.763), judge_end@18 (val 0.718), judge_end@22 (val 0.748)
+  prompt-only: prompt_end@16 (val 0.746), prompt_end@13 (val 0.72), prompt_end@11 (val 0.683), prompt_end@13 (val 0.677), prompt_end@13 (val 0.735)
+
+saved ../results/dscoder1b_analysis/probe_own_judge.json
+[15:39:59] RUN: python compare.py --a ../results/dscoder1b_analysis/probe_own_judge.json --b ../results/dscoder1b_analysis/probe_reader_qwen3b.json > ../results/dscoder1b_analysis/compare_reader_qwen3b.txt
+2710 solutions in both runs; GAP: 82 missed bugs vs 124 test-passing correct
+probe: logistic [task-centered]    ALL  A 0.570 [0.546,0.594]  B 0.608 [0.584,0.632]  B-A +0.038 [+0.020, +0.057]
+probe: logistic [task-centered]    GAP  A 0.472 [0.395,0.555]  B 0.519 [0.443,0.595]  B-A +0.047 [-0.030, +0.126]
+probe: logistic                    ALL  A 0.790 [0.762,0.817]  B 0.825 [0.798,0.850]  B-A +0.035 [+0.014, +0.057]
+probe: logistic                    GAP  A 0.713 [0.640,0.781]  B 0.728 [0.649,0.804]  B-A +0.015 [-0.050, +0.079]
+[15:40:48] RUN: python diagnose.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe_reader_qwen3b.json --extra selftest_results_morecorrect.jsonl > ../results/dscoder1b_analysis/diagnose_reader_qwen3b.txt
+extra own-test results: 1012 solutions, 358 with all own tests passing
+test-passing set: 82 missed bugs, 482 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n=  82  AUROC 0.514 [0.436, 0.591]  p(<=0.5)=0.355
+  edge-case-only (pass original, fail extra)   n=  45  AUROC 0.491 [0.397, 0.575]  p(<=0.5)=0.607
+  plain failures (fail original tests)         n=  37  AUROC 0.543 [0.422, 0.659]  p(<=0.5)=0.222
+  share of missed bugs that are edge-case-only: 54.9%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  56 pairs in 21 tasks; probe ranks the bug higher in 0.607 [0.436, 0.764]
+  missed bugs with NO test-passing correct sibling: 34 of 55 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.25)        n=  56  AUROC 0.552 [0.466, 0.630]  p(<=0.5)=0.122
+  unique mistake (disagreement > 0.25)         n=  23  AUROC 0.439 [0.279, 0.583]  p(<=0.5)=0.802
+[15:41:02] RUN: python diagnose.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe_own_judge.json --extra selftest_results_morecorrect.jsonl > ../results/dscoder1b_analysis/diagnose_own_judge.txt
+extra own-test results: 1012 solutions, 358 with all own tests passing
+test-passing set: 82 missed bugs, 482 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n=  82  AUROC 0.468 [0.391, 0.543]  p(<=0.5)=0.780
+  edge-case-only (pass original, fail extra)   n=  45  AUROC 0.448 [0.336, 0.559]  p(<=0.5)=0.827
+  plain failures (fail original tests)         n=  37  AUROC 0.491 [0.384, 0.594]  p(<=0.5)=0.572
+  share of missed bugs that are edge-case-only: 54.9%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  56 pairs in 21 tasks; probe ranks the bug higher in 0.518 [0.326, 0.719]
+  missed bugs with NO test-passing correct sibling: 34 of 55 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.25)        n=  56  AUROC 0.489 [0.400, 0.572]  p(<=0.5)=0.590
+  unique mistake (disagreement > 0.25)         n=  23  AUROC 0.438 [0.283, 0.589]  p(<=0.5)=0.792
+[15:41:17] RUN: python rq3.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe_reader_qwen3b.json --budgets 0.1,0.2,0.3,1.0 --escalate both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/dscoder1b_analysis/rq3_reader_qwen3b.txt
+combined policy uses: ['probe', 'verbal-prob', 'disagreement']
+green solutions (own tests all pass): 206 = 82 missed bugs + 124 correct
+note: 'disagreement' missing for 5 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.728 [0.656, 0.802]
+  probe-centered  0.519 [0.445, 0.601]   vs probe -0.209 [-0.315, -0.111]
+  verbal-prob     0.571 [0.486, 0.658]   vs probe -0.158 [-0.267, -0.039]
+  disagreement    0.606 [0.512, 0.702]   vs probe -0.123 [-0.224, -0.021]
+  combined        0.712 [0.627, 0.793]   vs probe -0.016 [-0.070, +0.039]
+
+=== escalation 'both': extra tests fail on 48/82 missed bugs, 67/124 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     21   0.059     0.054  0.398
+       probe             21   0.134     0.008  0.857   +0.076 [+0.019, +0.152]  
+       probe-centered    21   0.098     0.032  0.619   +0.039 [-0.013, +0.096]    -0.037 [-0.110, +0.023]
+       verbal-prob       21   0.098     0.065  0.429   +0.039 [-0.016, +0.120]    -0.037 [-0.106, +0.028]
+       disagreement      21   0.122     0.048  0.524   +0.063 [+0.010, +0.124]    -0.012 [-0.100, +0.069]
+       combined          21   0.195     0.008  0.810   +0.137 [+0.067, +0.196]    +0.061 [-0.009, +0.111]
+   20% random (exp.)     41   0.117     0.108  0.398
+       probe             41   0.207     0.056  0.683   +0.090 [+0.012, +0.159]  
+       probe-centered    41   0.146     0.089  0.561   +0.029 [-0.034, +0.092]    -0.061 [-0.135, +0.013]
+       verbal-prob       41   0.159     0.113  0.415   +0.041 [-0.016, +0.134]    -0.049 [-0.117, +0.072]
+       disagreement      41   0.220     0.089  0.537   +0.102 [+0.029, +0.177]    +0.012 [-0.081, +0.110]
+       combined          41   0.244     0.065  0.659   +0.127 [+0.054, +0.207]    +0.037 [-0.012, +0.107]
+   30% random (exp.)     62   0.176     0.162  0.398
+       probe             62   0.268     0.113  0.581   +0.093 [+0.016, +0.173]  
+       probe-centered    62   0.171     0.161  0.452   -0.005 [-0.069, +0.066]    -0.098 [-0.188, -0.010]
+       verbal-prob       62   0.280     0.153  0.484   +0.105 [+0.030, +0.200]    +0.012 [-0.091, +0.127]
+       disagreement      62   0.293     0.129  0.532   +0.117 [+0.029, +0.207]    +0.024 [-0.069, +0.115]
+       combined          62   0.305     0.097  0.629   +0.129 [+0.048, +0.210]    +0.037 [-0.034, +0.105]
+  100% random (exp.)    206   0.585     0.540  0.398
+  escalating everything: 34/82 bugs still shipped, 67 false alarms, 206 extra test runs
+##### dscoder1b read by qwen3b (B) vs its own judge_end probe (A)
+== same-task pairs (PRIMARY), own probe:
+  56 pairs in 21 tasks; probe ranks the bug higher in 0.518 [0.326, 0.719]
+== same-task pairs (PRIMARY), reader probe:
+  56 pairs in 21 tasks; probe ranks the bug higher in 0.607 [0.436, 0.764]
+== paired AUROC, own (A) vs reader (B):
+probe: logistic [task-centered]    ALL  A 0.570 [0.546,0.594]  B 0.608 [0.584,0.632]  B-A +0.038 [+0.020, +0.057]
+probe: logistic [task-centered]    GAP  A 0.472 [0.395,0.555]  B 0.519 [0.443,0.595]  B-A +0.047 [-0.030, +0.126]
+probe: logistic                    ALL  A 0.790 [0.762,0.817]  B 0.825 [0.798,0.850]  B-A +0.035 [+0.014, +0.057]
+probe: logistic                    GAP  A 0.713 [0.640,0.781]  B 0.728 [0.649,0.804]  B-A +0.015 [-0.050, +0.079]
+== reader probe, ranking the green set:
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.728 [0.656, 0.802]
+  probe-centered  0.519 [0.445, 0.601]   vs probe -0.209 [-0.315, -0.111]
+  verbal-prob     0.571 [0.486, 0.658]   vs probe -0.158 [-0.267, -0.039]
+  disagreement    0.606 [0.512, 0.702]   vs probe -0.123 [-0.224, -0.021]
+  combined        0.712 [0.627, 0.793]   vs probe -0.016 [-0.070, +0.039]
+
+== reader probe, 30% budget:
+   30% random (exp.)     62   0.176     0.162  0.398
+       probe             62   0.268     0.113  0.581   +0.093 [+0.016, +0.173]  
+       probe-centered    62   0.171     0.161  0.452   -0.005 [-0.069, +0.066]    -0.098 [-0.188, -0.010]
+       verbal-prob       62   0.280     0.153  0.484   +0.105 [+0.030, +0.200]    +0.012 [-0.091, +0.127]
+       disagreement      62   0.293     0.129  0.532   +0.117 [+0.029, +0.207]    +0.024 [-0.069, +0.115]
+       combined          62   0.305     0.097  0.629   +0.129 [+0.048, +0.210]    +0.037 [-0.034, +0.105]
+  100% random (exp.)    206   0.585     0.540  0.398
+[15:41:25] ===== DONE: dscoder1b read by qwen3b =====

@@ -1,0 +1,106 @@
+== stats_he
+buggy solutions: 196 in 66 tasks
+  caught by a valid test: code 0.694 | spec 0.719
+  bug-confirming share of wrong asserts: code 0.140 | spec 0.084
+  caught drop (spec - code)                    +0.026  95% CI [+0.000, +0.061]  bootstrap p = 0.0930
+  bug-confirming increase (code - spec)        +0.056  95% CI [-0.052, +0.175]  bootstrap p = 0.3578
+task-level sign-flip permutation test, caught: p = 0.2516
+== stats_mbpp
+buggy solutions: 740 in 221 tasks
+  caught by a valid test: code 0.591 | spec 0.650
+  bug-confirming share of wrong asserts: code 0.125 | spec 0.071
+  caught drop (spec - code)                    +0.059  95% CI [+0.021, +0.100]  bootstrap p = 0.0022
+  bug-confirming increase (code - spec)        +0.053  95% CI [+0.021, +0.090]  bootstrap p = 0.0000
+task-level sign-flip permutation test, caught: p = 0.0035
+== probe
+solutions: 2710 (937 buggy) in 542 tasks; with own tests: 1372
+GAP set: 135 missed bugs vs 270 test-passing correct
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.691 of 55 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.570 [0.498, 0.643], one-sided p(AUROC <= 0.5) = 0.0280
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.595 [0.524, 0.659], one-sided p(AUROC <= 0.5) = 0.0045
+  ALL  probe: logistic                    vs verbal: +0.068 [+0.033, +0.103]
+  GAP  probe: logistic                    vs verbal: +0.096 [+0.009, +0.177]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.004 [-0.017, +0.026]
+  GAP  probe: logistic [task-centered]    vs verbal: +0.051 [-0.022, +0.121]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.015 [-0.000, +0.030]
+  GAP  probe: mean-diff [task-centered]   vs verbal: +0.026 [-0.015, +0.071]
+== transfer_he_to_mbpp
+train: humaneval (820 solutions, 196 buggy) -> test: mbpp (1890 solutions, 741 buggy; gap set 95 missed bugs vs 166 correct)
+selected on humaneval only: judge_end @ layer 31 (validation AUROC 0.797)
+probe: logistic                                        0.709 [0.668,0.749]                     0.713 [0.633,0.788]
+baseline: verbal P(incorrect)                          0.686 [0.640,0.727]                     0.610 [0.501,0.719]
+probe: logistic [task-centered]                        0.551 [0.530,0.572]                     0.606 [0.530,0.685]
+probe: mean-diff [task-centered]                       0.555 [0.529,0.584]                     0.564 [0.489,0.646]
+baseline: prompt-only probe [task-centered]            0.504 [0.482,0.526]                     0.491 [0.421,0.559]
+baseline: verbal P(incorrect) [task-centered]          0.539 [0.517,0.563]                     0.525 [0.447,0.604]
+baseline: low mean log-prob [task-centered]            0.546 [0.527,0.567]                     0.535 [0.464,0.603]
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.024 [-0.019, +0.067]
+  GAP  [raw]             +0.104 [+0.005, +0.209]
+  ALL  [task-centered]   +0.011 [-0.015, +0.035]
+  GAP  [task-centered]   +0.081 [-0.002, +0.166]
+== transfer_mbpp_to_he
+train: mbpp (1890 solutions, 741 buggy) -> test: humaneval (820 solutions, 196 buggy; gap set 40 missed bugs vs 104 correct)
+selected on mbpp only: judge_end @ layer 27 (validation AUROC 0.794)
+probe: logistic                                        0.724 [0.646,0.795]                     0.666 [0.554,0.798]
+baseline: verbal P(incorrect)                          0.676 [0.598,0.747]                     0.623 [0.512,0.756]
+probe: logistic [task-centered]                        0.535 [0.494,0.580]                     0.543 [0.428,0.660]
+probe: mean-diff [task-centered]                       0.591 [0.539,0.645]                     0.605 [0.471,0.756]
+baseline: prompt-only probe [task-centered]            0.477 [0.440,0.515]                     0.451 [0.343,0.549]
+baseline: verbal P(incorrect) [task-centered]          0.590 [0.543,0.636]                     0.588 [0.471,0.732]
+baseline: low mean log-prob [task-centered]            0.553 [0.510,0.596]                     0.475 [0.352,0.597]
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.048 [-0.046, +0.137]
+  GAP  [raw]             +0.043 [-0.119, +0.177]
+  ALL  [task-centered]   -0.055 [-0.104, -0.002]
+  GAP  [task-centered]   -0.045 [-0.170, +0.065]
+== rq3
+green solutions (own tests all pass): 405 = 135 missed bugs + 270 correct
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.706 [0.635, 0.775]
+  probe-centered  0.595 [0.523, 0.658]   vs probe -0.111 [-0.207, -0.027]
+  confidence      0.649 [0.562, 0.733]   vs probe -0.057 [-0.148, +0.026]
+  verbal-prob     0.610 [0.527, 0.702]   vs probe -0.096 [-0.175, -0.003]
+  disagreement    0.577 [0.496, 0.654]   vs probe -0.130 [-0.221, -0.034]
+  combined        0.689 [0.611, 0.763]   vs probe -0.018 [-0.067, +0.031]
+
+=== escalation 'spec': extra tests fail on 35/135 missed bugs, 41/270 correct (coverage 100%) ===
+  escalating everything: 100/135 bugs still shipped, 41 false alarms, 405 extra test runs
+=== escalation 'both': extra tests fail on 63/135 missed bugs, 97/270 correct (coverage 100%) ===
+  escalating everything: 72/135 bugs still shipped, 97 false alarms, 405 extra test runs
+   30% random (exp.)    122   0.078     0.046  0.333
+       probe            122   0.193     0.052  0.508   +0.115 [+0.061, +0.187]  
+       probe-centered   122   0.119     0.048  0.451   +0.041 [-0.005, +0.094]    -0.074 [-0.144, -0.009]
+       confidence       122   0.163     0.037  0.525   +0.085 [+0.031, +0.149]    -0.030 [-0.094, +0.025]
+       verbal-prob      122   0.163     0.067  0.426   +0.085 [+0.026, +0.156]    -0.030 [-0.083, +0.010]
+       disagreement     122   0.185     0.056  0.434   +0.107 [+0.047, +0.170]    -0.007 [-0.075, +0.042]
+       combined         122   0.193     0.059  0.525   +0.115 [+0.065, +0.189]    +0.000 [-0.035, +0.045]
+  100% random (exp.)    405   0.259     0.152  0.333
+   30% random (exp.)    122   0.140     0.108  0.333
+       probe            122   0.281     0.096  0.508   +0.141 [+0.055, +0.229]  
+       probe-centered   122   0.178     0.104  0.451   +0.038 [-0.026, +0.104]    -0.104 [-0.187, -0.026]
+       confidence       122   0.259     0.081  0.525   +0.119 [+0.040, +0.185]    -0.022 [-0.125, +0.071]
+       verbal-prob      122   0.193     0.122  0.426   +0.053 [-0.008, +0.134]    -0.089 [-0.164, -0.015]
+       disagreement     122   0.237     0.104  0.434   +0.097 [+0.026, +0.164]    -0.044 [-0.143, +0.043]
+       combined         122   0.252     0.085  0.525   +0.112 [+0.055, +0.196]    -0.030 [-0.096, +0.053]
+  100% random (exp.)    405   0.467     0.359  0.333
+== rq3_transfer
+green solutions (own tests all pass): 261 = 95 missed bugs + 166 correct
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.713 [0.631, 0.781]
+  probe-centered  0.606 [0.527, 0.685]   vs probe -0.107 [-0.191, -0.013]
+  confidence      0.709 [0.635, 0.776]   vs probe -0.004 [-0.108, +0.098]
+  verbal-prob     0.610 [0.500, 0.722]   vs probe -0.104 [-0.215, -0.001]
+  disagreement    0.614 [0.526, 0.709]   vs probe -0.100 [-0.226, +0.046]
+
+=== escalation 'both': extra tests fail on 50/95 missed bugs, 62/166 correct (coverage 100%) ===
+  escalating everything: 45/95 bugs still shipped, 62 false alarms, 261 extra test runs
+   30% random (exp.)     78   0.158     0.112  0.364
+       probe             78   0.242     0.090  0.615   +0.084 [+0.002, +0.154]  
+       probe-centered    78   0.211     0.084  0.538   +0.053 [-0.010, +0.134]    -0.032 [-0.102, +0.077]
+       confidence        78   0.211     0.066  0.577   +0.053 [-0.013, +0.124]    -0.032 [-0.121, +0.078]
+       verbal-prob       78   0.221     0.114  0.577   +0.063 [-0.017, +0.158]    -0.021 [-0.095, +0.077]
+       disagreement      78   0.263     0.114  0.436   +0.105 [+0.029, +0.191]    +0.021 [-0.074, +0.136]
+  100% random (exp.)    261   0.526     0.373  0.364

@@ -1,0 +1,7 @@
+
+=== summary ===
+pairs with at least one parsable assert: 1033/1033 (100.0%)
+assert validity (passes on reference solution): 3210/5125 (62.6%)
+buggy solutions whose tests are all green (MISSED BUGS): 100/741 (13.5%)
+buggy solutions caught by at least one valid assert: 433/741 (58.4%)
+correct solutions with a failing test (false alarms): 129/292 (44.2%)

@@ -1,0 +1,1871 @@
+[18:10:15] ===== qwen7b: Qwen/Qwen2.5-Coder-7B-Instruct (generation batch 4, extraction batch 2) =====
+[18:10:15] START humaneval solutions
+[18:10:15] RUN: python generate.py solutions --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset humaneval --n 5 --batch-size 4 --out ../results/qwen7b_he/solutions.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:15<00:45, 15.28s/it]Fetching 4 files:  50%|█████     | 2/4 [00:30<00:30, 15.36s/it]Fetching 4 files: 100%|██████████| 4/4 [00:32<00:00,  6.43s/it]Fetching 4 files: 100%|██████████| 4/4 [00:32<00:00,  8.23s/it]
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3846.72it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/164 tasks
+  generated 4/64 prompts
+[W1014 18:14:36.119528701 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 278921216 bytes (free: 312541184, total: 21470511104).
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/164 tasks
+[W1014 18:18:27.045126558 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 341835776 bytes (free: 310444032, total: 21470511104).
+  generated 4/36 prompts
+  generated 8/36 prompts
+  generated 12/36 prompts
+  generated 16/36 prompts
+  generated 20/36 prompts
+  generated 24/36 prompts
+  generated 28/36 prompts
+  generated 32/36 prompts
+  generated 36/36 prompts
+saved 164/164 tasks
+wrote 820 solutions to ../results/qwen7b_he/solutions.jsonl in 613s
+[18:20:36] START humaneval labels
+[18:20:36] RUN: python evaluate.py label --dataset humaneval --solutions ../results/qwen7b_he/solutions.jsonl --out ../results/qwen7b_he/solutions_labeled.jsonl
+Load from ground-truth from /home/exouser/.cache/evalplus/fe585eb4df8c88d844eeb463ea4d0302.pkl
+labeled 820 solutions: 650 correct, 170 buggy (41 buggy ones pass the original tests but fail EvalPlus extra tests)
+[18:21:27] START humaneval own tests (code mode)
+[18:21:27] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 4 --out ../results/qwen7b_he/selftests.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  66%|██████▋   | 225/339 [00:00<00:00, 2219.35it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 2883.52it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/312 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/312 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/312 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/312 test sets
+  generated 4/56 prompts
+  generated 8/56 prompts
+  generated 12/56 prompts
+  generated 16/56 prompts
+  generated 20/56 prompts
+  generated 24/56 prompts
+  generated 28/56 prompts
+  generated 32/56 prompts
+  generated 36/56 prompts
+  generated 40/56 prompts
+  generated 44/56 prompts
+  generated 48/56 prompts
+  generated 52/56 prompts
+  generated 56/56 prompts
+saved 312/312 test sets
+wrote 312 test sets to ../results/qwen7b_he/selftests.jsonl in 368s (0 produced no parsable asserts)
+[18:27:37] START humaneval run own tests
+[18:27:37] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --tests ../results/qwen7b_he/selftests.jsonl --out ../results/qwen7b_he/selftest_results.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 312/312 (100.0%)
+assert validity (passes on reference solution): 1337/1560 (85.7%)
+buggy solutions whose tests are all green (MISSED BUGS): 36/170 (21.2%)
+buggy solutions caught by at least one valid assert: 112/170 (65.9%)
+correct solutions with a failing test (false alarms): 38/142 (26.8%)
+[18:27:45] START humaneval spec tests
+[18:27:45] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --mode spec --batch-size 4 --out ../results/qwen7b_he/selftests_spec.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3697.26it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/164 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/164 test sets
+  generated 4/36 prompts
+  generated 8/36 prompts
+  generated 12/36 prompts
+  generated 16/36 prompts
+  generated 20/36 prompts
+  generated 24/36 prompts
+  generated 28/36 prompts
+  generated 32/36 prompts
+  generated 36/36 prompts
+saved 164/164 test sets
+wrote 164 test sets to ../results/qwen7b_he/selftests_spec.jsonl in 212s (0 produced no parsable asserts)
+[18:31:18] START humaneval run spec tests
+[18:31:18] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --tests ../results/qwen7b_he/selftests_spec.jsonl --out ../results/qwen7b_he/selftest_results_spec.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 820/820 (100.0%)
+assert validity (passes on reference solution): 3665/4100 (89.4%)
+buggy solutions whose tests are all green (MISSED BUGS): 39/170 (22.9%)
+buggy solutions caught by at least one valid assert: 116/170 (68.2%)
+correct solutions with a failing test (false alarms): 188/650 (28.9%)
+[18:31:30] START humaneval test-passing ids
+[18:31:30] RUN: python -c 
+import json
+rows=[json.loads(l) for l in open('../results/qwen7b_he/selftest_results.jsonl')]
+g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
+open('../results/qwen7b_he/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')
+140 test-passing solutions
+[18:31:30] START humaneval spec_first tests (test-passing only)
+[18:31:30] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --mode spec_first --only-ids ../results/qwen7b_he/green_ids.jsonl --batch-size 4 --out ../results/qwen7b_he/selftests_spec_first.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3411.45it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/140 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/140 test sets
+  generated 4/12 prompts
+  generated 8/12 prompts
+  generated 12/12 prompts
+saved 140/140 test sets
+wrote 140 test sets to ../results/qwen7b_he/selftests_spec_first.jsonl in 346s (0 produced no parsable asserts)
+[18:37:18] START humaneval run spec_first tests
+[18:37:18] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --tests ../results/qwen7b_he/selftests_spec_first.jsonl --out ../results/qwen7b_he/selftest_results_spec_first.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 140/140 (100.0%)
+assert validity (passes on reference solution): 637/694 (91.8%)
+buggy solutions whose tests are all green (MISSED BUGS): 25/36 (69.4%)
+buggy solutions caught by at least one valid assert: 7/36 (19.4%)
+correct solutions with a failing test (false alarms): 28/104 (26.9%)
+[18:37:21] START humaneval hidden states
+[18:37:21] RUN: bash -c python extract.py --model 'Qwen/Qwen2.5-Coder-7B-Instruct' --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --framings gen,judge --batch-size 2 --out-dir ../results/qwen7b_he/hidden && touch ../results/qwen7b_he/hidden/DONE
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3465.36it/s]
+shard 1/13 saved (5s/shard, ~1 min left)
+shard 2/13 saved (4s/shard, ~1 min left)
+shard 3/13 saved (4s/shard, ~1 min left)
+shard 4/13 saved (4s/shard, ~1 min left)
+shard 5/13 saved (4s/shard, ~1 min left)
+shard 6/13 saved (4s/shard, ~1 min left)
+shard 7/13 saved (5s/shard, ~0 min left)
+[W1014 18:38:04.748229420 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 362807296 bytes (free: 354484224, total: 21470511104).
+shard 8/13 saved (5s/shard, ~0 min left)
+shard 9/13 saved (5s/shard, ~0 min left)
+shard 10/13 saved (5s/shard, ~0 min left)
+shard 11/13 saved (5s/shard, ~0 min left)
+shard 12/13 saved (5s/shard, ~0 min left)
+shard 13/13 saved (5s/shard, ~0 min left)
+done: 13 shards in ../results/qwen7b_he/hidden
+[18:38:35] START humaneval verbal yes/no
+[18:38:35] RUN: bash -c python extract.py --model 'Qwen/Qwen2.5-Coder-7B-Instruct' --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --framings judge,judgebug --yesno-only --batch-size 2 --out-dir ../results/qwen7b_he/hidden_yesno && touch ../results/qwen7b_he/hidden_yesno/DONE
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  90%|█████████ | 306/339 [00:00<00:00, 3058.95it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3331.99it/s]
+yes tokens [9454, 9693, 14004], no tokens [2152, 2753, 8996]; framings ['judge', 'judgebug']
+yes/no shard 1/13 saved
+yes/no shard 2/13 saved
+yes/no shard 3/13 saved
+yes/no shard 4/13 saved
+yes/no shard 5/13 saved
+yes/no shard 6/13 saved
+yes/no shard 7/13 saved
+yes/no shard 8/13 saved
+yes/no shard 9/13 saved
+yes/no shard 10/13 saved
+yes/no shard 11/13 saved
+yes/no shard 12/13 saved
+yes/no shard 13/13 saved
+done: 13 yes/no shards in ../results/qwen7b_he/hidden_yesno
+[18:39:43] START humaneval sibling disagreement
+[18:39:43] RUN: python disagree.py --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --tests ../results/qwen7b_he/selftests_spec.jsonl --out ../results/qwen7b_he/disagree.jsonl
+scored 820/820 solutions (164 tasks with inputs)
+sanity: AUROC of disagreement for buggy vs correct (all solutions) = 0.773
+[18:39:49] START mbpp solutions
+[18:39:49] RUN: python generate.py solutions --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset mbpp --n 5 --batch-size 4 --out ../results/qwen7b_mbpp/solutions.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 4315.47it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/378 tasks
+  generated 4/58 prompts
+  generated 8/58 prompts
+  generated 12/58 prompts
+  generated 16/58 prompts
+  generated 20/58 prompts
+  generated 24/58 prompts
+  generated 28/58 prompts
+  generated 32/58 prompts
+  generated 36/58 prompts
+  generated 40/58 prompts
+  generated 44/58 prompts
+  generated 48/58 prompts
+  generated 52/58 prompts
+  generated 56/58 prompts
+  generated 58/58 prompts
+saved 378/378 tasks
+wrote 1890 solutions to ../results/qwen7b_mbpp/solutions.jsonl in 774s
+[18:52:46] START mbpp labels
+[18:52:46] RUN: python evaluate.py label --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions.jsonl --out ../results/qwen7b_mbpp/solutions_labeled.jsonl
+Load from ground-truth from /home/exouser/.cache/evalplus/ee43ecabebf20deef4bb776a405ac5b1.pkl
+labeled 1890 solutions: 1266 correct, 624 buggy (236 buggy ones pass the original tests but fail EvalPlus extra tests)
+[18:56:47] START mbpp own tests (code mode)
+[18:56:47] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 4 --out ../results/qwen7b_mbpp/selftests.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  62%|██████▏   | 209/339 [00:00<00:00, 2082.07it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 2962.81it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 384/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 448/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 512/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 576/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 640/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 704/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 768/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 832/938 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 896/938 test sets
+  generated 4/42 prompts
+  generated 8/42 prompts
+  generated 12/42 prompts
+  generated 16/42 prompts
+  generated 20/42 prompts
+  generated 24/42 prompts
+  generated 28/42 prompts
+  generated 32/42 prompts
+  generated 36/42 prompts
+  generated 40/42 prompts
+  generated 42/42 prompts
+saved 938/938 test sets
+wrote 938 test sets to ../results/qwen7b_mbpp/selftests.jsonl in 1276s (0 produced no parsable asserts)
+[19:18:05] START mbpp run own tests
+[19:18:05] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --tests ../results/qwen7b_mbpp/selftests.jsonl --out ../results/qwen7b_mbpp/selftest_results.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 938/938 (100.0%)
+assert validity (passes on reference solution): 3192/4686 (68.1%)
+buggy solutions whose tests are all green (MISSED BUGS): 127/624 (20.4%)
+buggy solutions caught by at least one valid assert: 318/624 (51.0%)
+correct solutions with a failing test (false alarms): 119/314 (37.9%)
+[19:18:29] START mbpp spec tests
+[19:18:29] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --mode spec --batch-size 4 --out ../results/qwen7b_mbpp/selftests_spec.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  93%|█████████▎| 315/339 [00:00<00:00, 3148.01it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3319.83it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/378 test sets
+  generated 4/58 prompts
+  generated 8/58 prompts
+  generated 12/58 prompts
+  generated 16/58 prompts
+  generated 20/58 prompts
+  generated 24/58 prompts
+  generated 28/58 prompts
+  generated 32/58 prompts
+  generated 36/58 prompts
+  generated 40/58 prompts
+  generated 44/58 prompts
+  generated 48/58 prompts
+  generated 52/58 prompts
+  generated 56/58 prompts
+  generated 58/58 prompts
+saved 378/378 test sets
+wrote 378 test sets to ../results/qwen7b_mbpp/selftests_spec.jsonl in 649s (0 produced no parsable asserts)
+[19:29:20] START mbpp run spec tests
+[19:29:20] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --tests ../results/qwen7b_mbpp/selftests_spec.jsonl --out ../results/qwen7b_mbpp/selftest_results_spec.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 1890/1890 (100.0%)
+assert validity (passes on reference solution): 7435/9440 (78.8%)
+buggy solutions whose tests are all green (MISSED BUGS): 104/624 (16.7%)
+buggy solutions caught by at least one valid assert: 369/624 (59.1%)
+correct solutions with a failing test (false alarms): 447/1266 (35.3%)
+[19:29:44] START mbpp test-passing ids
+[19:29:44] RUN: python -c 
+import json
+rows=[json.loads(l) for l in open('../results/qwen7b_mbpp/selftest_results.jsonl')]
+g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
+open('../results/qwen7b_mbpp/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')
+322 test-passing solutions
+[19:29:44] START mbpp spec_first tests (test-passing only)
+[19:29:44] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --mode spec_first --only-ids ../results/qwen7b_mbpp/green_ids.jsonl --batch-size 4 --out ../results/qwen7b_mbpp/selftests_spec_first.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  71%|███████   | 239/339 [00:00<00:00, 2364.34it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 2957.51it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/322 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/322 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/322 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/322 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/322 test sets
+  generated 2/2 prompts
+saved 322/322 test sets
+wrote 322 test sets to ../results/qwen7b_mbpp/selftests_spec_first.jsonl in 735s (0 produced no parsable asserts)
+[19:42:01] START mbpp run spec_first tests
+[19:42:01] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --tests ../results/qwen7b_mbpp/selftests_spec_first.jsonl --out ../results/qwen7b_mbpp/selftest_results_spec_first.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 322/322 (100.0%)
+assert validity (passes on reference solution): 1342/1587 (84.6%)
+buggy solutions whose tests are all green (MISSED BUGS): 77/127 (60.6%)
+buggy solutions caught by at least one valid assert: 22/127 (17.3%)
+correct solutions with a failing test (false alarms): 55/195 (28.2%)
+[19:42:10] START mbpp hidden states
+[19:42:10] RUN: bash -c python extract.py --model 'Qwen/Qwen2.5-Coder-7B-Instruct' --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --framings gen,judge --batch-size 2 --out-dir ../results/qwen7b_mbpp/hidden && touch ../results/qwen7b_mbpp/hidden/DONE
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3755.78it/s]
+shard 1/30 saved (4s/shard, ~2 min left)
+shard 2/30 saved (4s/shard, ~2 min left)
+shard 3/30 saved (4s/shard, ~2 min left)
+shard 4/30 saved (4s/shard, ~2 min left)
+[W1014 19:42:37.121619124 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 299892736 bytes (free: 251723776, total: 21470511104).
+shard 5/30 saved (4s/shard, ~1 min left)
+shard 6/30 saved (4s/shard, ~1 min left)
+shard 7/30 saved (4s/shard, ~1 min left)
+shard 8/30 saved (4s/shard, ~1 min left)
+shard 9/30 saved (4s/shard, ~1 min left)
+shard 10/30 saved (4s/shard, ~1 min left)
+shard 11/30 saved (4s/shard, ~1 min left)
+shard 12/30 saved (4s/shard, ~1 min left)
+shard 13/30 saved (4s/shard, ~1 min left)
+shard 14/30 saved (4s/shard, ~1 min left)
+shard 15/30 saved (4s/shard, ~1 min left)
+shard 16/30 saved (4s/shard, ~1 min left)
+shard 17/30 saved (4s/shard, ~1 min left)
+shard 18/30 saved (4s/shard, ~1 min left)
+shard 19/30 saved (4s/shard, ~1 min left)
+shard 20/30 saved (4s/shard, ~1 min left)
+shard 21/30 saved (4s/shard, ~1 min left)
+shard 22/30 saved (4s/shard, ~0 min left)
+shard 23/30 saved (4s/shard, ~0 min left)
+shard 24/30 saved (4s/shard, ~0 min left)
+shard 25/30 saved (4s/shard, ~0 min left)
+shard 26/30 saved (4s/shard, ~0 min left)
+shard 27/30 saved (4s/shard, ~0 min left)
+shard 28/30 saved (4s/shard, ~0 min left)
+shard 29/30 saved (4s/shard, ~0 min left)
+shard 30/30 saved (3s/shard, ~0 min left)
+done: 30 shards in ../results/qwen7b_mbpp/hidden
+[19:44:06] START mbpp verbal yes/no
+[19:44:06] RUN: bash -c python extract.py --model 'Qwen/Qwen2.5-Coder-7B-Instruct' --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --framings judge,judgebug --yesno-only --batch-size 2 --out-dir ../results/qwen7b_mbpp/hidden_yesno && touch ../results/qwen7b_mbpp/hidden_yesno/DONE
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3834.63it/s]
+yes tokens [9454, 9693, 14004], no tokens [2152, 2753, 8996]; framings ['judge', 'judgebug']
+yes/no shard 1/30 saved
+yes/no shard 2/30 saved
+yes/no shard 3/30 saved
+yes/no shard 4/30 saved
+yes/no shard 5/30 saved
+yes/no shard 6/30 saved
+yes/no shard 7/30 saved
+yes/no shard 8/30 saved
+yes/no shard 9/30 saved
+yes/no shard 10/30 saved
+yes/no shard 11/30 saved
+yes/no shard 12/30 saved
+yes/no shard 13/30 saved
+yes/no shard 14/30 saved
+yes/no shard 15/30 saved
+yes/no shard 16/30 saved
+yes/no shard 17/30 saved
+yes/no shard 18/30 saved
+yes/no shard 19/30 saved
+yes/no shard 20/30 saved
+yes/no shard 21/30 saved
+yes/no shard 22/30 saved
+yes/no shard 23/30 saved
+yes/no shard 24/30 saved
+yes/no shard 25/30 saved
+yes/no shard 26/30 saved
+yes/no shard 27/30 saved
+yes/no shard 28/30 saved
+yes/no shard 29/30 saved
+yes/no shard 30/30 saved
+done: 30 yes/no shards in ../results/qwen7b_mbpp/hidden_yesno
+[19:45:50] START mbpp sibling disagreement
+[19:45:50] RUN: python disagree.py --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --tests ../results/qwen7b_mbpp/selftests_spec.jsonl --out ../results/qwen7b_mbpp/disagree.jsonl
+scored 1890/1890 solutions (378 tasks with inputs)
+sanity: AUROC of disagreement for buggy vs correct (all solutions) = 0.770
+[19:46:05] START analysis -> ../results/qwen7b_analysis
+[19:46:05] RUN: python stats.py modes --code ../results/qwen7b_he/selftest_results.jsonl --spec ../results/qwen7b_he/selftest_results_spec.jsonl > ../results/qwen7b_analysis/stats_he.txt
+buggy solutions: 170 in 54 tasks
+  caught by a valid test: code 0.659 | spec 0.682
+  bug-confirming share of wrong asserts: code 0.219 | spec 0.161
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.024  95% CI [-0.042, +0.093]  bootstrap p = 0.5570
+  bug-confirming increase (code - spec)        +0.059  95% CI [-0.086, +0.215]  bootstrap p = 0.4572
+task-level sign-flip permutation test, caught: p = 0.6317
+[19:46:05] RUN: python stats.py modes --code ../results/qwen7b_mbpp/selftest_results.jsonl --spec ../results/qwen7b_mbpp/selftest_results_spec.jsonl > ../results/qwen7b_analysis/stats_mbpp.txt
+buggy solutions: 624 in 204 tasks
+  caught by a valid test: code 0.510 | spec 0.591
+  bug-confirming share of wrong asserts: code 0.185 | spec 0.130
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.082  95% CI [+0.042, +0.123]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        +0.055  95% CI [+0.017, +0.097]  bootstrap p = 0.0042
+task-level sign-flip permutation test, caught: p = 0.0003
+[19:46:06] RUN: python probe.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --out ../results/qwen7b_analysis/probe.json > ../results/qwen7b_analysis/probe.txt
+solutions: 2710 (794 buggy) in 542 tasks; with own tests: 1250
+GAP set: 163 missed bugs vs 299 test-passing correct
+probe positions: ['code_end', 'resp_end', 'judge_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.776 [0.739,0.811]           0.694 [0.625,0.760]           0.815 [0.774,0.853]
+probe: logistic                                            0.793 [0.758,0.827]           0.752 [0.687,0.814]           0.821 [0.783,0.859]
+baseline: prompt-only probe                                0.671 [0.625,0.712]           0.640 [0.556,0.720]           0.706 [0.660,0.753]
+baseline: low mean log-prob                                0.680 [0.646,0.714]           0.660 [0.597,0.725]           0.678 [0.632,0.721]
+baseline: low min log-prob                                 0.624 [0.597,0.651]           0.615 [0.555,0.674]           0.635 [0.594,0.678]
+baseline: code length                                      0.610 [0.572,0.647]           0.631 [0.558,0.700]           0.619 [0.577,0.661]
+baseline: verbal P(incorrect)                              0.775 [0.740,0.810]           0.686 [0.618,0.749]           0.808 [0.769,0.845]
+baseline: verbal P(bug)                                    0.763 [0.728,0.798]           0.722 [0.655,0.783]           0.793 [0.754,0.830]
+probe: mean-diff [task-centered]                           0.547 [0.522,0.573]           0.485 [0.429,0.543]           0.567 [0.530,0.603]
+probe: logistic [task-centered]                            0.561 [0.536,0.586]           0.508 [0.452,0.569]           0.569 [0.532,0.607]
+baseline: prompt-only probe [task-centered]                0.496 [0.477,0.514]           0.499 [0.452,0.547]           0.474 [0.433,0.512]
+baseline: low mean log-prob [task-centered]                0.531 [0.513,0.548]           0.518 [0.473,0.562]           0.522 [0.485,0.559]
+baseline: verbal P(incorrect) [task-centered]              0.498 [0.470,0.526]           0.440 [0.380,0.501]           0.514 [0.479,0.550]
+baseline: verbal P(bug) [task-centered]                    0.519 [0.493,0.545]           0.463 [0.406,0.524]           0.533 [0.496,0.570]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.442 of 43 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.485 [0.429, 0.543], one-sided p(AUROC <= 0.5) = 0.6975
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.508 [0.452, 0.569], one-sided p(AUROC <= 0.5) = 0.3790
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.018 [-0.009, +0.045]
+  GAP  probe: logistic                    vs verbal: +0.066 [+0.010, +0.126]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.063 [+0.037, +0.089]
+  GAP  probe: logistic [task-centered]    vs verbal: +0.068 [+0.008, +0.131]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.049 [+0.033, +0.067]
+  GAP  probe: mean-diff [task-centered]   vs verbal: +0.045 [+0.008, +0.084]
+
+selected (position, layer) per fold:
+  probe: judge_end@27 (val 0.813), judge_end@20 (val 0.832), judge_end@20 (val 0.819), judge_end@21 (val 0.75), judge_end@19 (val 0.803)
+  prompt-only: prompt_end@23 (val 0.651), prompt_end@23 (val 0.736), prompt_end@21 (val 0.735), prompt_end@19 (val 0.647), prompt_end@21 (val 0.731)
+
+saved ../results/qwen7b_analysis/probe.json
+[19:49:44] RUN: python transfer.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --train humaneval --test mbpp --out ../results/qwen7b_analysis/transfer_he_to_mbpp.json > ../results/qwen7b_analysis/transfer_he_to_mbpp.txt
+train: humaneval (820 solutions, 170 buggy) -> test: mbpp (1890 solutions, 624 buggy; gap set 127 missed bugs vs 195 correct)
+selected on humaneval only: judge_end @ layer 19 (validation AUROC 0.935)
+
+AUROC on mbpp (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.763 [0.722,0.800]                     0.766 [0.690,0.835]
+probe: mean-diff                                       0.805 [0.767,0.842]                     0.727 [0.640,0.802]
+baseline: prompt-only probe                            0.716 [0.671,0.759]                     0.684 [0.594,0.765]
+baseline: verbal P(incorrect)                          0.781 [0.742,0.819]                     0.683 [0.598,0.760]
+baseline: low mean log-prob                            0.674 [0.637,0.709]                     0.659 [0.587,0.737]
+probe: logistic [task-centered]                        0.546 [0.519,0.574]                     0.516 [0.453,0.579]
+probe: mean-diff [task-centered]                       0.566 [0.534,0.599]                     0.512 [0.446,0.580]
+baseline: prompt-only probe [task-centered]            0.489 [0.468,0.510]                     0.517 [0.457,0.577]
+baseline: verbal P(incorrect) [task-centered]          0.508 [0.476,0.542]                     0.452 [0.383,0.525]
+baseline: low mean log-prob [task-centered]            0.536 [0.516,0.557]                     0.528 [0.475,0.585]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             -0.018 [-0.067, +0.027]
+  GAP  [raw]             +0.083 [+0.014, +0.152]
+  ALL  [task-centered]   +0.038 [+0.003, +0.072]
+  GAP  [task-centered]   +0.065 [-0.017, +0.145]
+
+saved ../results/qwen7b_analysis/transfer_he_to_mbpp.json (usable as --probe for rq3.py on mbpp)
+[19:51:14] RUN: python transfer.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --train mbpp --test humaneval --out ../results/qwen7b_analysis/transfer_mbpp_to_he.json > ../results/qwen7b_analysis/transfer_mbpp_to_he.txt
+train: mbpp (1890 solutions, 624 buggy) -> test: humaneval (820 solutions, 170 buggy; gap set 36 missed bugs vs 104 correct)
+selected on mbpp only: judge_end @ layer 19 (validation AUROC 0.789)
+
+AUROC on humaneval (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.780 [0.693,0.849]                     0.740 [0.539,0.879]
+probe: mean-diff                                       0.779 [0.692,0.850]                     0.742 [0.589,0.854]
+baseline: prompt-only probe                            0.669 [0.574,0.757]                     0.679 [0.500,0.833]
+baseline: verbal P(incorrect)                          0.734 [0.647,0.803]                     0.666 [0.511,0.791]
+baseline: low mean log-prob                            0.659 [0.588,0.727]                     0.625 [0.501,0.731]
+probe: logistic [task-centered]                        0.537 [0.490,0.587]                     0.497 [0.391,0.624]
+probe: mean-diff [task-centered]                       0.530 [0.480,0.582]                     0.495 [0.387,0.603]
+baseline: prompt-only probe [task-centered]            0.503 [0.473,0.534]                     0.530 [0.449,0.610]
+baseline: verbal P(incorrect) [task-centered]          0.480 [0.419,0.538]                     0.406 [0.308,0.519]
+baseline: low mean log-prob [task-centered]            0.531 [0.494,0.565]                     0.534 [0.453,0.617]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.046 [-0.027, +0.114]
+  GAP  [raw]             +0.074 [-0.014, +0.160]
+  ALL  [task-centered]   +0.057 [-0.000, +0.113]
+  GAP  [task-centered]   +0.091 [-0.037, +0.225]
+
+saved ../results/qwen7b_analysis/transfer_mbpp_to_he.json (usable as --probe for rq3.py on humaneval)
+[19:52:39] RUN: python rq3.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --probe ../results/qwen7b_analysis/probe.json --budgets 0.1,0.2,0.3,1.0 --escalate spec=selftest_results_spec.jsonl both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/qwen7b_analysis/rq3.txt
+combined policy uses: ['probe', 'verbal-prob', 'confidence', 'disagreement']
+green solutions (own tests all pass): 462 = 163 missed bugs + 299 correct
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.752 [0.684, 0.816]
+  probe-centered  0.508 [0.451, 0.567]   vs probe -0.243 [-0.317, -0.174]
+  confidence      0.660 [0.595, 0.723]   vs probe -0.091 [-0.185, -0.001]
+  verbal-prob     0.686 [0.613, 0.753]   vs probe -0.065 [-0.126, -0.010]
+  disagreement    0.680 [0.614, 0.745]   vs probe -0.072 [-0.157, +0.008]
+  combined        0.761 [0.698, 0.820]   vs probe +0.009 [-0.025, +0.046]
+
+=== escalation 'spec': extra tests fail on 54/163 missed bugs, 43/299 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     46   0.033     0.014  0.353
+       probe             46   0.043     0.020  0.609   +0.010 [-0.021, +0.057]  
+       probe-centered    46   0.043     0.020  0.500   +0.010 [-0.018, +0.050]    +0.000 [-0.040, +0.031]
+       confidence        46   0.055     0.010  0.565   +0.022 [-0.011, +0.070]    +0.012 [-0.042, +0.071]
+       verbal-prob       46   0.049     0.017  0.543   +0.016 [-0.016, +0.057]    +0.006 [-0.035, +0.041]
+       disagreement      46   0.055     0.030  0.522   +0.022 [-0.019, +0.063]    +0.012 [-0.043, +0.058]
+       combined          46   0.055     0.020  0.609   +0.022 [-0.005, +0.070]    +0.012 [-0.023, +0.052]
+   20% random (exp.)     92   0.066     0.029  0.353
+       probe             92   0.117     0.037  0.663   +0.050 [+0.004, +0.105]  
+       probe-centered    92   0.086     0.050  0.435   +0.020 [-0.027, +0.061]    -0.031 [-0.087, +0.012]
+       confidence        92   0.117     0.023  0.598   +0.050 [+0.004, +0.102]    +0.000 [-0.074, +0.071]
+       verbal-prob       92   0.110     0.023  0.598   +0.044 [-0.003, +0.108]    -0.006 [-0.067, +0.057]
+       disagreement      92   0.098     0.047  0.511   +0.032 [-0.010, +0.085]    -0.018 [-0.084, +0.050]
+       combined          92   0.141     0.037  0.641   +0.075 [+0.025, +0.124]    +0.025 [-0.030, +0.068]
+   30% random (exp.)    139   0.099     0.043  0.353
+       probe            139   0.196     0.050  0.612   +0.097 [+0.030, +0.152]  
+       probe-centered   139   0.098     0.070  0.388   -0.001 [-0.051, +0.049]    -0.098 [-0.167, -0.036]
+       confidence       139   0.153     0.047  0.504   +0.054 [+0.008, +0.112]    -0.043 [-0.105, +0.032]
+       verbal-prob      139   0.160     0.054  0.525   +0.060 [+0.003, +0.127]    -0.037 [-0.101, +0.041]
+       disagreement     139   0.184     0.060  0.532   +0.085 [+0.009, +0.153]    -0.012 [-0.106, +0.086]
+       combined         139   0.178     0.064  0.568   +0.079 [+0.029, +0.130]    -0.018 [-0.072, +0.041]
+  100% random (exp.)    462   0.331     0.144  0.353
+  escalating everything: 109/163 bugs still shipped, 43 false alarms, 462 extra test runs
+
+=== escalation 'both': extra tests fail on 84/163 missed bugs, 105/299 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     46   0.052     0.035  0.353
+       probe             46   0.080     0.020  0.609   +0.028 [-0.008, +0.073]  
+       probe-centered    46   0.055     0.030  0.500   +0.004 [-0.026, +0.046]    -0.025 [-0.064, +0.022]
+       confidence        46   0.061     0.030  0.565   +0.010 [-0.023, +0.060]    -0.018 [-0.075, +0.044]
+       verbal-prob       46   0.074     0.023  0.543   +0.022 [-0.010, +0.075]    -0.006 [-0.046, +0.042]
+       disagreement      46   0.098     0.043  0.522   +0.047 [-0.006, +0.091]    +0.018 [-0.040, +0.064]
+       combined          46   0.080     0.027  0.609   +0.028 [-0.004, +0.083]    +0.000 [-0.035, +0.049]
+   20% random (exp.)     92   0.103     0.070  0.353
+       probe             92   0.196     0.040  0.663   +0.093 [+0.048, +0.159]  
+       probe-centered    92   0.110     0.067  0.435   +0.007 [-0.037, +0.055]    -0.086 [-0.150, -0.034]
+       confidence        92   0.178     0.050  0.598   +0.075 [+0.019, +0.126]    -0.018 [-0.111, +0.047]
+       verbal-prob       92   0.178     0.043  0.598   +0.075 [+0.015, +0.143]    -0.018 [-0.087, +0.041]
+       disagreement      92   0.184     0.080  0.511   +0.081 [+0.028, +0.141]    -0.012 [-0.086, +0.055]
+       combined          92   0.221     0.047  0.641   +0.118 [+0.063, +0.178]    +0.025 [-0.045, +0.074]
+   30% random (exp.)    139   0.155     0.105  0.353
+       probe            139   0.301     0.064  0.612   +0.146 [+0.073, +0.209]  
+       probe-centered   139   0.141     0.107  0.388   -0.013 [-0.061, +0.048]    -0.160 [-0.227, -0.090]
+       confidence       139   0.227     0.097  0.504   +0.072 [+0.017, +0.142]    -0.074 [-0.150, +0.019]
+       verbal-prob      139   0.245     0.084  0.525   +0.091 [+0.030, +0.165]    -0.055 [-0.120, +0.023]
+       disagreement     139   0.282     0.097  0.532   +0.128 [+0.053, +0.192]    -0.018 [-0.105, +0.083]
+       combined         139   0.282     0.084  0.568   +0.128 [+0.069, +0.188]    -0.018 [-0.079, +0.055]
+  100% random (exp.)    462   0.515     0.351  0.353
+  escalating everything: 79/163 bugs still shipped, 105 false alarms, 462 extra test runs
+[19:52:51] RUN: python rq3.py --runs ../results/qwen7b_mbpp:mbpp --probe ../results/qwen7b_analysis/transfer_he_to_mbpp.json --budgets 0.1,0.2,0.3,1.0 --escalate both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/qwen7b_analysis/rq3_transfer.txt
+transfer scores (probe trained on humaneval): combined policy disabled
+green solutions (own tests all pass): 322 = 127 missed bugs + 195 correct
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.766 [0.693, 0.834]
+  probe-centered  0.516 [0.455, 0.578]   vs probe -0.249 [-0.321, -0.173]
+  confidence      0.659 [0.588, 0.729]   vs probe -0.107 [-0.201, -0.017]
+  verbal-prob     0.683 [0.595, 0.766]   vs probe -0.082 [-0.151, -0.015]
+  disagreement    0.644 [0.561, 0.725]   vs probe -0.122 [-0.232, -0.003]
+
+=== escalation 'both': extra tests fail on 73/127 missed bugs, 72/195 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     32   0.057     0.037  0.394
+       probe             32   0.087     0.026  0.719   +0.029 [-0.015, +0.090]  
+       probe-centered    32   0.055     0.031  0.500   -0.002 [-0.030, +0.046]    -0.031 [-0.085, +0.028]
+       confidence        32   0.071     0.036  0.625   +0.013 [-0.031, +0.062]    -0.016 [-0.090, +0.042]
+       verbal-prob       32   0.087     0.026  0.594   +0.029 [-0.015, +0.076]    +0.000 [-0.072, +0.062]
+       disagreement      32   0.071     0.046  0.531   +0.013 [-0.031, +0.067]    -0.016 [-0.083, +0.053]
+   20% random (exp.)     64   0.115     0.074  0.394
+       probe             64   0.213     0.046  0.719   +0.098 [+0.028, +0.177]  
+       probe-centered    64   0.118     0.056  0.531   +0.003 [-0.037, +0.057]    -0.094 [-0.158, -0.029]
+       confidence        64   0.134     0.077  0.578   +0.019 [-0.029, +0.103]    -0.079 [-0.159, +0.017]
+       verbal-prob       64   0.189     0.041  0.641   +0.074 [+0.010, +0.151]    -0.024 [-0.108, +0.063]
+       disagreement      64   0.197     0.077  0.562   +0.082 [+0.015, +0.148]    -0.016 [-0.126, +0.087]
+   30% random (exp.)     97   0.172     0.111  0.394
+       probe             97   0.315     0.092  0.660   +0.143 [+0.064, +0.220]  
+       probe-centered    97   0.157     0.103  0.464   -0.015 [-0.059, +0.036]    -0.157 [-0.231, -0.081]
+       confidence        97   0.244     0.092  0.577   +0.072 [+0.008, +0.140]    -0.071 [-0.151, +0.017]
+       verbal-prob       97   0.260     0.072  0.577   +0.087 [+0.017, +0.174]    -0.055 [-0.133, +0.037]
+       disagreement      97   0.236     0.123  0.505   +0.064 [+0.004, +0.151]    -0.079 [-0.183, +0.050]
+  100% random (exp.)    322   0.575     0.369  0.394
+  escalating everything: 54/127 bugs still shipped, 72 false alarms, 322 extra test runs
+[19:53:00] summary: ../results/qwen7b_analysis/SUMMARY.txt
+[19:53:00] ===== DONE: qwen7b. Full log: ../results/qwen7b_log.txt =====
+[21:29:41] ===== qwen7b: Qwen/Qwen2.5-Coder-7B-Instruct (generation batch 4, extraction batch 2) =====
+[21:29:42] skip  humaneval solutions (../results/qwen7b_he/solutions.jsonl exists)
+[21:29:42] skip  humaneval labels (../results/qwen7b_he/solutions_labeled.jsonl exists)
+[21:29:42] skip  humaneval own tests (code mode) (../results/qwen7b_he/selftests.jsonl exists)
+[21:29:42] skip  humaneval run own tests (../results/qwen7b_he/selftest_results.jsonl exists)
+[21:29:42] skip  humaneval spec tests (../results/qwen7b_he/selftests_spec.jsonl exists)
+[21:29:42] skip  humaneval run spec tests (../results/qwen7b_he/selftest_results_spec.jsonl exists)
+[21:29:42] skip  humaneval test-passing ids (../results/qwen7b_he/green_ids.jsonl exists)
+[21:29:42] skip  humaneval spec_first tests (test-passing only) (../results/qwen7b_he/selftests_spec_first.jsonl exists)
+[21:29:42] skip  humaneval run spec_first tests (../results/qwen7b_he/selftest_results_spec_first.jsonl exists)
+[21:29:42] skip  humaneval hidden states (../results/qwen7b_he/hidden/DONE exists)
+[21:29:42] skip  humaneval verbal yes/no (../results/qwen7b_he/hidden_yesno/DONE exists)
+[21:29:42] skip  humaneval sibling disagreement (../results/qwen7b_he/disagree.jsonl exists)
+[21:29:42] START humaneval ids of correct solutions without own tests
+[21:29:42] RUN: python -c 
+import json
+done={(r['task_id'],r['sample_id']) for r in map(json.loads, open('../results/qwen7b_he/selftests.jsonl'))}
+ids=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in map(json.loads, open('../results/qwen7b_he/solutions_labeled.jsonl'))
+     if r['correct'] and (r['task_id'],r['sample_id']) not in done]
+open('../results/qwen7b_he/more_correct_ids.jsonl','w').write(''.join(json.dumps(x)+'\n' for x in ids)); print(len(ids), 'correct solutions to test')
+508 correct solutions to test
+[21:29:42] START humaneval own tests, remaining correct solutions
+[21:29:42] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --mode code --only-ids ../results/qwen7b_he/more_correct_ids.jsonl --batch-size 4 --out ../results/qwen7b_he/selftests_morecorrect.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  64%|██████▍   | 217/339 [00:00<00:00, 2161.85it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 3078.86it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/508 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/508 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/508 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/508 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/508 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 384/508 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 448/508 test sets
+  generated 4/60 prompts
+  generated 8/60 prompts
+  generated 12/60 prompts
+  generated 16/60 prompts
+  generated 20/60 prompts
+  generated 24/60 prompts
+  generated 28/60 prompts
+  generated 32/60 prompts
+  generated 36/60 prompts
+  generated 40/60 prompts
+  generated 44/60 prompts
+  generated 48/60 prompts
+  generated 52/60 prompts
+  generated 56/60 prompts
+  generated 60/60 prompts
+saved 508/508 test sets
+wrote 508 test sets to ../results/qwen7b_he/selftests_morecorrect.jsonl in 555s (0 produced no parsable asserts)
+[21:38:59] START humaneval run own tests, remaining correct solutions
+[21:38:59] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen7b_he/solutions_labeled.jsonl --tests ../results/qwen7b_he/selftests_morecorrect.jsonl --out ../results/qwen7b_he/selftest_results_morecorrect.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 508/508 (100.0%)
+assert validity (passes on reference solution): 2298/2540 (90.5%)
+buggy solutions whose tests are all green (MISSED BUGS): 0/0
+buggy solutions caught by at least one valid assert: 0/0
+correct solutions with a failing test (false alarms): 140/508 (27.6%)
+[21:39:09] skip  mbpp solutions (../results/qwen7b_mbpp/solutions.jsonl exists)
+[21:39:09] skip  mbpp labels (../results/qwen7b_mbpp/solutions_labeled.jsonl exists)
+[21:39:09] skip  mbpp own tests (code mode) (../results/qwen7b_mbpp/selftests.jsonl exists)
+[21:39:09] skip  mbpp run own tests (../results/qwen7b_mbpp/selftest_results.jsonl exists)
+[21:39:09] skip  mbpp spec tests (../results/qwen7b_mbpp/selftests_spec.jsonl exists)
+[21:39:09] skip  mbpp run spec tests (../results/qwen7b_mbpp/selftest_results_spec.jsonl exists)
+[21:39:09] skip  mbpp test-passing ids (../results/qwen7b_mbpp/green_ids.jsonl exists)
+[21:39:09] skip  mbpp spec_first tests (test-passing only) (../results/qwen7b_mbpp/selftests_spec_first.jsonl exists)
+[21:39:09] skip  mbpp run spec_first tests (../results/qwen7b_mbpp/selftest_results_spec_first.jsonl exists)
+[21:39:09] skip  mbpp hidden states (../results/qwen7b_mbpp/hidden/DONE exists)
+[21:39:09] skip  mbpp verbal yes/no (../results/qwen7b_mbpp/hidden_yesno/DONE exists)
+[21:39:09] skip  mbpp sibling disagreement (../results/qwen7b_mbpp/disagree.jsonl exists)
+[21:39:09] START mbpp ids of correct solutions without own tests
+[21:39:09] RUN: python -c 
+import json
+done={(r['task_id'],r['sample_id']) for r in map(json.loads, open('../results/qwen7b_mbpp/selftests.jsonl'))}
+ids=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in map(json.loads, open('../results/qwen7b_mbpp/solutions_labeled.jsonl'))
+     if r['correct'] and (r['task_id'],r['sample_id']) not in done]
+open('../results/qwen7b_mbpp/more_correct_ids.jsonl','w').write(''.join(json.dumps(x)+'\n' for x in ids)); print(len(ids), 'correct solutions to test')
+952 correct solutions to test
+[21:39:09] START mbpp own tests, remaining correct solutions
+[21:39:09] RUN: python generate.py tests --model Qwen/Qwen2.5-Coder-7B-Instruct --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --mode code --only-ids ../results/qwen7b_mbpp/more_correct_ids.jsonl --batch-size 4 --out ../results/qwen7b_mbpp/selftests_morecorrect.jsonl
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 4974.00it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 384/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 448/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 512/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 576/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 640/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 704/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 768/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 832/952 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 896/952 test sets
+  generated 4/56 prompts
+  generated 8/56 prompts
+  generated 12/56 prompts
+  generated 16/56 prompts
+  generated 20/56 prompts
+  generated 24/56 prompts
+  generated 28/56 prompts
+  generated 32/56 prompts
+  generated 36/56 prompts
+  generated 40/56 prompts
+  generated 44/56 prompts
+  generated 48/56 prompts
+  generated 52/56 prompts
+  generated 56/56 prompts
+saved 952/952 test sets
+wrote 952 test sets to ../results/qwen7b_mbpp/selftests_morecorrect.jsonl in 1244s (0 produced no parsable asserts)
+[21:59:55] START mbpp run own tests, remaining correct solutions
+[21:59:55] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen7b_mbpp/solutions_labeled.jsonl --tests ../results/qwen7b_mbpp/selftests_morecorrect.jsonl --out ../results/qwen7b_mbpp/selftest_results_morecorrect.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 952/952 (100.0%)
+assert validity (passes on reference solution): 4092/4755 (86.1%)
+buggy solutions whose tests are all green (MISSED BUGS): 0/0
+buggy solutions caught by at least one valid assert: 0/0
+correct solutions with a failing test (false alarms): 329/952 (34.6%)
+[22:00:13] START analysis -> ../results/qwen7b_analysis
+[22:00:13] RUN: python stats.py modes --code ../results/qwen7b_he/selftest_results.jsonl --spec ../results/qwen7b_he/selftest_results_spec.jsonl > ../results/qwen7b_analysis/stats_he.txt
+buggy solutions: 170 in 54 tasks
+  caught by a valid test: code 0.659 | spec 0.682
+  bug-confirming share of wrong asserts: code 0.219 | spec 0.161
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.024  95% CI [-0.042, +0.093]  bootstrap p = 0.5570
+  bug-confirming increase (code - spec)        +0.059  95% CI [-0.086, +0.215]  bootstrap p = 0.4572
+task-level sign-flip permutation test, caught: p = 0.6317
+[22:00:13] RUN: python stats.py modes --code ../results/qwen7b_mbpp/selftest_results.jsonl --spec ../results/qwen7b_mbpp/selftest_results_spec.jsonl > ../results/qwen7b_analysis/stats_mbpp.txt
+buggy solutions: 624 in 204 tasks
+  caught by a valid test: code 0.510 | spec 0.591
+  bug-confirming share of wrong asserts: code 0.185 | spec 0.130
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.082  95% CI [+0.042, +0.123]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        +0.055  95% CI [+0.017, +0.097]  bootstrap p = 0.0042
+task-level sign-flip permutation test, caught: p = 0.0003
+[22:00:13] RUN: python probe.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --out ../results/qwen7b_analysis/probe.json > ../results/qwen7b_analysis/probe.txt
+solutions: 2710 (794 buggy) in 542 tasks; with own tests: 1250
+GAP set: 163 missed bugs vs 299 test-passing correct
+probe positions: ['code_end', 'resp_end', 'judge_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.776 [0.739,0.811]           0.694 [0.625,0.760]           0.815 [0.774,0.853]
+probe: logistic                                            0.793 [0.758,0.827]           0.752 [0.687,0.814]           0.821 [0.783,0.859]
+baseline: prompt-only probe                                0.671 [0.625,0.712]           0.640 [0.556,0.720]           0.706 [0.660,0.753]
+baseline: low mean log-prob                                0.680 [0.646,0.714]           0.660 [0.597,0.725]           0.678 [0.632,0.721]
+baseline: low min log-prob                                 0.624 [0.597,0.651]           0.615 [0.555,0.674]           0.635 [0.594,0.678]
+baseline: code length                                      0.610 [0.572,0.647]           0.631 [0.558,0.700]           0.619 [0.577,0.661]
+baseline: verbal P(incorrect)                              0.775 [0.740,0.810]           0.686 [0.618,0.749]           0.808 [0.769,0.845]
+baseline: verbal P(bug)                                    0.763 [0.728,0.798]           0.722 [0.655,0.783]           0.793 [0.754,0.830]
+probe: mean-diff [task-centered]                           0.547 [0.522,0.573]           0.485 [0.429,0.543]           0.567 [0.530,0.603]
+probe: logistic [task-centered]                            0.561 [0.536,0.586]           0.508 [0.452,0.569]           0.569 [0.532,0.607]
+baseline: prompt-only probe [task-centered]                0.496 [0.477,0.514]           0.499 [0.452,0.547]           0.474 [0.433,0.512]
+baseline: low mean log-prob [task-centered]                0.531 [0.513,0.548]           0.518 [0.473,0.562]           0.522 [0.485,0.559]
+baseline: verbal P(incorrect) [task-centered]              0.498 [0.470,0.526]           0.440 [0.380,0.501]           0.514 [0.479,0.550]
+baseline: verbal P(bug) [task-centered]                    0.519 [0.493,0.545]           0.463 [0.406,0.524]           0.533 [0.496,0.570]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.442 of 43 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.485 [0.429, 0.543], one-sided p(AUROC <= 0.5) = 0.6975
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.508 [0.452, 0.569], one-sided p(AUROC <= 0.5) = 0.3790
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.018 [-0.009, +0.045]
+  GAP  probe: logistic                    vs verbal: +0.066 [+0.010, +0.126]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.063 [+0.037, +0.089]
+  GAP  probe: logistic [task-centered]    vs verbal: +0.068 [+0.008, +0.131]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.049 [+0.033, +0.067]
+  GAP  probe: mean-diff [task-centered]   vs verbal: +0.045 [+0.008, +0.084]
+
+selected (position, layer) per fold:
+  probe: judge_end@27 (val 0.813), judge_end@20 (val 0.832), judge_end@20 (val 0.819), judge_end@21 (val 0.75), judge_end@19 (val 0.803)
+  prompt-only: prompt_end@23 (val 0.651), prompt_end@23 (val 0.736), prompt_end@21 (val 0.735), prompt_end@19 (val 0.647), prompt_end@21 (val 0.731)
+
+saved ../results/qwen7b_analysis/probe.json
+[22:03:54] RUN: python transfer.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --train humaneval --test mbpp --out ../results/qwen7b_analysis/transfer_he_to_mbpp.json > ../results/qwen7b_analysis/transfer_he_to_mbpp.txt
+train: humaneval (820 solutions, 170 buggy) -> test: mbpp (1890 solutions, 624 buggy; gap set 127 missed bugs vs 195 correct)
+selected on humaneval only: judge_end @ layer 19 (validation AUROC 0.935)
+
+AUROC on mbpp (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.763 [0.722,0.800]                     0.766 [0.690,0.835]
+probe: mean-diff                                       0.805 [0.767,0.842]                     0.727 [0.640,0.802]
+baseline: prompt-only probe                            0.716 [0.671,0.759]                     0.684 [0.594,0.765]
+baseline: verbal P(incorrect)                          0.781 [0.742,0.819]                     0.683 [0.598,0.760]
+baseline: low mean log-prob                            0.674 [0.637,0.709]                     0.659 [0.587,0.737]
+probe: logistic [task-centered]                        0.546 [0.519,0.574]                     0.516 [0.453,0.579]
+probe: mean-diff [task-centered]                       0.566 [0.534,0.599]                     0.512 [0.446,0.580]
+baseline: prompt-only probe [task-centered]            0.489 [0.468,0.510]                     0.517 [0.457,0.577]
+baseline: verbal P(incorrect) [task-centered]          0.508 [0.476,0.542]                     0.452 [0.383,0.525]
+baseline: low mean log-prob [task-centered]            0.536 [0.516,0.557]                     0.528 [0.475,0.585]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             -0.018 [-0.067, +0.027]
+  GAP  [raw]             +0.083 [+0.014, +0.152]
+  ALL  [task-centered]   +0.038 [+0.003, +0.072]
+  GAP  [task-centered]   +0.065 [-0.017, +0.145]
+
+saved ../results/qwen7b_analysis/transfer_he_to_mbpp.json (usable as --probe for rq3.py on mbpp)
+[22:05:24] RUN: python transfer.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --train mbpp --test humaneval --out ../results/qwen7b_analysis/transfer_mbpp_to_he.json > ../results/qwen7b_analysis/transfer_mbpp_to_he.txt
+train: mbpp (1890 solutions, 624 buggy) -> test: humaneval (820 solutions, 170 buggy; gap set 36 missed bugs vs 104 correct)
+selected on mbpp only: judge_end @ layer 19 (validation AUROC 0.789)
+
+AUROC on humaneval (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.780 [0.693,0.849]                     0.740 [0.539,0.879]
+probe: mean-diff                                       0.779 [0.692,0.850]                     0.742 [0.589,0.854]
+baseline: prompt-only probe                            0.669 [0.574,0.757]                     0.679 [0.500,0.833]
+baseline: verbal P(incorrect)                          0.734 [0.647,0.803]                     0.666 [0.511,0.791]
+baseline: low mean log-prob                            0.659 [0.588,0.727]                     0.625 [0.501,0.731]
+probe: logistic [task-centered]                        0.537 [0.490,0.587]                     0.497 [0.391,0.624]
+probe: mean-diff [task-centered]                       0.530 [0.480,0.582]                     0.495 [0.387,0.603]
+baseline: prompt-only probe [task-centered]            0.503 [0.473,0.534]                     0.530 [0.449,0.610]
+baseline: verbal P(incorrect) [task-centered]          0.480 [0.419,0.538]                     0.406 [0.308,0.519]
+baseline: low mean log-prob [task-centered]            0.531 [0.494,0.565]                     0.534 [0.453,0.617]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.046 [-0.027, +0.114]
+  GAP  [raw]             +0.074 [-0.014, +0.160]
+  ALL  [task-centered]   +0.057 [-0.000, +0.113]
+  GAP  [task-centered]   +0.091 [-0.037, +0.225]
+
+saved ../results/qwen7b_analysis/transfer_mbpp_to_he.json (usable as --probe for rq3.py on humaneval)
+[22:06:45] RUN: python rq3.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --probe ../results/qwen7b_analysis/probe.json --budgets 0.1,0.2,0.3,1.0 --escalate spec=selftest_results_spec.jsonl both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/qwen7b_analysis/rq3.txt
+combined policy uses: ['probe', 'verbal-prob', 'confidence', 'disagreement']
+green solutions (own tests all pass): 462 = 163 missed bugs + 299 correct
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.752 [0.684, 0.816]
+  probe-centered  0.508 [0.451, 0.567]   vs probe -0.243 [-0.317, -0.174]
+  confidence      0.660 [0.595, 0.723]   vs probe -0.091 [-0.185, -0.001]
+  verbal-prob     0.686 [0.613, 0.753]   vs probe -0.065 [-0.126, -0.010]
+  disagreement    0.680 [0.614, 0.745]   vs probe -0.072 [-0.157, +0.008]
+  combined        0.761 [0.698, 0.820]   vs probe +0.009 [-0.025, +0.046]
+
+=== escalation 'spec': extra tests fail on 54/163 missed bugs, 43/299 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     46   0.033     0.014  0.353
+       probe             46   0.043     0.020  0.609   +0.010 [-0.021, +0.057]  
+       probe-centered    46   0.043     0.020  0.500   +0.010 [-0.018, +0.050]    +0.000 [-0.040, +0.031]
+       confidence        46   0.055     0.010  0.565   +0.022 [-0.011, +0.070]    +0.012 [-0.042, +0.071]
+       verbal-prob       46   0.049     0.017  0.543   +0.016 [-0.016, +0.057]    +0.006 [-0.035, +0.041]
+       disagreement      46   0.055     0.030  0.522   +0.022 [-0.019, +0.063]    +0.012 [-0.043, +0.058]
+       combined          46   0.055     0.020  0.609   +0.022 [-0.005, +0.070]    +0.012 [-0.023, +0.052]
+   20% random (exp.)     92   0.066     0.029  0.353
+       probe             92   0.117     0.037  0.663   +0.050 [+0.004, +0.105]  
+       probe-centered    92   0.086     0.050  0.435   +0.020 [-0.027, +0.061]    -0.031 [-0.087, +0.012]
+       confidence        92   0.117     0.023  0.598   +0.050 [+0.004, +0.102]    +0.000 [-0.074, +0.071]
+       verbal-prob       92   0.110     0.023  0.598   +0.044 [-0.003, +0.108]    -0.006 [-0.067, +0.057]
+       disagreement      92   0.098     0.047  0.511   +0.032 [-0.010, +0.085]    -0.018 [-0.084, +0.050]
+       combined          92   0.141     0.037  0.641   +0.075 [+0.025, +0.124]    +0.025 [-0.030, +0.068]
+   30% random (exp.)    139   0.099     0.043  0.353
+       probe            139   0.196     0.050  0.612   +0.097 [+0.030, +0.152]  
+       probe-centered   139   0.098     0.070  0.388   -0.001 [-0.051, +0.049]    -0.098 [-0.167, -0.036]
+       confidence       139   0.153     0.047  0.504   +0.054 [+0.008, +0.112]    -0.043 [-0.105, +0.032]
+       verbal-prob      139   0.160     0.054  0.525   +0.060 [+0.003, +0.127]    -0.037 [-0.101, +0.041]
+       disagreement     139   0.184     0.060  0.532   +0.085 [+0.009, +0.153]    -0.012 [-0.106, +0.086]
+       combined         139   0.178     0.064  0.568   +0.079 [+0.029, +0.130]    -0.018 [-0.072, +0.041]
+  100% random (exp.)    462   0.331     0.144  0.353
+  escalating everything: 109/163 bugs still shipped, 43 false alarms, 462 extra test runs
+
+=== escalation 'both': extra tests fail on 84/163 missed bugs, 105/299 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     46   0.052     0.035  0.353
+       probe             46   0.080     0.020  0.609   +0.028 [-0.008, +0.073]  
+       probe-centered    46   0.055     0.030  0.500   +0.004 [-0.026, +0.046]    -0.025 [-0.064, +0.022]
+       confidence        46   0.061     0.030  0.565   +0.010 [-0.023, +0.060]    -0.018 [-0.075, +0.044]
+       verbal-prob       46   0.074     0.023  0.543   +0.022 [-0.010, +0.075]    -0.006 [-0.046, +0.042]
+       disagreement      46   0.098     0.043  0.522   +0.047 [-0.006, +0.091]    +0.018 [-0.040, +0.064]
+       combined          46   0.080     0.027  0.609   +0.028 [-0.004, +0.083]    +0.000 [-0.035, +0.049]
+   20% random (exp.)     92   0.103     0.070  0.353
+       probe             92   0.196     0.040  0.663   +0.093 [+0.048, +0.159]  
+       probe-centered    92   0.110     0.067  0.435   +0.007 [-0.037, +0.055]    -0.086 [-0.150, -0.034]
+       confidence        92   0.178     0.050  0.598   +0.075 [+0.019, +0.126]    -0.018 [-0.111, +0.047]
+       verbal-prob       92   0.178     0.043  0.598   +0.075 [+0.015, +0.143]    -0.018 [-0.087, +0.041]
+       disagreement      92   0.184     0.080  0.511   +0.081 [+0.028, +0.141]    -0.012 [-0.086, +0.055]
+       combined          92   0.221     0.047  0.641   +0.118 [+0.063, +0.178]    +0.025 [-0.045, +0.074]
+   30% random (exp.)    139   0.155     0.105  0.353
+       probe            139   0.301     0.064  0.612   +0.146 [+0.073, +0.209]  
+       probe-centered   139   0.141     0.107  0.388   -0.013 [-0.061, +0.048]    -0.160 [-0.227, -0.090]
+       confidence       139   0.227     0.097  0.504   +0.072 [+0.017, +0.142]    -0.074 [-0.150, +0.019]
+       verbal-prob      139   0.245     0.084  0.525   +0.091 [+0.030, +0.165]    -0.055 [-0.120, +0.023]
+       disagreement     139   0.282     0.097  0.532   +0.128 [+0.053, +0.192]    -0.018 [-0.105, +0.083]
+       combined         139   0.282     0.084  0.568   +0.128 [+0.069, +0.188]    -0.018 [-0.079, +0.055]
+  100% random (exp.)    462   0.515     0.351  0.353
+  escalating everything: 79/163 bugs still shipped, 105 false alarms, 462 extra test runs
+[22:06:57] RUN: python rq3.py --runs ../results/qwen7b_mbpp:mbpp --probe ../results/qwen7b_analysis/transfer_he_to_mbpp.json --budgets 0.1,0.2,0.3,1.0 --escalate both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/qwen7b_analysis/rq3_transfer.txt
+transfer scores (probe trained on humaneval): combined policy disabled
+green solutions (own tests all pass): 322 = 127 missed bugs + 195 correct
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.766 [0.693, 0.834]
+  probe-centered  0.516 [0.455, 0.578]   vs probe -0.249 [-0.321, -0.173]
+  confidence      0.659 [0.588, 0.729]   vs probe -0.107 [-0.201, -0.017]
+  verbal-prob     0.683 [0.595, 0.766]   vs probe -0.082 [-0.151, -0.015]
+  disagreement    0.644 [0.561, 0.725]   vs probe -0.122 [-0.232, -0.003]
+
+=== escalation 'both': extra tests fail on 73/127 missed bugs, 72/195 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     32   0.057     0.037  0.394
+       probe             32   0.087     0.026  0.719   +0.029 [-0.015, +0.090]  
+       probe-centered    32   0.055     0.031  0.500   -0.002 [-0.030, +0.046]    -0.031 [-0.085, +0.028]
+       confidence        32   0.071     0.036  0.625   +0.013 [-0.031, +0.062]    -0.016 [-0.090, +0.042]
+       verbal-prob       32   0.087     0.026  0.594   +0.029 [-0.015, +0.076]    +0.000 [-0.072, +0.062]
+       disagreement      32   0.071     0.046  0.531   +0.013 [-0.031, +0.067]    -0.016 [-0.083, +0.053]
+   20% random (exp.)     64   0.115     0.074  0.394
+       probe             64   0.213     0.046  0.719   +0.098 [+0.028, +0.177]  
+       probe-centered    64   0.118     0.056  0.531   +0.003 [-0.037, +0.057]    -0.094 [-0.158, -0.029]
+       confidence        64   0.134     0.077  0.578   +0.019 [-0.029, +0.103]    -0.079 [-0.159, +0.017]
+       verbal-prob       64   0.189     0.041  0.641   +0.074 [+0.010, +0.151]    -0.024 [-0.108, +0.063]
+       disagreement      64   0.197     0.077  0.562   +0.082 [+0.015, +0.148]    -0.016 [-0.126, +0.087]
+   30% random (exp.)     97   0.172     0.111  0.394
+       probe             97   0.315     0.092  0.660   +0.143 [+0.064, +0.220]  
+       probe-centered    97   0.157     0.103  0.464   -0.015 [-0.059, +0.036]    -0.157 [-0.231, -0.081]
+       confidence        97   0.244     0.092  0.577   +0.072 [+0.008, +0.140]    -0.071 [-0.151, +0.017]
+       verbal-prob       97   0.260     0.072  0.577   +0.087 [+0.017, +0.174]    -0.055 [-0.133, +0.037]
+       disagreement      97   0.236     0.123  0.505   +0.064 [+0.004, +0.151]    -0.079 [-0.183, +0.050]
+  100% random (exp.)    322   0.575     0.369  0.394
+  escalating everything: 54/127 bugs still shipped, 72 false alarms, 322 extra test runs
+[22:07:05] RUN: python diagnose.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --probe ../results/qwen7b_analysis/probe.json > ../results/qwen7b_analysis/diagnose.txt
+test-passing set: 163 missed bugs, 299 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n= 163  AUROC 0.508 [0.452, 0.569]  p(<=0.5)=0.379
+  edge-case-only (pass original, fail extra)   n= 120  AUROC 0.496 [0.434, 0.564]  p(<=0.5)=0.546
+  plain failures (fail original tests)         n=  43  AUROC 0.541 [0.432, 0.668]  p(<=0.5)=0.221
+  share of missed bugs that are edge-case-only: 73.6%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  43 pairs in 24 tasks; probe ranks the bug higher in 0.512 [0.324, 0.714]
+  missed bugs with NO test-passing correct sibling: 50 of 74 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.10)        n=  94  AUROC 0.498 [0.435, 0.562]  p(<=0.5)=0.535
+  unique mistake (disagreement > 0.10)         n=  69  AUROC 0.523 [0.430, 0.629]  p(<=0.5)=0.326
+[22:07:21] RUN: python diagnose.py --runs ../results/qwen7b_he:humaneval ../results/qwen7b_mbpp:mbpp --probe ../results/qwen7b_analysis/probe.json --extra selftest_results_morecorrect.jsonl > ../results/qwen7b_analysis/diagnose_allcorrect.txt
+extra own-test results: 1460 solutions, 991 with all own tests passing
+test-passing set: 163 missed bugs, 1290 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n= 163  AUROC 0.500 [0.450, 0.553]  p(<=0.5)=0.512
+  edge-case-only (pass original, fail extra)   n= 120  AUROC 0.488 [0.430, 0.548]  p(<=0.5)=0.641
+  plain failures (fail original tests)         n=  43  AUROC 0.531 [0.423, 0.662]  p(<=0.5)=0.278
+  share of missed bugs that are edge-case-only: 73.6%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  98 pairs in 28 tasks; probe ranks the bug higher in 0.541 [0.416, 0.667]
+  missed bugs with NO test-passing correct sibling: 46 of 74 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.10)        n=  94  AUROC 0.489 [0.434, 0.552]  p(<=0.5)=0.632
+  unique mistake (disagreement > 0.10)         n=  69  AUROC 0.514 [0.423, 0.620]  p(<=0.5)=0.382
+[22:07:38] summary: ../results/qwen7b_analysis/SUMMARY.txt
+[22:07:38] ===== DONE: qwen7b. Full log: ../results/qwen7b_log.txt =====

@@ -1,0 +1,32 @@
+solutions: 2710 (794 buggy) in 542 tasks; with own tests: 1250
+GAP set: 163 missed bugs vs 299 test-passing correct
+probe positions: ['judge_end', 'judgebug_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.701 [0.657,0.740]           0.677 [0.605,0.745]           0.727 [0.681,0.773]
+probe: logistic                                            0.735 [0.697,0.770]           0.750 [0.691,0.806]           0.767 [0.725,0.808]
+baseline: code length                                      0.610 [0.572,0.647]           0.631 [0.558,0.700]           0.619 [0.577,0.661]
+baseline: verbal P(incorrect)                              0.775 [0.740,0.810]           0.686 [0.618,0.749]           0.808 [0.769,0.845]
+baseline: verbal P(bug)                                    0.763 [0.728,0.798]           0.722 [0.655,0.783]           0.793 [0.754,0.830]
+probe: mean-diff [task-centered]                           0.529 [0.507,0.551]           0.505 [0.448,0.562]           0.526 [0.488,0.565]
+probe: logistic [task-centered]                            0.531 [0.509,0.553]           0.526 [0.467,0.583]           0.536 [0.499,0.573]
+baseline: verbal P(incorrect) [task-centered]              0.498 [0.470,0.526]           0.440 [0.380,0.501]           0.514 [0.479,0.550]
+baseline: verbal P(bug) [task-centered]                    0.519 [0.493,0.545]           0.463 [0.406,0.524]           0.533 [0.496,0.570]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.419 of 43 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.505 [0.448, 0.562], one-sided p(AUROC <= 0.5) = 0.4230
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.526 [0.467, 0.583], one-sided p(AUROC <= 0.5) = 0.1830
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: -0.040 [-0.078, -0.005]
+  GAP  probe: logistic                    vs verbal: +0.064 [-0.001, +0.134]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.033 [+0.005, +0.060]
+  GAP  probe: logistic [task-centered]    vs verbal: +0.086 [+0.019, +0.150]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.031 [+0.002, +0.060]
+  GAP  probe: mean-diff [task-centered]   vs verbal: +0.065 [-0.001, +0.138]
+
+selected (position, layer) per fold:
+  probe: judge_end@33 (val 0.676), judgebug_end@28 (val 0.778), judgebug_end@31 (val 0.78), judge_end@25 (val 0.676), judge_end@28 (val 0.78)
+
+saved ../results/qwen7b_analysis/probe_reader_qwen3b.json

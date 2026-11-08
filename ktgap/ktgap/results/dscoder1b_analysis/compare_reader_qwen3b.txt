@@ -1,0 +1,5 @@
+2710 solutions in both runs; GAP: 82 missed bugs vs 124 test-passing correct
+probe: logistic [task-centered]    ALL  A 0.570 [0.546,0.594]  B 0.608 [0.584,0.632]  B-A +0.038 [+0.020, +0.057]
+probe: logistic [task-centered]    GAP  A 0.472 [0.395,0.555]  B 0.519 [0.443,0.595]  B-A +0.047 [-0.030, +0.126]
+probe: logistic                    ALL  A 0.790 [0.762,0.817]  B 0.825 [0.798,0.850]  B-A +0.035 [+0.014, +0.057]
+probe: logistic                    GAP  A 0.713 [0.640,0.781]  B 0.728 [0.649,0.804]  B-A +0.015 [-0.050, +0.079]

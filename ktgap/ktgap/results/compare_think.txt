@@ -1,0 +1,9 @@
+2710 solutions in both runs; GAP: 135 missed bugs vs 270 test-passing correct
+probe: logistic [task-centered]    ALL  A 0.556 [0.534,0.578]  B 0.548 [0.528,0.569]  B-A -0.007 [-0.029, +0.013]
+probe: logistic [task-centered]    GAP  A 0.595 [0.524,0.659]  B 0.542 [0.474,0.604]  B-A -0.053 [-0.108, +0.006]
+probe: logistic                    ALL  A 0.763 [0.729,0.795]  B 0.690 [0.652,0.726]  B-A -0.073 [-0.104, -0.044]
+probe: logistic                    GAP  A 0.706 [0.637,0.775]  B 0.689 [0.627,0.750]  B-A -0.018 [-0.080, +0.048]
+2710 solutions in both runs; GAP: 135 missed bugs vs 270 test-passing correct
+A = 'baseline: verbal P(incorrect)'   B = 'baseline: verbal P(incorrect) after reasoning'
+baseline: verbal P(incorrect)      ALL  A 0.695 [0.660,0.731]  B 0.616 [0.575,0.656]  B-A -0.079 [-0.120, -0.037]
+baseline: verbal P(incorrect)      GAP  A 0.610 [0.532,0.699]  B 0.653 [0.571,0.731]  B-A +0.043 [-0.065, +0.145]

@@ -1,0 +1,26 @@
+##### qwen7b read by qwen3b (B) vs its own judge_end probe (A)
+== same-task pairs (PRIMARY), own probe:
+  98 pairs in 28 tasks; probe ranks the bug higher in 0.541 [0.416, 0.667]
+== same-task pairs (PRIMARY), reader probe:
+  98 pairs in 28 tasks; probe ranks the bug higher in 0.571 [0.434, 0.720]
+== paired AUROC, own (A) vs reader (B):
+probe: logistic [task-centered]    ALL  A 0.561 [0.536,0.586]  B 0.531 [0.509,0.553]  B-A -0.030 [-0.052, -0.008]
+probe: logistic [task-centered]    GAP  A 0.508 [0.452,0.569]  B 0.526 [0.467,0.583]  B-A +0.018 [-0.038, +0.073]
+probe: logistic                    ALL  A 0.793 [0.758,0.827]  B 0.735 [0.697,0.770]  B-A -0.058 [-0.089, -0.030]
+probe: logistic                    GAP  A 0.752 [0.687,0.814]  B 0.750 [0.691,0.806]  B-A -0.002 [-0.064, +0.058]
+== reader probe, ranking the green set:
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.750 [0.691, 0.807]
+  probe-centered  0.526 [0.468, 0.584]   vs probe -0.224 [-0.294, -0.152]
+  verbal-prob     0.686 [0.617, 0.754]   vs probe -0.064 [-0.134, -0.000]
+  disagreement    0.669 [0.597, 0.745]   vs probe -0.081 [-0.161, +0.000]
+  combined        0.736 [0.678, 0.793]   vs probe -0.014 [-0.054, +0.026]
+
+== reader probe, 30% budget:
+   30% random (exp.)    139   0.155     0.105  0.353
+       probe            139   0.301     0.084  0.583   +0.146 [+0.085, +0.214]  
+       probe-centered   139   0.172     0.110  0.432   +0.017 [-0.029, +0.055]    -0.129 [-0.199, -0.079]
+       verbal-prob      139   0.245     0.084  0.525   +0.091 [+0.028, +0.161]    -0.055 [-0.121, +0.006]
+       disagreement     139   0.276     0.100  0.518   +0.121 [+0.065, +0.195]    -0.025 [-0.101, +0.060]
+       combined         139   0.288     0.087  0.568   +0.134 [+0.081, +0.203]    -0.012 [-0.058, +0.037]
+  100% random (exp.)    462   0.515     0.351  0.353

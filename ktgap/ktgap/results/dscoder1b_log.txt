@@ -1,0 +1,2164 @@
+[02:28:12] ===== dscoder1b: deepseek-ai/deepseek-coder-1.3b-instruct (generation batch 8, extraction batch 4) =====
+[02:28:12] START humaneval solutions
+[02:28:12] RUN: python generate.py solutions --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --n 5 --batch-size 8 --out ../results/dscoder1b_he/solutions.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 3996.09it/s]
+[W1014 02:28:45.962394407 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 52428800 bytes (free: 99876864, total: 10733092864).
+[W1014 02:28:46.614954173 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 56623104 bytes (free: 114556928, total: 10733092864).
+[W1014 02:28:46.267773047 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 60817408 bytes (free: 118751232, total: 10733092864).
+[W1014 02:28:47.891162415 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 62914560 bytes (free: 91488256, total: 10733092864).
+[W1014 02:28:47.281272857 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 67108864 bytes (free: 81002496, total: 10733092864).
+[W1014 02:28:48.651969194 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 69206016 bytes (free: 110362624, total: 10733092864).
+[W1014 02:28:48.306138053 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 73400320 bytes (free: 78905344, total: 10733092864).
+[W1014 02:28:49.713488669 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 75497472 bytes (free: 87293952, total: 10733092864).
+[W1014 02:28:49.078236044 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 77594624 bytes (free: 112459776, total: 10733092864).
+[W1014 02:28:50.475257690 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 79691776 bytes (free: 74711040, total: 10733092864).
+[W1014 02:28:50.862861944 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 81788928 bytes (free: 127139840, total: 10733092864).
+[W1014 02:28:50.266863277 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 116654080, total: 10733092864).
+[W1014 02:28:51.394719095 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 104071168, total: 10733092864).
+[W1014 02:28:51.770392516 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 85983232 bytes (free: 110362624, total: 10733092864).
+[W1014 02:28:51.131495296 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 88080384 bytes (free: 135528448, total: 10733092864).
+[W1014 02:28:51.268767851 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 88080384 bytes (free: 68419584, total: 10733092864).
+[W1014 02:28:52.677612349 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 90177536 bytes (free: 89391104, total: 10733092864).
+[W1014 02:28:52.093748786 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 92274688 bytes (free: 118751232, total: 10733092864).
+[W1014 02:28:52.217139378 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 92274688 bytes (free: 146014208, total: 10733092864).
+[W1014 02:28:53.607768883 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 94371840 bytes (free: 74711040, total: 10733092864).
+[W1014 02:28:53.717723709 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 94371840 bytes (free: 129236992, total: 10733092864).
+[W1014 02:28:53.114078364 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 96468992 bytes (free: 91488256, total: 10733092864).
+[W1014 02:28:53.202498051 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 96468992 bytes (free: 120848384, total: 10733092864).
+[W1014 02:28:53.336973119 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 96468992 bytes (free: 87293952, total: 10733092864).
+[W1014 02:28:54.446411383 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 96468992 bytes (free: 150208512, total: 10733092864).
+  generated 8/64 prompts
+[W1014 02:29:02.944262908 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 98566144 bytes (free: 156499968, total: 10733092864).
+[W1014 02:29:02.038672135 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 98566144 bytes (free: 127139840, total: 10733092864).
+[W1014 02:29:02.153921483 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 98566144 bytes (free: 97779712, total: 10733092864).
+[W1014 02:29:03.578660689 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 100663296 bytes (free: 60030976, total: 10733092864).
+[W1014 02:29:03.706197357 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 100663296 bytes (free: 116654080, total: 10733092864).
+[W1014 02:29:03.825218522 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 100663296 bytes (free: 89391104, total: 10733092864).
+[W1014 02:29:03.938804157 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 100663296 bytes (free: 62128128, total: 10733092864).
+[W1014 02:29:03.331113830 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 102760448 bytes (free: 118751232, total: 10733092864).
+[W1014 02:29:04.457266422 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 102760448 bytes (free: 89391104, total: 10733092864).
+[W1014 02:29:04.572471588 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 102760448 bytes (free: 64225280, total: 10733092864).
+[W1014 02:29:04.683846673 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 102760448 bytes (free: 143917056, total: 10733092864).
+[W1014 02:29:04.065292681 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 104857600 bytes (free: 114556928, total: 10733092864).
+[W1014 02:29:04.185522876 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 104857600 bytes (free: 83099648, total: 10733092864).
+[W1014 02:29:04.291986224 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 104857600 bytes (free: 62128128, total: 10733092864).
+[W1014 02:29:05.390350271 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 104857600 bytes (free: 146014208, total: 10733092864).
+[W1014 02:29:05.485896241 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 104857600 bytes (free: 127139840, total: 10733092864).
+[W1014 02:29:05.870203174 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 106954752 bytes (free: 97779712, total: 10733092864).
+[W1014 02:29:05.982459502 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 106954752 bytes (free: 70516736, total: 10733092864).
+[W1014 02:29:05.070500983 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 106954752 bytes (free: 156499968, total: 10733092864).
+[W1014 02:29:05.169993113 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 106954752 bytes (free: 137625600, total: 10733092864).
+[W1014 02:29:05.267629333 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 106954752 bytes (free: 118751232, total: 10733092864).
+  generated 16/64 prompts
+[W1014 02:29:15.925451011 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 109051904 bytes (free: 70516736, total: 10733092864).
+[W1014 02:29:15.023678817 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 109051904 bytes (free: 154402816, total: 10733092864).
+[W1014 02:29:15.118618494 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 109051904 bytes (free: 137625600, total: 10733092864).
+[W1014 02:29:15.204305334 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 109051904 bytes (free: 120848384, total: 10733092864).
+[W1014 02:29:15.290205374 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 109051904 bytes (free: 104071168, total: 10733092864).
+[W1014 02:29:16.392280316 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 109051904 bytes (free: 87293952, total: 10733092864).
+[W1014 02:29:16.751768553 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 146014208, total: 10733092864).
+[W1014 02:29:16.837100980 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 131334144, total: 10733092864).
+[W1014 02:29:16.910788183 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 116654080, total: 10733092864).
+[W1014 02:29:16.984739814 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 104071168, total: 10733092864).
+[W1014 02:29:16.060619508 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 91488256, total: 10733092864).
+[W1014 02:29:16.136470218 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 78905344, total: 10733092864).
+[W1014 02:29:16.202488491 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 111149056 bytes (free: 66322432, total: 10733092864).
+[W1014 02:29:17.549578035 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 164888576, total: 10733092864).
+[W1014 02:29:17.615151848 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 146014208, total: 10733092864).
+[W1014 02:29:17.679954092 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 133431296, total: 10733092864).
+[W1014 02:29:17.750687349 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 120848384, total: 10733092864).
+[W1014 02:29:17.826269298 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 108265472, total: 10733092864).
+[W1014 02:29:17.903229216 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 95682560, total: 10733092864).
+[W1014 02:29:17.979720503 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 83099648, total: 10733092864).
+[W1014 02:29:17.055179641 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 113246208 bytes (free: 70516736, total: 10733092864).
+  generated 24/64 prompts
+  generated 32/64 prompts
+[W1014 02:29:29.775161550 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 119537664 bytes (free: 171180032, total: 10733092864).
+[W1014 02:29:32.174989674 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 81788928 bytes (free: 104071168, total: 10733092864).
+[W1014 02:29:33.416050889 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 97779712, total: 10733092864).
+[W1014 02:29:33.449684093 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 91488256, total: 10733092864).
+[W1014 02:29:33.482945899 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 85196800, total: 10733092864).
+[W1014 02:29:33.508358525 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 78905344, total: 10733092864).
+[W1014 02:29:33.526125121 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 72613888, total: 10733092864).
+[W1014 02:29:33.558843737 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 66322432, total: 10733092864).
+[W1014 02:29:33.592774829 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 60030976, total: 10733092864).
+[W1014 02:29:33.644114085 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 83886080 bytes (free: 137625600, total: 10733092864).
+[W1014 02:29:33.903918743 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 85983232 bytes (free: 135528448, total: 10733092864).
+[W1014 02:29:33.917308900 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 85983232 bytes (free: 133431296, total: 10733092864).
+[W1014 02:29:33.930043947 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 85983232 bytes (free: 131334144, total: 10733092864).
+[W1014 02:29:33.930185743 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 85983232 bytes (free: 131334144, total: 10733092864).
+Traceback (most recent call last):
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/generate.py", line 408, in <module>
+    main()
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/generate.py", line 400, in main
+    run_solutions(args)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/generate.py", line 277, in run_solutions
+    outs = backend.generate(prompts, args.n, args.temperature, args.top_p, args.max_new_tokens)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/generate.py", line 203, in generate
+    gen = self.model.generate(**enc, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/generation/utils.py", line 2982, in generate
+    result = decoding_method(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/generation/utils.py", line 3210, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 456, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/utils/generic.py", line 1081, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/utils/output_capturing.py", line 287, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 392, in forward
+    hidden_states = decoder_layer(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/modeling_layers.py", line 110, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 297, in forward
+    hidden_states, _ = self.self_attn(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 251, in forward
+    key_states, value_states = past_key_values.update(key_states, value_states, self.layer_idx)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/cache_utils.py", line 1440, in update
+    keys, values = self.layers[layer_idx].update(key_states, value_states, *args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/cache_utils.py", line 145, in update
+    self.keys = torch.cat([self.keys, key_states], dim=-2)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 82.00 MiB. GPU 0 has a total capacity of 10.00 GiB of which 125.25 MiB is free. Including non-PyTorch memory, this process has 8.98 GiB memory in use. Of the allocated memory 6.32 GiB is allocated by PyTorch, and 2.16 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+[02:29:37] FAILED (exit 1): python generate.py solutions --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --n 5 --batch-size 8 --out ../results/dscoder1b_he/solutions.jsonl
+[02:29:37] fix the problem, then re-run the same command; finished steps are skipped
+[02:30:07] ===== dscoder1b: deepseek-ai/deepseek-coder-1.3b-instruct (generation batch 4, extraction batch 4) =====
+[02:30:07] START humaneval solutions
+[02:30:07] RUN: python generate.py solutions --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --n 5 --batch-size 4 --out ../results/dscoder1b_he/solutions.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 8845.93it/s]
+[W1014 02:30:20.631088307 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 37748736 bytes (free: 93585408, total: 10733092864).
+[W1014 02:30:22.184618158 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 46137344 bytes (free: 70516736, total: 10733092864).
+  generated 4/64 prompts
+  generated 8/64 prompts
+[W1014 02:30:40.286751774 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 50331648 bytes (free: 81002496, total: 10733092864).
+[W1014 02:30:41.016255785 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 52428800 bytes (free: 99876864, total: 10733092864).
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+[W1014 02:31:06.308565966 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 56623104 bytes (free: 76808192, total: 10733092864).
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+[W1014 02:31:32.573513489 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 58720256 bytes (free: 85196800, total: 10733092864).
+[W1014 02:31:32.286238724 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 60817408 bytes (free: 60030976, total: 10733092864).
+[W1014 02:31:33.003052630 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 62914560 bytes (free: 120848384, total: 10733092864).
+[W1014 02:31:34.752834602 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 65011712 bytes (free: 93585408, total: 10733092864).
+[W1014 02:31:35.474992846 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 67108864 bytes (free: 91488256, total: 10733092864).
+[W1014 02:31:35.241767936 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 69206016 bytes (free: 114556928, total: 10733092864).
+[W1014 02:31:36.959765943 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 71303168 bytes (free: 91488256, total: 10733092864).
+[W1014 02:31:37.742408608 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 73400320 bytes (free: 85196800, total: 10733092864).
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/164 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+[W1014 02:34:51.973609077 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 75497472 bytes (free: 62128128, total: 10733092864).
+[W1014 02:34:51.152521912 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 75497472 bytes (free: 95682560, total: 10733092864).
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/164 tasks
+[W1014 02:35:45.824436081 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 77594624 bytes (free: 104071168, total: 10733092864).
+[W1014 02:35:46.587198700 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 79691776 bytes (free: 81002496, total: 10733092864).
+[W1014 02:35:47.370066784 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 81788928 bytes (free: 64225280, total: 10733092864).
+[W1014 02:35:47.548851755 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 81788928 bytes (free: 125042688, total: 10733092864).
+  generated 4/36 prompts
+  generated 8/36 prompts
+  generated 12/36 prompts
+  generated 16/36 prompts
+  generated 20/36 prompts
+  generated 24/36 prompts
+  generated 28/36 prompts
+  generated 32/36 prompts
+  generated 36/36 prompts
+saved 164/164 tasks
+wrote 820 solutions to ../results/dscoder1b_he/solutions.jsonl in 423s
+[02:37:12] START humaneval labels
+[02:37:12] RUN: python evaluate.py label --dataset humaneval --solutions ../results/dscoder1b_he/solutions.jsonl --out ../results/dscoder1b_he/solutions_labeled.jsonl
+Load from ground-truth from /home/exouser/.cache/evalplus/fe585eb4df8c88d844eeb463ea4d0302.pkl
+labeled 820 solutions: 474 correct, 346 buggy (39 buggy ones pass the original tests but fail EvalPlus extra tests)
+[02:38:07] START humaneval own tests (code mode)
+[02:38:07] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 4 --out ../results/dscoder1b_he/selftests.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 3173.04it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/474 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/474 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/474 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/474 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/474 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 384/474 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 448/474 test sets
+  generated 4/26 prompts
+  generated 8/26 prompts
+  generated 12/26 prompts
+  generated 16/26 prompts
+  generated 20/26 prompts
+  generated 24/26 prompts
+  generated 26/26 prompts
+saved 474/474 test sets
+wrote 474 test sets to ../results/dscoder1b_he/selftests.jsonl in 1001s (7 produced no parsable asserts)
+[02:54:50] START humaneval run own tests
+[02:54:50] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --tests ../results/dscoder1b_he/selftests.jsonl --out ../results/dscoder1b_he/selftest_results.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 467/474 (98.5%)
+assert validity (passes on reference solution): 311/675 (46.1%)
+buggy solutions whose tests are all green (MISSED BUGS): 21/341 (6.2%)
+buggy solutions caught by at least one valid assert: 101/341 (29.6%)
+correct solutions with a failing test (false alarms): 75/126 (59.5%)
+[02:55:00] START humaneval spec tests
+[02:55:00] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --mode spec --batch-size 4 --out ../results/dscoder1b_he/selftests_spec.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 2855.80it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/164 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/164 test sets
+  generated 4/36 prompts
+  generated 8/36 prompts
+  generated 12/36 prompts
+  generated 16/36 prompts
+  generated 20/36 prompts
+  generated 24/36 prompts
+  generated 28/36 prompts
+  generated 32/36 prompts
+  generated 36/36 prompts
+saved 164/164 test sets
+wrote 164 test sets to ../results/dscoder1b_he/selftests_spec.jsonl in 421s (0 produced no parsable asserts)
+[03:02:03] START humaneval run spec tests
+[03:02:03] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --tests ../results/dscoder1b_he/selftests_spec.jsonl --out ../results/dscoder1b_he/selftest_results_spec.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 820/820 (100.0%)
+assert validity (passes on reference solution): 2055/2775 (74.1%)
+buggy solutions whose tests are all green (MISSED BUGS): 32/346 (9.2%)
+buggy solutions caught by at least one valid assert: 193/346 (55.8%)
+correct solutions with a failing test (false alarms): 276/474 (58.2%)
+[03:02:14] START humaneval test-passing ids
+[03:02:14] RUN: python -c 
+import json
+rows=[json.loads(l) for l in open('../results/dscoder1b_he/selftest_results.jsonl')]
+g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
+open('../results/dscoder1b_he/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')
+72 test-passing solutions
+[03:02:14] START humaneval spec_first tests (test-passing only)
+[03:02:14] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --mode spec_first --only-ids ../results/dscoder1b_he/green_ids.jsonl --batch-size 4 --out ../results/dscoder1b_he/selftests_spec_first.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 2579.29it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/72 test sets
+  generated 4/8 prompts
+  generated 8/8 prompts
+saved 72/72 test sets
+wrote 72 test sets to ../results/dscoder1b_he/selftests_spec_first.jsonl in 204s (0 produced no parsable asserts)
+[03:05:39] START humaneval run spec_first tests
+[03:05:39] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --tests ../results/dscoder1b_he/selftests_spec_first.jsonl --out ../results/dscoder1b_he/selftest_results_spec_first.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 72/72 (100.0%)
+assert validity (passes on reference solution): 246/328 (75.0%)
+buggy solutions whose tests are all green (MISSED BUGS): 9/21 (42.9%)
+buggy solutions caught by at least one valid assert: 1/21 (4.8%)
+correct solutions with a failing test (false alarms): 28/51 (54.9%)
+[03:05:42] START humaneval hidden states
+[03:05:42] RUN: bash -c python extract.py --model 'deepseek-ai/deepseek-coder-1.3b-instruct' --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --framings gen,judge --batch-size 4 --out-dir ../results/dscoder1b_he/hidden && touch ../results/dscoder1b_he/hidden/DONE
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 4115.27it/s]
+shard 1/13 saved (2s/shard, ~0 min left)
+shard 2/13 saved (2s/shard, ~0 min left)
+shard 3/13 saved (2s/shard, ~0 min left)
+shard 4/13 saved (2s/shard, ~0 min left)
+shard 5/13 saved (2s/shard, ~0 min left)
+shard 6/13 saved (2s/shard, ~0 min left)
+shard 7/13 saved (2s/shard, ~0 min left)
+shard 8/13 saved (2s/shard, ~0 min left)
+shard 9/13 saved (2s/shard, ~0 min left)
+shard 10/13 saved (2s/shard, ~0 min left)
+shard 11/13 saved (2s/shard, ~0 min left)
+shard 12/13 saved (2s/shard, ~0 min left)
+shard 13/13 saved (2s/shard, ~0 min left)
+done: 13 shards in ../results/dscoder1b_he/hidden
+[03:06:12] START humaneval verbal yes/no
+[03:06:12] RUN: bash -c python extract.py --model 'deepseek-ai/deepseek-coder-1.3b-instruct' --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --framings judge,judgebug --yesno-only --batch-size 4 --out-dir ../results/dscoder1b_he/hidden_yesno && touch ../results/dscoder1b_he/hidden_yesno/DONE
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 2834.61it/s]
+yes tokens [5652, 8714], no tokens [2459, 3221, 8322]; framings ['judge', 'judgebug']
+yes/no shard 1/13 saved
+yes/no shard 2/13 saved
+yes/no shard 3/13 saved
+yes/no shard 4/13 saved
+yes/no shard 5/13 saved
+yes/no shard 6/13 saved
+yes/no shard 7/13 saved
+yes/no shard 8/13 saved
+yes/no shard 9/13 saved
+yes/no shard 10/13 saved
+yes/no shard 11/13 saved
+yes/no shard 12/13 saved
+yes/no shard 13/13 saved
+done: 13 yes/no shards in ../results/dscoder1b_he/hidden_yesno
+[03:06:38] START humaneval sibling disagreement
+[03:06:38] RUN: python disagree.py --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --tests ../results/dscoder1b_he/selftests_spec.jsonl --out ../results/dscoder1b_he/disagree.jsonl
+scored 820/820 solutions (164 tasks with inputs)
+sanity: AUROC of disagreement for buggy vs correct (all solutions) = 0.839
+[03:06:49] START mbpp solutions
+[03:06:49] RUN: python generate.py solutions --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset mbpp --n 5 --batch-size 4 --out ../results/dscoder1b_mbpp/solutions.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 3628.06it/s]
+[W1014 03:07:02.634553937 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 33554432 bytes (free: 76808192, total: 10733092864).
+[W1014 03:07:04.621974440 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 39845888 bytes (free: 72613888, total: 10733092864).
+[W1014 03:07:05.008175893 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 44040192 bytes (free: 66322432, total: 10733092864).
+[W1014 03:07:06.349091670 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 48234496 bytes (free: 97779712, total: 10733092864).
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+[W1014 03:09:07.860463155 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 52428800 bytes (free: 108265472, total: 10733092864).
+[W1014 03:09:08.597509509 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 54525952 bytes (free: 81002496, total: 10733092864).
+[W1014 03:09:09.937675111 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 58720256 bytes (free: 76808192, total: 10733092864).
+  generated 64/64 prompts
+saved 64/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+[W1014 03:13:16.635424904 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 60817408 bytes (free: 116654080, total: 10733092864).
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/378 tasks
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/378 tasks
+  generated 4/58 prompts
+  generated 8/58 prompts
+  generated 12/58 prompts
+  generated 16/58 prompts
+  generated 20/58 prompts
+  generated 24/58 prompts
+  generated 28/58 prompts
+  generated 32/58 prompts
+  generated 36/58 prompts
+  generated 40/58 prompts
+  generated 44/58 prompts
+  generated 48/58 prompts
+  generated 52/58 prompts
+  generated 56/58 prompts
+  generated 58/58 prompts
+saved 378/378 tasks
+wrote 1890 solutions to ../results/dscoder1b_mbpp/solutions.jsonl in 829s
+[03:20:41] START mbpp labels
+[03:20:41] RUN: python evaluate.py label --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions.jsonl --out ../results/dscoder1b_mbpp/solutions_labeled.jsonl
+Load from ground-truth from /home/exouser/.cache/evalplus/ee43ecabebf20deef4bb776a405ac5b1.pkl
+labeled 1890 solutions: 928 correct, 962 buggy (174 buggy ones pass the original tests but fail EvalPlus extra tests)
+[03:23:46] START mbpp own tests (code mode)
+[03:23:46] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 4 --out ../results/dscoder1b_mbpp/selftests.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 2775.16it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+[14:54:13] ===== dscoder1b: deepseek-ai/deepseek-coder-1.3b-instruct (generation batch 4, extraction batch 4) =====
+[14:54:13] skip  humaneval solutions (../results/dscoder1b_he/solutions.jsonl exists)
+[14:54:13] skip  humaneval labels (../results/dscoder1b_he/solutions_labeled.jsonl exists)
+[14:54:13] skip  humaneval own tests (code mode) (../results/dscoder1b_he/selftests.jsonl exists)
+[14:54:13] skip  humaneval run own tests (../results/dscoder1b_he/selftest_results.jsonl exists)
+[14:54:13] skip  humaneval spec tests (../results/dscoder1b_he/selftests_spec.jsonl exists)
+[14:54:13] skip  humaneval run spec tests (../results/dscoder1b_he/selftest_results_spec.jsonl exists)
+[14:54:13] skip  humaneval test-passing ids (../results/dscoder1b_he/green_ids.jsonl exists)
+[14:54:13] skip  humaneval spec_first tests (test-passing only) (../results/dscoder1b_he/selftests_spec_first.jsonl exists)
+[14:54:13] skip  humaneval run spec_first tests (../results/dscoder1b_he/selftest_results_spec_first.jsonl exists)
+[14:54:13] skip  humaneval hidden states (../results/dscoder1b_he/hidden/DONE exists)
+[14:54:13] skip  humaneval verbal yes/no (../results/dscoder1b_he/hidden_yesno/DONE exists)
+[14:54:13] skip  humaneval sibling disagreement (../results/dscoder1b_he/disagree.jsonl exists)
+[14:54:13] skip  mbpp solutions (../results/dscoder1b_mbpp/solutions.jsonl exists)
+[14:54:13] skip  mbpp labels (../results/dscoder1b_mbpp/solutions_labeled.jsonl exists)
+[14:54:13] START mbpp own tests (code mode)
+[14:54:13] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 4 --out ../results/dscoder1b_mbpp/selftests.jsonl
+resuming: 128 test sets already saved in ../results/dscoder1b_mbpp/selftests.jsonl.partial, 1092 to go
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights:  16%|█▌        | 34/219 [00:00<00:00, 299.67it/s]Loading weights:  29%|██▉       | 64/219 [00:00<00:00, 285.41it/s]Loading weights:  42%|████▏     | 93/219 [00:00<00:00, 286.18it/s]Loading weights:  59%|█████▉    | 129/219 [00:00<00:00, 297.12it/s]Loading weights:  74%|███████▎  | 161/219 [00:00<00:00, 296.48it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 360.51it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 384/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 448/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 512/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 576/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 640/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 704/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 768/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 832/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 896/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 960/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 1024/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 1088/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 1152/1220 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 1216/1220 test sets
+  generated 4/4 prompts
+saved 1220/1220 test sets
+wrote 1220 test sets to ../results/dscoder1b_mbpp/selftests.jsonl in 2577s (5 produced no parsable asserts)
+[15:37:17] START mbpp run own tests
+[15:37:17] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --tests ../results/dscoder1b_mbpp/selftests.jsonl --out ../results/dscoder1b_mbpp/selftest_results.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 1215/1220 (99.6%)
+assert validity (passes on reference solution): 1667/3595 (46.4%)
+buggy solutions whose tests are all green (MISSED BUGS): 61/958 (6.4%)
+buggy solutions caught by at least one valid assert: 382/958 (39.9%)
+correct solutions with a failing test (false alarms): 184/257 (71.6%)
+[15:37:46] START mbpp spec tests
+[15:37:46] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --mode spec --batch-size 4 --out ../results/dscoder1b_mbpp/selftests_spec.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 4663.93it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/378 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/378 test sets
+  generated 4/58 prompts
+  generated 8/58 prompts
+  generated 12/58 prompts
+  generated 16/58 prompts
+  generated 20/58 prompts
+  generated 24/58 prompts
+  generated 28/58 prompts
+  generated 32/58 prompts
+  generated 36/58 prompts
+  generated 40/58 prompts
+  generated 44/58 prompts
+  generated 48/58 prompts
+  generated 52/58 prompts
+  generated 56/58 prompts
+  generated 58/58 prompts
+saved 378/378 test sets
+wrote 378 test sets to ../results/dscoder1b_mbpp/selftests_spec.jsonl in 995s (14 produced no parsable asserts)
+[15:54:23] START mbpp run spec tests
+[15:54:23] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --tests ../results/dscoder1b_mbpp/selftests_spec.jsonl --out ../results/dscoder1b_mbpp/selftest_results_spec.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 1820/1890 (96.3%)
+assert validity (passes on reference solution): 4755/8340 (57.0%)
+buggy solutions whose tests are all green (MISSED BUGS): 75/906 (8.3%)
+buggy solutions caught by at least one valid assert: 591/906 (65.2%)
+correct solutions with a failing test (false alarms): 606/914 (66.3%)
+[15:54:59] START mbpp test-passing ids
+[15:54:59] RUN: python -c 
+import json
+rows=[json.loads(l) for l in open('../results/dscoder1b_mbpp/selftest_results.jsonl')]
+g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
+open('../results/dscoder1b_mbpp/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')
+134 test-passing solutions
+[15:54:59] START mbpp spec_first tests (test-passing only)
+[15:54:59] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --mode spec_first --only-ids ../results/dscoder1b_mbpp/green_ids.jsonl --batch-size 4 --out ../results/dscoder1b_mbpp/selftests_spec_first.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 3073.78it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/134 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/134 test sets
+  generated 4/6 prompts
+  generated 6/6 prompts
+saved 134/134 test sets
+wrote 134 test sets to ../results/dscoder1b_mbpp/selftests_spec_first.jsonl in 415s (10 produced no parsable asserts)
+[16:01:57] START mbpp run spec_first tests
+[16:01:57] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --tests ../results/dscoder1b_mbpp/selftests_spec_first.jsonl --out ../results/dscoder1b_mbpp/selftest_results_spec_first.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 124/134 (92.5%)
+assert validity (passes on reference solution): 414/539 (76.8%)
+buggy solutions whose tests are all green (MISSED BUGS): 30/59 (50.8%)
+buggy solutions caught by at least one valid assert: 14/59 (23.7%)
+correct solutions with a failing test (false alarms): 27/65 (41.5%)
+[16:02:00] START mbpp hidden states
+[16:02:00] RUN: bash -c python extract.py --model 'deepseek-ai/deepseek-coder-1.3b-instruct' --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --framings gen,judge --batch-size 4 --out-dir ../results/dscoder1b_mbpp/hidden && touch ../results/dscoder1b_mbpp/hidden/DONE
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 3274.27it/s]
+shard 1/30 saved (2s/shard, ~1 min left)
+shard 2/30 saved (2s/shard, ~1 min left)
+shard 3/30 saved (1s/shard, ~1 min left)
+shard 4/30 saved (1s/shard, ~1 min left)
+shard 5/30 saved (1s/shard, ~1 min left)
+shard 6/30 saved (1s/shard, ~1 min left)
+shard 7/30 saved (1s/shard, ~1 min left)
+shard 8/30 saved (1s/shard, ~1 min left)
+shard 9/30 saved (1s/shard, ~0 min left)
+shard 10/30 saved (1s/shard, ~0 min left)
+shard 11/30 saved (1s/shard, ~0 min left)
+shard 12/30 saved (1s/shard, ~0 min left)
+shard 13/30 saved (1s/shard, ~0 min left)
+shard 14/30 saved (1s/shard, ~0 min left)
+shard 15/30 saved (1s/shard, ~0 min left)
+shard 16/30 saved (1s/shard, ~0 min left)
+shard 17/30 saved (1s/shard, ~0 min left)
+shard 18/30 saved (1s/shard, ~0 min left)
+shard 19/30 saved (1s/shard, ~0 min left)
+shard 20/30 saved (1s/shard, ~0 min left)
+shard 21/30 saved (1s/shard, ~0 min left)
+shard 22/30 saved (1s/shard, ~0 min left)
+shard 23/30 saved (1s/shard, ~0 min left)
+shard 24/30 saved (1s/shard, ~0 min left)
+shard 25/30 saved (1s/shard, ~0 min left)
+shard 26/30 saved (1s/shard, ~0 min left)
+shard 27/30 saved (1s/shard, ~0 min left)
+shard 28/30 saved (1s/shard, ~0 min left)
+shard 29/30 saved (1s/shard, ~0 min left)
+shard 30/30 saved (1s/shard, ~0 min left)
+done: 30 shards in ../results/dscoder1b_mbpp/hidden
+[16:02:48] START mbpp verbal yes/no
+[16:02:48] RUN: bash -c python extract.py --model 'deepseek-ai/deepseek-coder-1.3b-instruct' --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --framings judge,judgebug --yesno-only --batch-size 4 --out-dir ../results/dscoder1b_mbpp/hidden_yesno && touch ../results/dscoder1b_mbpp/hidden_yesno/DONE
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 3023.83it/s]
+yes tokens [5652, 8714], no tokens [2459, 3221, 8322]; framings ['judge', 'judgebug']
+yes/no shard 1/30 saved
+yes/no shard 2/30 saved
+yes/no shard 3/30 saved
+yes/no shard 4/30 saved
+yes/no shard 5/30 saved
+yes/no shard 6/30 saved
+yes/no shard 7/30 saved
+yes/no shard 8/30 saved
+yes/no shard 9/30 saved
+yes/no shard 10/30 saved
+yes/no shard 11/30 saved
+yes/no shard 12/30 saved
+yes/no shard 13/30 saved
+yes/no shard 14/30 saved
+yes/no shard 15/30 saved
+yes/no shard 16/30 saved
+yes/no shard 17/30 saved
+yes/no shard 18/30 saved
+yes/no shard 19/30 saved
+yes/no shard 20/30 saved
+yes/no shard 21/30 saved
+yes/no shard 22/30 saved
+yes/no shard 23/30 saved
+yes/no shard 24/30 saved
+yes/no shard 25/30 saved
+yes/no shard 26/30 saved
+yes/no shard 27/30 saved
+yes/no shard 28/30 saved
+yes/no shard 29/30 saved
+yes/no shard 30/30 saved
+done: 30 yes/no shards in ../results/dscoder1b_mbpp/hidden_yesno
+[16:03:26] START mbpp sibling disagreement
+[16:03:26] RUN: python disagree.py --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --tests ../results/dscoder1b_mbpp/selftests_spec.jsonl --out ../results/dscoder1b_mbpp/disagree.jsonl
+scored 1820/1890 solutions (364 tasks with inputs)
+sanity: AUROC of disagreement for buggy vs correct (all solutions) = 0.847
+[16:03:45] START analysis -> ../results/dscoder1b_analysis
+[16:03:45] RUN: python stats.py modes --code ../results/dscoder1b_he/selftest_results.jsonl --spec ../results/dscoder1b_he/selftest_results_spec.jsonl
+buggy solutions: 341 in 109 tasks
+  caught by a valid test: code 0.296 | spec 0.560
+  bug-confirming share of wrong asserts: code 0.029 | spec 0.120
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.264  95% CI [+0.169, +0.360]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        -0.091  95% CI [-0.184, -0.015]  bootstrap p = 0.0162
+task-level sign-flip permutation test, caught: p = 0.0001
+[16:03:46] RUN: python stats.py modes --code ../results/dscoder1b_mbpp/selftest_results.jsonl --spec ../results/dscoder1b_mbpp/selftest_results_spec.jsonl
+buggy solutions: 902 in 268 tasks
+  caught by a valid test: code 0.401 | spec 0.652
+  bug-confirming share of wrong asserts: code 0.139 | spec 0.125
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.251  95% CI [+0.196, +0.304]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        +0.014  95% CI [-0.021, +0.047]  bootstrap p = 0.4166
+task-level sign-flip permutation test, caught: p = 0.0001
+[16:03:46] RUN: python probe.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --out ../results/dscoder1b_analysis/probe.json
+solutions: 2710 (1308 buggy) in 542 tasks; with own tests: 1682
+GAP set: 82 missed bugs vs 124 test-passing correct
+probe positions: ['code_end', 'resp_end', 'judge_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.731 [0.698,0.765]           0.632 [0.556,0.712]           0.754 [0.705,0.804]
+probe: logistic                                            0.790 [0.762,0.817]           0.713 [0.640,0.781]           0.799 [0.755,0.840]
+baseline: prompt-only probe                                0.711 [0.673,0.746]           0.714 [0.625,0.794]           0.750 [0.701,0.801]
+baseline: low mean log-prob                                0.597 [0.571,0.623]           0.649 [0.569,0.729]           0.608 [0.550,0.662]
+baseline: low min log-prob                                 0.605 [0.581,0.630]           0.634 [0.554,0.713]           0.638 [0.584,0.690]
+baseline: code length                                      0.578 [0.544,0.611]           0.582 [0.491,0.666]           0.629 [0.577,0.686]
+baseline: verbal P(incorrect)                              0.571 [0.538,0.605]           0.569 [0.481,0.661]           0.596 [0.540,0.650]
+baseline: verbal P(bug)                                    0.545 [0.514,0.577]           0.510 [0.425,0.595]           0.565 [0.509,0.620]
+probe: mean-diff [task-centered]                           0.558 [0.534,0.582]           0.477 [0.390,0.567]           0.596 [0.549,0.644]
+probe: logistic [task-centered]                            0.570 [0.546,0.594]           0.472 [0.395,0.555]           0.573 [0.526,0.621]
+baseline: prompt-only probe [task-centered]                0.502 [0.484,0.518]           0.494 [0.415,0.574]           0.519 [0.469,0.571]
+baseline: low mean log-prob [task-centered]                0.522 [0.506,0.538]           0.606 [0.519,0.689]           0.544 [0.489,0.598]
+baseline: verbal P(incorrect) [task-centered]              0.534 [0.512,0.556]           0.493 [0.410,0.578]           0.552 [0.501,0.600]
+baseline: verbal P(bug) [task-centered]                    0.481 [0.463,0.498]           0.475 [0.392,0.558]           0.470 [0.424,0.515]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.522 of 23 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.477 [0.390, 0.567], one-sided p(AUROC <= 0.5) = 0.6830
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.472 [0.395, 0.555], one-sided p(AUROC <= 0.5) = 0.7435
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.220 [+0.176, +0.262]
+  GAP  probe: logistic                    vs verbal: +0.144 [+0.024, +0.266]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.036 [+0.013, +0.059]
+  GAP  probe: logistic [task-centered]    vs verbal: -0.021 [-0.108, +0.067]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.024 [+0.001, +0.047]
+  GAP  probe: mean-diff [task-centered]   vs verbal: -0.017 [-0.108, +0.076]
+
+selected (position, layer) per fold:
+  probe: judge_end@21 (val 0.763), judge_end@13 (val 0.744), judge_end@23 (val 0.763), judge_end@18 (val 0.718), judge_end@22 (val 0.748)
+  prompt-only: prompt_end@16 (val 0.746), prompt_end@13 (val 0.72), prompt_end@11 (val 0.683), prompt_end@13 (val 0.677), prompt_end@13 (val 0.735)
+
+saved ../results/dscoder1b_analysis/probe.json
+[16:07:00] RUN: python transfer.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --train humaneval --test mbpp --out ../results/dscoder1b_analysis/transfer_he_to_mbpp.json
+train: humaneval (820 solutions, 346 buggy) -> test: mbpp (1890 solutions, 962 buggy; gap set 61 missed bugs vs 73 correct)
+selected on humaneval only: code_end @ layer 23 (validation AUROC 0.642)
+
+AUROC on mbpp (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.703 [0.669,0.733]                     0.702 [0.587,0.803]
+probe: mean-diff                                       0.708 [0.674,0.740]                     0.637 [0.544,0.732]
+baseline: prompt-only probe                            0.716 [0.676,0.756]                     0.674 [0.546,0.789]
+baseline: verbal P(incorrect)                          0.632 [0.594,0.670]                     0.617 [0.509,0.730]
+baseline: low mean log-prob                            0.561 [0.529,0.591]                     0.562 [0.464,0.661]
+probe: logistic [task-centered]                        0.557 [0.536,0.579]                     0.577 [0.474,0.671]
+probe: mean-diff [task-centered]                       0.536 [0.515,0.558]                     0.506 [0.406,0.599]
+baseline: prompt-only probe [task-centered]            0.493 [0.471,0.515]                     0.546 [0.443,0.643]
+baseline: verbal P(incorrect) [task-centered]          0.534 [0.506,0.562]                     0.540 [0.439,0.640]
+baseline: low mean log-prob [task-centered]            0.514 [0.495,0.532]                     0.535 [0.432,0.633]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.071 [+0.024, +0.117]
+  GAP  [raw]             +0.085 [-0.069, +0.224]
+  ALL  [task-centered]   +0.023 [-0.007, +0.054]
+  GAP  [task-centered]   +0.038 [-0.103, +0.173]
+
+saved ../results/dscoder1b_analysis/transfer_he_to_mbpp.json (usable as --probe for rq3.py on mbpp)
+[16:08:20] RUN: python transfer.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --train mbpp --test humaneval --out ../results/dscoder1b_analysis/transfer_mbpp_to_he.json
+train: mbpp (1890 solutions, 962 buggy) -> test: humaneval (820 solutions, 346 buggy; gap set 21 missed bugs vs 51 correct)
+selected on mbpp only: judge_end @ layer 19 (validation AUROC 0.737)
+
+AUROC on humaneval (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.704 [0.643,0.760]                     0.738 [0.580,0.886]
+probe: mean-diff                                       0.646 [0.579,0.706]                     0.655 [0.493,0.813]
+baseline: prompt-only probe                            0.623 [0.552,0.692]                     0.695 [0.547,0.829]
+baseline: verbal P(incorrect)                          0.428 [0.368,0.490]                     0.505 [0.327,0.663]
+baseline: low mean log-prob                            0.645 [0.605,0.682]                     0.754 [0.630,0.871]
+probe: logistic [task-centered]                        0.543 [0.509,0.578]                     0.476 [0.315,0.649]
+probe: mean-diff [task-centered]                       0.512 [0.476,0.546]                     0.329 [0.182,0.497]
+baseline: prompt-only probe [task-centered]            0.514 [0.478,0.550]                     0.529 [0.408,0.653]
+baseline: verbal P(incorrect) [task-centered]          0.535 [0.497,0.575]                     0.380 [0.240,0.525]
+baseline: low mean log-prob [task-centered]            0.541 [0.511,0.572]                     0.742 [0.616,0.868]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.276 [+0.178, +0.366]
+  GAP  [raw]             +0.232 [-0.020, +0.492]
+  ALL  [task-centered]   +0.008 [-0.031, +0.047]
+  GAP  [task-centered]   +0.096 [-0.099, +0.291]
+
+saved ../results/dscoder1b_analysis/transfer_mbpp_to_he.json (usable as --probe for rq3.py on humaneval)
+[16:09:35] RUN: python rq3.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe.json --budgets 0.1,0.2,0.3,1.0 --escalate spec=selftest_results_spec.jsonl both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl
+combined policy uses: ['probe', 'verbal-prob', 'confidence', 'disagreement']
+green solutions (own tests all pass): 206 = 82 missed bugs + 124 correct
+note: 'disagreement' missing for 5 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+Traceback (most recent call last):
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/rq3.py", line 215, in <module>
+    main()
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/rq3.py", line 165, in main
+    base_auc = {p: auc(np.arange(len(y)), scores[p]) for p in policies}
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/rq3.py", line 165, in <dictcomp>
+    base_auc = {p: auc(np.arange(len(y)), scores[p]) for p in policies}
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/rq3.py", line 157, in auc
+    return roc_auc_score(yy, s[idx]) if 0 < yy.sum() < len(yy) else np.nan
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/sklearn/metrics/_ranking.py", line 665, in roc_auc_score
+    y_score = check_array(y_score, ensure_2d=False)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/sklearn/utils/validation.py", line 1105, in check_array
+    _assert_all_finite(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/sklearn/utils/validation.py", line 120, in _assert_all_finite
+    _assert_all_finite_element_wise(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/sklearn/utils/validation.py", line 169, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input contains infinity or a value too large for dtype('float64').
+[16:09:37] FAILED (exit 1): python rq3.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe.json --budgets 0.1,0.2,0.3,1.0 --escalate spec=selftest_results_spec.jsonl both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl
+[16:09:37] fix the problem, then re-run the same command; finished steps are skipped
+[17:25:06] ===== dscoder1b: deepseek-ai/deepseek-coder-1.3b-instruct (generation batch 4, extraction batch 4) =====
+[17:25:06] skip  humaneval solutions (../results/dscoder1b_he/solutions.jsonl exists)
+[17:25:06] skip  humaneval labels (../results/dscoder1b_he/solutions_labeled.jsonl exists)
+[17:25:06] skip  humaneval own tests (code mode) (../results/dscoder1b_he/selftests.jsonl exists)
+[17:25:06] skip  humaneval run own tests (../results/dscoder1b_he/selftest_results.jsonl exists)
+[17:25:06] skip  humaneval spec tests (../results/dscoder1b_he/selftests_spec.jsonl exists)
+[17:25:06] skip  humaneval run spec tests (../results/dscoder1b_he/selftest_results_spec.jsonl exists)
+[17:25:06] skip  humaneval test-passing ids (../results/dscoder1b_he/green_ids.jsonl exists)
+[17:25:06] skip  humaneval spec_first tests (test-passing only) (../results/dscoder1b_he/selftests_spec_first.jsonl exists)
+[17:25:06] skip  humaneval run spec_first tests (../results/dscoder1b_he/selftest_results_spec_first.jsonl exists)
+[17:25:06] skip  humaneval hidden states (../results/dscoder1b_he/hidden/DONE exists)
+[17:25:06] skip  humaneval verbal yes/no (../results/dscoder1b_he/hidden_yesno/DONE exists)
+[17:25:06] skip  humaneval sibling disagreement (../results/dscoder1b_he/disagree.jsonl exists)
+[17:25:06] skip  mbpp solutions (../results/dscoder1b_mbpp/solutions.jsonl exists)
+[17:25:06] skip  mbpp labels (../results/dscoder1b_mbpp/solutions_labeled.jsonl exists)
+[17:25:06] skip  mbpp own tests (code mode) (../results/dscoder1b_mbpp/selftests.jsonl exists)
+[17:25:06] skip  mbpp run own tests (../results/dscoder1b_mbpp/selftest_results.jsonl exists)
+[17:25:06] skip  mbpp spec tests (../results/dscoder1b_mbpp/selftests_spec.jsonl exists)
+[17:25:06] skip  mbpp run spec tests (../results/dscoder1b_mbpp/selftest_results_spec.jsonl exists)
+[17:25:06] skip  mbpp test-passing ids (../results/dscoder1b_mbpp/green_ids.jsonl exists)
+[17:25:06] skip  mbpp spec_first tests (test-passing only) (../results/dscoder1b_mbpp/selftests_spec_first.jsonl exists)
+[17:25:06] skip  mbpp run spec_first tests (../results/dscoder1b_mbpp/selftest_results_spec_first.jsonl exists)
+[17:25:06] skip  mbpp hidden states (../results/dscoder1b_mbpp/hidden/DONE exists)
+[17:25:06] skip  mbpp verbal yes/no (../results/dscoder1b_mbpp/hidden_yesno/DONE exists)
+[17:25:06] skip  mbpp sibling disagreement (../results/dscoder1b_mbpp/disagree.jsonl exists)
+[17:25:06] START analysis -> ../results/dscoder1b_analysis
+[17:25:06] RUN: python stats.py modes --code ../results/dscoder1b_he/selftest_results.jsonl --spec ../results/dscoder1b_he/selftest_results_spec.jsonl > ../results/dscoder1b_analysis/stats_he.txt
+buggy solutions: 341 in 109 tasks
+  caught by a valid test: code 0.296 | spec 0.560
+  bug-confirming share of wrong asserts: code 0.029 | spec 0.120
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.264  95% CI [+0.169, +0.360]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        -0.091  95% CI [-0.184, -0.015]  bootstrap p = 0.0162
+task-level sign-flip permutation test, caught: p = 0.0001
+[17:25:06] RUN: python stats.py modes --code ../results/dscoder1b_mbpp/selftest_results.jsonl --spec ../results/dscoder1b_mbpp/selftest_results_spec.jsonl > ../results/dscoder1b_analysis/stats_mbpp.txt
+buggy solutions: 902 in 268 tasks
+  caught by a valid test: code 0.401 | spec 0.652
+  bug-confirming share of wrong asserts: code 0.139 | spec 0.125
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.251  95% CI [+0.196, +0.304]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        +0.014  95% CI [-0.021, +0.047]  bootstrap p = 0.4166
+task-level sign-flip permutation test, caught: p = 0.0001
+[17:25:07] RUN: python probe.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --out ../results/dscoder1b_analysis/probe.json > ../results/dscoder1b_analysis/probe.txt
+solutions: 2710 (1308 buggy) in 542 tasks; with own tests: 1682
+GAP set: 82 missed bugs vs 124 test-passing correct
+probe positions: ['code_end', 'resp_end', 'judge_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.731 [0.698,0.765]           0.632 [0.556,0.712]           0.754 [0.705,0.804]
+probe: logistic                                            0.790 [0.762,0.817]           0.713 [0.640,0.781]           0.799 [0.755,0.840]
+baseline: prompt-only probe                                0.711 [0.673,0.746]           0.714 [0.625,0.794]           0.750 [0.701,0.801]
+baseline: low mean log-prob                                0.597 [0.571,0.623]           0.649 [0.569,0.729]           0.608 [0.550,0.662]
+baseline: low min log-prob                                 0.605 [0.581,0.630]           0.634 [0.554,0.713]           0.638 [0.584,0.690]
+baseline: code length                                      0.578 [0.544,0.611]           0.582 [0.491,0.666]           0.629 [0.577,0.686]
+baseline: verbal P(incorrect)                              0.571 [0.538,0.605]           0.569 [0.481,0.661]           0.596 [0.540,0.650]
+baseline: verbal P(bug)                                    0.545 [0.514,0.577]           0.510 [0.425,0.595]           0.565 [0.509,0.620]
+probe: mean-diff [task-centered]                           0.558 [0.534,0.582]           0.477 [0.390,0.567]           0.596 [0.549,0.644]
+probe: logistic [task-centered]                            0.570 [0.546,0.594]           0.472 [0.395,0.555]           0.573 [0.526,0.621]
+baseline: prompt-only probe [task-centered]                0.502 [0.484,0.518]           0.494 [0.415,0.574]           0.519 [0.469,0.571]
+baseline: low mean log-prob [task-centered]                0.522 [0.506,0.538]           0.606 [0.519,0.689]           0.544 [0.489,0.598]
+baseline: verbal P(incorrect) [task-centered]              0.534 [0.512,0.556]           0.493 [0.410,0.578]           0.552 [0.501,0.600]
+baseline: verbal P(bug) [task-centered]                    0.481 [0.463,0.498]           0.475 [0.392,0.558]           0.470 [0.424,0.515]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.522 of 23 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.477 [0.390, 0.567], one-sided p(AUROC <= 0.5) = 0.6830
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.472 [0.395, 0.555], one-sided p(AUROC <= 0.5) = 0.7435
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.220 [+0.176, +0.262]
+  GAP  probe: logistic                    vs verbal: +0.144 [+0.024, +0.266]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.036 [+0.013, +0.059]
+  GAP  probe: logistic [task-centered]    vs verbal: -0.021 [-0.108, +0.067]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.024 [+0.001, +0.047]
+  GAP  probe: mean-diff [task-centered]   vs verbal: -0.017 [-0.108, +0.076]
+
+selected (position, layer) per fold:
+  probe: judge_end@21 (val 0.763), judge_end@13 (val 0.744), judge_end@23 (val 0.763), judge_end@18 (val 0.718), judge_end@22 (val 0.748)
+  prompt-only: prompt_end@16 (val 0.746), prompt_end@13 (val 0.72), prompt_end@11 (val 0.683), prompt_end@13 (val 0.677), prompt_end@13 (val 0.735)
+
+saved ../results/dscoder1b_analysis/probe.json
+[17:28:19] RUN: python transfer.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --train humaneval --test mbpp --out ../results/dscoder1b_analysis/transfer_he_to_mbpp.json > ../results/dscoder1b_analysis/transfer_he_to_mbpp.txt
+train: humaneval (820 solutions, 346 buggy) -> test: mbpp (1890 solutions, 962 buggy; gap set 61 missed bugs vs 73 correct)
+selected on humaneval only: code_end @ layer 23 (validation AUROC 0.642)
+
+AUROC on mbpp (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.703 [0.669,0.733]                     0.702 [0.587,0.803]
+probe: mean-diff                                       0.708 [0.674,0.740]                     0.637 [0.544,0.732]
+baseline: prompt-only probe                            0.716 [0.676,0.756]                     0.674 [0.546,0.789]
+baseline: verbal P(incorrect)                          0.632 [0.594,0.670]                     0.617 [0.509,0.730]
+baseline: low mean log-prob                            0.561 [0.529,0.591]                     0.562 [0.464,0.661]
+probe: logistic [task-centered]                        0.557 [0.536,0.579]                     0.577 [0.474,0.671]
+probe: mean-diff [task-centered]                       0.536 [0.515,0.558]                     0.506 [0.406,0.599]
+baseline: prompt-only probe [task-centered]            0.493 [0.471,0.515]                     0.546 [0.443,0.643]
+baseline: verbal P(incorrect) [task-centered]          0.534 [0.506,0.562]                     0.540 [0.439,0.640]
+baseline: low mean log-prob [task-centered]            0.514 [0.495,0.532]                     0.535 [0.432,0.633]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.071 [+0.024, +0.117]
+  GAP  [raw]             +0.085 [-0.069, +0.224]
+  ALL  [task-centered]   +0.023 [-0.007, +0.054]
+  GAP  [task-centered]   +0.038 [-0.103, +0.173]
+
+saved ../results/dscoder1b_analysis/transfer_he_to_mbpp.json (usable as --probe for rq3.py on mbpp)
+[17:29:43] RUN: python transfer.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --train mbpp --test humaneval --out ../results/dscoder1b_analysis/transfer_mbpp_to_he.json > ../results/dscoder1b_analysis/transfer_mbpp_to_he.txt
+train: mbpp (1890 solutions, 962 buggy) -> test: humaneval (820 solutions, 346 buggy; gap set 21 missed bugs vs 51 correct)
+selected on mbpp only: judge_end @ layer 19 (validation AUROC 0.737)
+
+AUROC on humaneval (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.704 [0.643,0.760]                     0.738 [0.580,0.886]
+probe: mean-diff                                       0.646 [0.579,0.706]                     0.655 [0.493,0.813]
+baseline: prompt-only probe                            0.623 [0.552,0.692]                     0.695 [0.547,0.829]
+baseline: verbal P(incorrect)                          0.428 [0.368,0.490]                     0.505 [0.327,0.663]
+baseline: low mean log-prob                            0.645 [0.605,0.682]                     0.754 [0.630,0.871]
+probe: logistic [task-centered]                        0.543 [0.509,0.578]                     0.476 [0.315,0.649]
+probe: mean-diff [task-centered]                       0.512 [0.476,0.546]                     0.329 [0.182,0.497]
+baseline: prompt-only probe [task-centered]            0.514 [0.478,0.550]                     0.529 [0.408,0.653]
+baseline: verbal P(incorrect) [task-centered]          0.535 [0.497,0.575]                     0.380 [0.240,0.525]
+baseline: low mean log-prob [task-centered]            0.541 [0.511,0.572]                     0.742 [0.616,0.868]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.276 [+0.178, +0.366]
+  GAP  [raw]             +0.232 [-0.020, +0.492]
+  ALL  [task-centered]   +0.008 [-0.031, +0.047]
+  GAP  [task-centered]   +0.096 [-0.099, +0.291]
+
+saved ../results/dscoder1b_analysis/transfer_mbpp_to_he.json (usable as --probe for rq3.py on humaneval)
+[17:31:01] RUN: python rq3.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe.json --budgets 0.1,0.2,0.3,1.0 --escalate spec=selftest_results_spec.jsonl both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/dscoder1b_analysis/rq3.txt
+combined policy uses: ['probe', 'verbal-prob', 'confidence', 'disagreement']
+green solutions (own tests all pass): 206 = 82 missed bugs + 124 correct
+note: 'disagreement' missing for 5 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.713 [0.645, 0.783]
+  probe-centered  0.472 [0.386, 0.552]   vs probe -0.241 [-0.346, -0.135]
+  confidence      0.649 [0.570, 0.732]   vs probe -0.064 [-0.166, +0.033]
+  verbal-prob     0.568 [0.486, 0.654]   vs probe -0.145 [-0.254, -0.022]
+  disagreement    0.588 [0.490, 0.690]   vs probe -0.125 [-0.235, -0.006]
+  combined        0.711 [0.636, 0.780]   vs probe -0.002 [-0.067, +0.064]
+
+=== escalation 'spec': extra tests fail on 28/82 missed bugs, 36/124 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     21   0.034     0.029  0.398
+       probe             21   0.061     0.016  0.810   +0.027 [-0.018, +0.093]  
+       probe-centered    21   0.049     0.016  0.667   +0.015 [-0.025, +0.060]    -0.012 [-0.060, +0.026]
+       confidence        21   0.049     0.016  0.381   +0.015 [-0.028, +0.057]    -0.012 [-0.087, +0.038]
+       verbal-prob       21   0.085     0.024  0.429   +0.051 [-0.004, +0.124]    +0.024 [-0.027, +0.078]
+       disagreement      21   0.110     0.008  0.571   +0.076 [+0.032, +0.140]    +0.049 [-0.028, +0.127]
+       combined          21   0.146     0.008  0.667   +0.112 [+0.046, +0.160]    +0.085 [+0.012, +0.139]
+   20% random (exp.)     41   0.068     0.058  0.398
+       probe             41   0.098     0.073  0.634   +0.029 [-0.019, +0.104]  
+       probe-centered    41   0.061     0.073  0.415   -0.007 [-0.051, +0.044]    -0.037 [-0.103, +0.013]
+       confidence        41   0.098     0.032  0.439   +0.029 [-0.018, +0.101]    +0.000 [-0.082, +0.078]
+       verbal-prob       41   0.122     0.040  0.439   +0.054 [-0.009, +0.123]    +0.024 [-0.048, +0.096]
+       disagreement      41   0.183     0.024  0.561   +0.115 [+0.051, +0.194]    +0.085 [+0.000, +0.172]
+       combined          41   0.171     0.040  0.561   +0.102 [+0.034, +0.182]    +0.073 [+0.009, +0.139]
+   30% random (exp.)     62   0.102     0.087  0.398
+       probe             62   0.122     0.089  0.548   +0.020 [-0.030, +0.100]  
+       probe-centered    62   0.134     0.097  0.419   +0.032 [-0.041, +0.091]    +0.012 [-0.088, +0.074]
+       confidence        62   0.159     0.040  0.532   +0.056 [-0.001, +0.132]    +0.037 [-0.047, +0.114]
+       verbal-prob       62   0.195     0.065  0.500   +0.093 [+0.018, +0.156]    +0.073 [-0.027, +0.149]
+       disagreement      62   0.207     0.056  0.516   +0.105 [+0.032, +0.187]    +0.085 [+0.000, +0.169]
+       combined          62   0.183     0.056  0.613   +0.080 [+0.021, +0.176]    +0.061 [-0.000, +0.140]
+  100% random (exp.)    206   0.341     0.290  0.398
+  escalating everything: 54/82 bugs still shipped, 36 false alarms, 206 extra test runs
+
+=== escalation 'both': extra tests fail on 48/82 missed bugs, 67/124 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     21   0.059     0.054  0.398
+       probe             21   0.110     0.016  0.810   +0.051 [-0.012, +0.127]  
+       probe-centered    21   0.085     0.016  0.667   +0.027 [-0.028, +0.080]    -0.024 [-0.090, +0.026]
+       confidence        21   0.061     0.032  0.381   +0.002 [-0.042, +0.053]    -0.049 [-0.137, +0.023]
+       verbal-prob       21   0.098     0.065  0.429   +0.039 [-0.014, +0.118]    -0.012 [-0.073, +0.055]
+       disagreement      21   0.122     0.040  0.571   +0.063 [+0.013, +0.125]    +0.012 [-0.069, +0.098]
+       combined          21   0.171     0.024  0.667   +0.112 [+0.047, +0.160]    +0.061 [-0.025, +0.123]
+   20% random (exp.)     41   0.117     0.108  0.398
+       probe             41   0.171     0.081  0.634   +0.054 [-0.009, +0.143]  
+       probe-centered    41   0.098     0.121  0.415   -0.020 [-0.070, +0.049]    -0.073 [-0.159, -0.012]
+       confidence        41   0.159     0.081  0.439   +0.041 [-0.018, +0.120]    -0.012 [-0.106, +0.073]
+       verbal-prob       41   0.183     0.113  0.439   +0.066 [-0.005, +0.142]    +0.012 [-0.091, +0.105]
+       disagreement      41   0.232     0.081  0.561   +0.115 [+0.026, +0.183]    +0.061 [-0.057, +0.140]
+       combined          41   0.220     0.081  0.561   +0.102 [+0.035, +0.205]    +0.049 [-0.014, +0.119]
+   30% random (exp.)     62   0.176     0.162  0.398
+       probe             62   0.220     0.153  0.548   +0.044 [-0.022, +0.143]  
+       probe-centered    62   0.195     0.177  0.419   +0.020 [-0.064, +0.096]    -0.024 [-0.152, +0.051]
+       confidence        62   0.280     0.105  0.532   +0.105 [+0.028, +0.190]    +0.061 [-0.052, +0.153]
+       verbal-prob       62   0.293     0.153  0.500   +0.117 [+0.039, +0.201]    +0.073 [-0.056, +0.181]
+       disagreement      62   0.256     0.137  0.516   +0.080 [-0.012, +0.180]    +0.037 [-0.072, +0.128]
+       combined          62   0.293     0.121  0.613   +0.117 [+0.031, +0.204]    +0.073 [-0.015, +0.140]
+  100% random (exp.)    206   0.585     0.540  0.398
+  escalating everything: 34/82 bugs still shipped, 67 false alarms, 206 extra test runs
+[17:31:12] RUN: python rq3.py --runs ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/transfer_he_to_mbpp.json --budgets 0.1,0.2,0.3,1.0 --escalate both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/dscoder1b_analysis/rq3_transfer.txt
+transfer scores (probe trained on humaneval): combined policy disabled
+green solutions (own tests all pass): 134 = 61 missed bugs + 73 correct
+note: 'disagreement' missing for 5 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.702 [0.594, 0.802]
+  probe-centered  0.577 [0.481, 0.666]   vs probe -0.125 [-0.222, -0.034]
+  confidence      0.562 [0.465, 0.655]   vs probe -0.140 [-0.265, -0.002]
+  verbal-prob     0.618 [0.512, 0.730]   vs probe -0.084 [-0.237, +0.066]
+  disagreement    0.585 [0.484, 0.690]   vs probe -0.117 [-0.259, +0.026]
+
+=== escalation 'both': extra tests fail on 34/61 missed bugs, 36/73 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     13   0.056     0.049  0.455
+       probe             13   0.098     0.014  0.615   +0.043 [+0.002, +0.135]  
+       probe-centered    13   0.098     0.014  0.692   +0.043 [-0.020, +0.102]    +0.000 [-0.087, +0.035]
+       confidence        13   0.049     0.027  0.385   -0.007 [-0.052, +0.051]    -0.049 [-0.141, +0.000]
+       verbal-prob       13   0.098     0.055  0.538   +0.043 [-0.018, +0.134]    +0.000 [-0.107, +0.093]
+       disagreement      13   0.131     0.027  0.615   +0.075 [+0.021, +0.145]    +0.033 [-0.068, +0.096]
+   20% random (exp.)     27   0.111     0.099  0.455
+       probe             27   0.197     0.014  0.741   +0.085 [+0.006, +0.196]  
+       probe-centered    27   0.148     0.041  0.556   +0.036 [-0.021, +0.125]    -0.049 [-0.137, +0.028]
+       confidence        27   0.131     0.096  0.444   +0.020 [-0.052, +0.086]    -0.066 [-0.200, +0.036]
+       verbal-prob       27   0.197     0.082  0.593   +0.085 [+0.015, +0.179]    +0.000 [-0.119, +0.122]
+       disagreement      27   0.246     0.068  0.556   +0.134 [+0.046, +0.200]    +0.049 [-0.100, +0.140]
+   30% random (exp.)     40   0.167     0.148  0.455
+       probe             40   0.246     0.055  0.700   +0.079 [-0.005, +0.209]  
+       probe-centered    40   0.197     0.055  0.625   +0.030 [-0.043, +0.120]    -0.049 [-0.170, +0.018]
+       confidence        40   0.197     0.123  0.475   +0.030 [-0.049, +0.129]    -0.049 [-0.209, +0.081]
+       verbal-prob       40   0.295     0.123  0.575   +0.128 [+0.030, +0.225]    +0.049 [-0.089, +0.143]
+       disagreement      40   0.262     0.110  0.525   +0.095 [+0.009, +0.206]    +0.016 [-0.145, +0.136]
+  100% random (exp.)    134   0.557     0.493  0.455
+  escalating everything: 27/61 bugs still shipped, 36 false alarms, 134 extra test runs
+[17:31:20] summary: ../results/dscoder1b_analysis/SUMMARY.txt
+[17:31:20] ===== DONE: dscoder1b. Full log: ../results/dscoder1b_log.txt =====
+[23:11:54] ===== dscoder1b: deepseek-ai/deepseek-coder-1.3b-instruct (generation batch 4, extraction batch 4) =====
+[23:11:54] skip  humaneval solutions (../results/dscoder1b_he/solutions.jsonl exists)
+[23:11:54] skip  humaneval labels (../results/dscoder1b_he/solutions_labeled.jsonl exists)
+[23:11:54] skip  humaneval own tests (code mode) (../results/dscoder1b_he/selftests.jsonl exists)
+[23:11:54] skip  humaneval run own tests (../results/dscoder1b_he/selftest_results.jsonl exists)
+[23:11:54] skip  humaneval spec tests (../results/dscoder1b_he/selftests_spec.jsonl exists)
+[23:11:54] skip  humaneval run spec tests (../results/dscoder1b_he/selftest_results_spec.jsonl exists)
+[23:11:54] skip  humaneval test-passing ids (../results/dscoder1b_he/green_ids.jsonl exists)
+[23:11:54] skip  humaneval spec_first tests (test-passing only) (../results/dscoder1b_he/selftests_spec_first.jsonl exists)
+[23:11:54] skip  humaneval run spec_first tests (../results/dscoder1b_he/selftest_results_spec_first.jsonl exists)
+[23:11:54] skip  humaneval hidden states (../results/dscoder1b_he/hidden/DONE exists)
+[23:11:54] skip  humaneval verbal yes/no (../results/dscoder1b_he/hidden_yesno/DONE exists)
+[23:11:54] skip  humaneval sibling disagreement (../results/dscoder1b_he/disagree.jsonl exists)
+[23:11:54] START humaneval ids of correct solutions without own tests
+[23:11:54] RUN: python -c 
+import json
+done={(r['task_id'],r['sample_id']) for r in map(json.loads, open('../results/dscoder1b_he/selftests.jsonl'))}
+ids=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in map(json.loads, open('../results/dscoder1b_he/solutions_labeled.jsonl'))
+     if r['correct'] and (r['task_id'],r['sample_id']) not in done]
+open('../results/dscoder1b_he/more_correct_ids.jsonl','w').write(''.join(json.dumps(x)+'\n' for x in ids)); print(len(ids), 'correct solutions to test')
+346 correct solutions to test
+[23:11:54] START humaneval own tests, remaining correct solutions
+[23:11:54] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --mode code --only-ids ../results/dscoder1b_he/more_correct_ids.jsonl --batch-size 4 --out ../results/dscoder1b_he/selftests_morecorrect.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 51/219 [00:00<00:00, 493.97it/s]Loading weights:  46%|████▌     | 101/219 [00:00<00:00, 334.09it/s]Loading weights:  63%|██████▎   | 138/219 [00:00<00:00, 334.15it/s]Loading weights:  79%|███████▉  | 173/219 [00:00<00:00, 283.81it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 390.21it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/346 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/346 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/346 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/346 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/346 test sets
+  generated 4/26 prompts
+  generated 8/26 prompts
+  generated 12/26 prompts
+  generated 16/26 prompts
+  generated 20/26 prompts
+  generated 24/26 prompts
+  generated 26/26 prompts
+saved 346/346 test sets
+wrote 346 test sets to ../results/dscoder1b_he/selftests_morecorrect.jsonl in 782s (3 produced no parsable asserts)
+[23:24:59] START humaneval run own tests, remaining correct solutions
+[23:24:59] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/dscoder1b_he/solutions_labeled.jsonl --tests ../results/dscoder1b_he/selftests_morecorrect.jsonl --out ../results/dscoder1b_he/selftest_results_morecorrect.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 343/346 (99.1%)
+assert validity (passes on reference solution): 273/513 (53.2%)
+buggy solutions whose tests are all green (MISSED BUGS): 0/0
+buggy solutions caught by at least one valid assert: 0/0
+correct solutions with a failing test (false alarms): 213/343 (62.1%)
+[23:25:06] skip  mbpp solutions (../results/dscoder1b_mbpp/solutions.jsonl exists)
+[23:25:06] skip  mbpp labels (../results/dscoder1b_mbpp/solutions_labeled.jsonl exists)
+[23:25:06] skip  mbpp own tests (code mode) (../results/dscoder1b_mbpp/selftests.jsonl exists)
+[23:25:06] skip  mbpp run own tests (../results/dscoder1b_mbpp/selftest_results.jsonl exists)
+[23:25:06] skip  mbpp spec tests (../results/dscoder1b_mbpp/selftests_spec.jsonl exists)
+[23:25:06] skip  mbpp run spec tests (../results/dscoder1b_mbpp/selftest_results_spec.jsonl exists)
+[23:25:07] skip  mbpp test-passing ids (../results/dscoder1b_mbpp/green_ids.jsonl exists)
+[23:25:07] skip  mbpp spec_first tests (test-passing only) (../results/dscoder1b_mbpp/selftests_spec_first.jsonl exists)
+[23:25:07] skip  mbpp run spec_first tests (../results/dscoder1b_mbpp/selftest_results_spec_first.jsonl exists)
+[23:25:07] skip  mbpp hidden states (../results/dscoder1b_mbpp/hidden/DONE exists)
+[23:25:07] skip  mbpp verbal yes/no (../results/dscoder1b_mbpp/hidden_yesno/DONE exists)
+[23:25:07] skip  mbpp sibling disagreement (../results/dscoder1b_mbpp/disagree.jsonl exists)
+[23:25:07] START mbpp ids of correct solutions without own tests
+[23:25:07] RUN: python -c 
+import json
+done={(r['task_id'],r['sample_id']) for r in map(json.loads, open('../results/dscoder1b_mbpp/selftests.jsonl'))}
+ids=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in map(json.loads, open('../results/dscoder1b_mbpp/solutions_labeled.jsonl'))
+     if r['correct'] and (r['task_id'],r['sample_id']) not in done]
+open('../results/dscoder1b_mbpp/more_correct_ids.jsonl','w').write(''.join(json.dumps(x)+'\n' for x in ids)); print(len(ids), 'correct solutions to test')
+670 correct solutions to test
+[23:25:07] START mbpp own tests, remaining correct solutions
+[23:25:07] RUN: python generate.py tests --model deepseek-ai/deepseek-coder-1.3b-instruct --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --mode code --only-ids ../results/dscoder1b_mbpp/more_correct_ids.jsonl --batch-size 4 --out ../results/dscoder1b_mbpp/selftests_morecorrect.jsonl
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 4475.61it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 256/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 320/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 384/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 448/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 512/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 576/670 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 640/670 test sets
+  generated 4/30 prompts
+  generated 8/30 prompts
+  generated 12/30 prompts
+  generated 16/30 prompts
+  generated 20/30 prompts
+  generated 24/30 prompts
+  generated 28/30 prompts
+  generated 30/30 prompts
+saved 670/670 test sets
+wrote 670 test sets to ../results/dscoder1b_mbpp/selftests_morecorrect.jsonl in 1548s (1 produced no parsable asserts)
+[23:50:57] START mbpp run own tests, remaining correct solutions
+[23:50:57] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/dscoder1b_mbpp/solutions_labeled.jsonl --tests ../results/dscoder1b_mbpp/selftests_morecorrect.jsonl --out ../results/dscoder1b_mbpp/selftest_results_morecorrect.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 669/670 (99.9%)
+assert validity (passes on reference solution): 1216/1956 (62.2%)
+buggy solutions whose tests are all green (MISSED BUGS): 0/0
+buggy solutions caught by at least one valid assert: 0/0
+correct solutions with a failing test (false alarms): 441/669 (65.9%)
+[23:51:11] START analysis -> ../results/dscoder1b_analysis
+[23:51:11] RUN: python stats.py modes --code ../results/dscoder1b_he/selftest_results.jsonl --spec ../results/dscoder1b_he/selftest_results_spec.jsonl > ../results/dscoder1b_analysis/stats_he.txt
+buggy solutions: 341 in 109 tasks
+  caught by a valid test: code 0.296 | spec 0.560
+  bug-confirming share of wrong asserts: code 0.029 | spec 0.120
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.264  95% CI [+0.169, +0.360]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        -0.091  95% CI [-0.184, -0.015]  bootstrap p = 0.0162
+task-level sign-flip permutation test, caught: p = 0.0001
+[23:51:11] RUN: python stats.py modes --code ../results/dscoder1b_mbpp/selftest_results.jsonl --spec ../results/dscoder1b_mbpp/selftest_results_spec.jsonl > ../results/dscoder1b_analysis/stats_mbpp.txt
+buggy solutions: 902 in 268 tasks
+  caught by a valid test: code 0.401 | spec 0.652
+  bug-confirming share of wrong asserts: code 0.139 | spec 0.125
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.251  95% CI [+0.196, +0.304]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        +0.014  95% CI [-0.021, +0.047]  bootstrap p = 0.4166
+task-level sign-flip permutation test, caught: p = 0.0001
+[23:51:12] RUN: python probe.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --out ../results/dscoder1b_analysis/probe.json > ../results/dscoder1b_analysis/probe.txt
+solutions: 2710 (1308 buggy) in 542 tasks; with own tests: 1682
+GAP set: 82 missed bugs vs 124 test-passing correct
+probe positions: ['code_end', 'resp_end', 'judge_end']
+
+AUROC (higher = probe ranks buggy above correct), 95% CI from a bootstrap over tasks
+method                                                                     ALL                           GAP                        CAUGHT
+probe: mean-diff                                           0.731 [0.698,0.765]           0.632 [0.556,0.712]           0.754 [0.705,0.804]
+probe: logistic                                            0.790 [0.762,0.817]           0.713 [0.640,0.781]           0.799 [0.755,0.840]
+baseline: prompt-only probe                                0.711 [0.673,0.746]           0.714 [0.625,0.794]           0.750 [0.701,0.801]
+baseline: low mean log-prob                                0.597 [0.571,0.623]           0.649 [0.569,0.729]           0.608 [0.550,0.662]
+baseline: low min log-prob                                 0.605 [0.581,0.630]           0.634 [0.554,0.713]           0.638 [0.584,0.690]
+baseline: code length                                      0.578 [0.544,0.611]           0.582 [0.491,0.666]           0.629 [0.577,0.686]
+baseline: verbal P(incorrect)                              0.571 [0.538,0.605]           0.569 [0.481,0.661]           0.596 [0.540,0.650]
+baseline: verbal P(bug)                                    0.545 [0.514,0.577]           0.510 [0.425,0.595]           0.565 [0.509,0.620]
+probe: mean-diff [task-centered]                           0.558 [0.534,0.582]           0.477 [0.390,0.567]           0.596 [0.549,0.644]
+probe: logistic [task-centered]                            0.570 [0.546,0.594]           0.472 [0.395,0.555]           0.573 [0.526,0.621]
+baseline: prompt-only probe [task-centered]                0.501 [0.481,0.518]           0.507 [0.428,0.587]           0.523 [0.469,0.576]
+baseline: low mean log-prob [task-centered]                0.522 [0.506,0.538]           0.606 [0.519,0.689]           0.544 [0.489,0.598]
+baseline: verbal P(incorrect) [task-centered]              0.534 [0.512,0.556]           0.493 [0.410,0.578]           0.552 [0.501,0.600]
+baseline: verbal P(bug) [task-centered]                    0.481 [0.463,0.498]           0.475 [0.392,0.558]           0.470 [0.424,0.515]
+
+GAP within-task pairs (missed bug vs test-passing correct, same task): probe ranks the bug higher in 0.522 of 23 pairs
+KNOWING-TESTING GAP (probe: mean-diff [task-centered]): AUROC 0.477 [0.390, 0.567], one-sided p(AUROC <= 0.5) = 0.6830
+KNOWING-TESTING GAP (probe: logistic [task-centered]): AUROC 0.472 [0.395, 0.555], one-sided p(AUROC <= 0.5) = 0.7435
+
+paired comparison: probe minus the model's verbal P(incorrect), 95% CI (bootstrap over tasks)
+  ALL  probe: logistic                    vs verbal: +0.220 [+0.176, +0.262]
+  GAP  probe: logistic                    vs verbal: +0.144 [+0.024, +0.266]
+  ALL  probe: logistic [task-centered]    vs verbal: +0.036 [+0.013, +0.059]
+  GAP  probe: logistic [task-centered]    vs verbal: -0.021 [-0.108, +0.067]
+  ALL  probe: mean-diff [task-centered]   vs verbal: +0.024 [+0.001, +0.047]
+  GAP  probe: mean-diff [task-centered]   vs verbal: -0.017 [-0.108, +0.076]
+
+selected (position, layer) per fold:
+  probe: judge_end@21 (val 0.763), judge_end@13 (val 0.744), judge_end@23 (val 0.763), judge_end@18 (val 0.718), judge_end@22 (val 0.748)
+  prompt-only: prompt_end@16 (val 0.746), prompt_end@13 (val 0.72), prompt_end@11 (val 0.683), prompt_end@13 (val 0.677), prompt_end@13 (val 0.735)
+
+saved ../results/dscoder1b_analysis/probe.json
+[23:54:27] RUN: python transfer.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --train humaneval --test mbpp --out ../results/dscoder1b_analysis/transfer_he_to_mbpp.json > ../results/dscoder1b_analysis/transfer_he_to_mbpp.txt
+train: humaneval (820 solutions, 346 buggy) -> test: mbpp (1890 solutions, 962 buggy; gap set 61 missed bugs vs 73 correct)
+selected on humaneval only: code_end @ layer 23 (validation AUROC 0.642)
+
+AUROC on mbpp (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.703 [0.669,0.733]                     0.702 [0.587,0.803]
+probe: mean-diff                                       0.708 [0.674,0.740]                     0.637 [0.544,0.732]
+baseline: prompt-only probe                            0.716 [0.676,0.756]                     0.674 [0.546,0.789]
+baseline: verbal P(incorrect)                          0.632 [0.594,0.670]                     0.617 [0.509,0.730]
+baseline: low mean log-prob                            0.561 [0.529,0.591]                     0.562 [0.464,0.661]
+probe: logistic [task-centered]                        0.557 [0.536,0.579]                     0.577 [0.474,0.671]
+probe: mean-diff [task-centered]                       0.536 [0.515,0.558]                     0.506 [0.406,0.599]
+baseline: prompt-only probe [task-centered]            0.491 [0.469,0.513]                     0.546 [0.443,0.643]
+baseline: verbal P(incorrect) [task-centered]          0.534 [0.506,0.562]                     0.540 [0.439,0.640]
+baseline: low mean log-prob [task-centered]            0.514 [0.495,0.532]                     0.535 [0.432,0.633]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.071 [+0.024, +0.117]
+  GAP  [raw]             +0.085 [-0.069, +0.224]
+  ALL  [task-centered]   +0.023 [-0.007, +0.054]
+  GAP  [task-centered]   +0.038 [-0.103, +0.173]
+
+saved ../results/dscoder1b_analysis/transfer_he_to_mbpp.json (usable as --probe for rq3.py on mbpp)
+[23:55:48] RUN: python transfer.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --train mbpp --test humaneval --out ../results/dscoder1b_analysis/transfer_mbpp_to_he.json > ../results/dscoder1b_analysis/transfer_mbpp_to_he.txt
+train: mbpp (1890 solutions, 962 buggy) -> test: humaneval (820 solutions, 346 buggy; gap set 21 missed bugs vs 51 correct)
+selected on mbpp only: judge_end @ layer 19 (validation AUROC 0.737)
+
+AUROC on humaneval (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.704 [0.643,0.760]                     0.738 [0.580,0.886]
+probe: mean-diff                                       0.646 [0.579,0.706]                     0.655 [0.493,0.813]
+baseline: prompt-only probe                            0.623 [0.552,0.692]                     0.695 [0.547,0.829]
+baseline: verbal P(incorrect)                          0.428 [0.368,0.490]                     0.505 [0.327,0.663]
+baseline: low mean log-prob                            0.645 [0.605,0.682]                     0.754 [0.630,0.871]
+probe: logistic [task-centered]                        0.543 [0.509,0.578]                     0.476 [0.315,0.649]
+probe: mean-diff [task-centered]                       0.512 [0.476,0.546]                     0.329 [0.182,0.497]
+baseline: prompt-only probe [task-centered]            0.515 [0.480,0.551]                     0.543 [0.425,0.667]
+baseline: verbal P(incorrect) [task-centered]          0.535 [0.497,0.575]                     0.380 [0.240,0.525]
+baseline: low mean log-prob [task-centered]            0.541 [0.511,0.572]                     0.742 [0.616,0.868]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.276 [+0.178, +0.366]
+  GAP  [raw]             +0.232 [-0.020, +0.492]
+  ALL  [task-centered]   +0.008 [-0.031, +0.047]
+  GAP  [task-centered]   +0.096 [-0.099, +0.291]
+
+saved ../results/dscoder1b_analysis/transfer_mbpp_to_he.json (usable as --probe for rq3.py on humaneval)
+[23:57:03] RUN: python rq3.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe.json --budgets 0.1,0.2,0.3,1.0 --escalate spec=selftest_results_spec.jsonl both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/dscoder1b_analysis/rq3.txt
+combined policy uses: ['probe', 'verbal-prob', 'confidence', 'disagreement']
+green solutions (own tests all pass): 206 = 82 missed bugs + 124 correct
+note: 'disagreement' missing for 5 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.713 [0.645, 0.783]
+  probe-centered  0.472 [0.386, 0.552]   vs probe -0.241 [-0.346, -0.135]
+  confidence      0.649 [0.570, 0.732]   vs probe -0.064 [-0.166, +0.033]
+  verbal-prob     0.568 [0.486, 0.654]   vs probe -0.145 [-0.254, -0.022]
+  disagreement    0.588 [0.490, 0.690]   vs probe -0.125 [-0.235, -0.006]
+  combined        0.711 [0.636, 0.780]   vs probe -0.002 [-0.067, +0.064]
+
+=== escalation 'spec': extra tests fail on 28/82 missed bugs, 36/124 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     21   0.034     0.029  0.398
+       probe             21   0.061     0.016  0.810   +0.027 [-0.018, +0.093]  
+       probe-centered    21   0.049     0.016  0.667   +0.015 [-0.025, +0.060]    -0.012 [-0.060, +0.026]
+       confidence        21   0.049     0.016  0.381   +0.015 [-0.028, +0.057]    -0.012 [-0.087, +0.038]
+       verbal-prob       21   0.085     0.024  0.429   +0.051 [-0.004, +0.124]    +0.024 [-0.027, +0.078]
+       disagreement      21   0.110     0.008  0.571   +0.076 [+0.032, +0.140]    +0.049 [-0.028, +0.127]
+       combined          21   0.146     0.008  0.667   +0.112 [+0.046, +0.160]    +0.085 [+0.012, +0.139]
+   20% random (exp.)     41   0.068     0.058  0.398
+       probe             41   0.098     0.073  0.634   +0.029 [-0.019, +0.104]  
+       probe-centered    41   0.061     0.073  0.415   -0.007 [-0.051, +0.044]    -0.037 [-0.103, +0.013]
+       confidence        41   0.098     0.032  0.439   +0.029 [-0.018, +0.101]    +0.000 [-0.082, +0.078]
+       verbal-prob       41   0.122     0.040  0.439   +0.054 [-0.009, +0.123]    +0.024 [-0.048, +0.096]
+       disagreement      41   0.183     0.024  0.561   +0.115 [+0.051, +0.194]    +0.085 [+0.000, +0.172]
+       combined          41   0.171     0.040  0.561   +0.102 [+0.034, +0.182]    +0.073 [+0.009, +0.139]
+   30% random (exp.)     62   0.102     0.087  0.398
+       probe             62   0.122     0.089  0.548   +0.020 [-0.030, +0.100]  
+       probe-centered    62   0.134     0.097  0.419   +0.032 [-0.041, +0.091]    +0.012 [-0.088, +0.074]
+       confidence        62   0.159     0.040  0.532   +0.056 [-0.001, +0.132]    +0.037 [-0.047, +0.114]
+       verbal-prob       62   0.195     0.065  0.500   +0.093 [+0.018, +0.156]    +0.073 [-0.027, +0.149]
+       disagreement      62   0.207     0.056  0.516   +0.105 [+0.032, +0.187]    +0.085 [+0.000, +0.169]
+       combined          62   0.183     0.056  0.613   +0.080 [+0.021, +0.176]    +0.061 [-0.000, +0.140]
+  100% random (exp.)    206   0.341     0.290  0.398
+  escalating everything: 54/82 bugs still shipped, 36 false alarms, 206 extra test runs
+
+=== escalation 'both': extra tests fail on 48/82 missed bugs, 67/124 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     21   0.059     0.054  0.398
+       probe             21   0.110     0.016  0.810   +0.051 [-0.012, +0.127]  
+       probe-centered    21   0.085     0.016  0.667   +0.027 [-0.028, +0.080]    -0.024 [-0.090, +0.026]
+       confidence        21   0.061     0.032  0.381   +0.002 [-0.042, +0.053]    -0.049 [-0.137, +0.023]
+       verbal-prob       21   0.098     0.065  0.429   +0.039 [-0.014, +0.118]    -0.012 [-0.073, +0.055]
+       disagreement      21   0.122     0.040  0.571   +0.063 [+0.013, +0.125]    +0.012 [-0.069, +0.098]
+       combined          21   0.171     0.024  0.667   +0.112 [+0.047, +0.160]    +0.061 [-0.025, +0.123]
+   20% random (exp.)     41   0.117     0.108  0.398
+       probe             41   0.171     0.081  0.634   +0.054 [-0.009, +0.143]  
+       probe-centered    41   0.098     0.121  0.415   -0.020 [-0.070, +0.049]    -0.073 [-0.159, -0.012]
+       confidence        41   0.159     0.081  0.439   +0.041 [-0.018, +0.120]    -0.012 [-0.106, +0.073]
+       verbal-prob       41   0.183     0.113  0.439   +0.066 [-0.005, +0.142]    +0.012 [-0.091, +0.105]
+       disagreement      41   0.232     0.081  0.561   +0.115 [+0.026, +0.183]    +0.061 [-0.057, +0.140]
+       combined          41   0.220     0.081  0.561   +0.102 [+0.035, +0.205]    +0.049 [-0.014, +0.119]
+   30% random (exp.)     62   0.176     0.162  0.398
+       probe             62   0.220     0.153  0.548   +0.044 [-0.022, +0.143]  
+       probe-centered    62   0.195     0.177  0.419   +0.020 [-0.064, +0.096]    -0.024 [-0.152, +0.051]
+       confidence        62   0.280     0.105  0.532   +0.105 [+0.028, +0.190]    +0.061 [-0.052, +0.153]
+       verbal-prob       62   0.293     0.153  0.500   +0.117 [+0.039, +0.201]    +0.073 [-0.056, +0.181]
+       disagreement      62   0.256     0.137  0.516   +0.080 [-0.012, +0.180]    +0.037 [-0.072, +0.128]
+       combined          62   0.293     0.121  0.613   +0.117 [+0.031, +0.204]    +0.073 [-0.015, +0.140]
+  100% random (exp.)    206   0.585     0.540  0.398
+  escalating everything: 34/82 bugs still shipped, 67 false alarms, 206 extra test runs
+[23:57:14] RUN: python rq3.py --runs ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/transfer_he_to_mbpp.json --budgets 0.1,0.2,0.3,1.0 --escalate both=selftest_results_spec.jsonl+selftest_results_spec_first.jsonl > ../results/dscoder1b_analysis/rq3_transfer.txt
+transfer scores (probe trained on humaneval): combined policy disabled
+green solutions (own tests all pass): 134 = 61 missed bugs + 73 correct
+note: 'disagreement' missing for 5 solutions (ranked last)
+
+ranking the green set (missed bugs above correct), AUROC; paired difference vs probe
+  probe           0.702 [0.594, 0.802]
+  probe-centered  0.577 [0.481, 0.666]   vs probe -0.125 [-0.222, -0.034]
+  confidence      0.562 [0.465, 0.655]   vs probe -0.140 [-0.265, -0.002]
+  verbal-prob     0.618 [0.512, 0.730]   vs probe -0.084 [-0.237, +0.066]
+  disagreement    0.585 [0.484, 0.690]   vs probe -0.117 [-0.259, +0.026]
+
+=== escalation 'both': extra tests fail on 34/61 missed bugs, 36/73 correct (coverage 100%) ===
+budget policy             n  caught false al.  prec.   vs random (95% CI)       vs probe (95% CI)
+   10% random (exp.)     13   0.056     0.049  0.455
+       probe             13   0.098     0.014  0.615   +0.043 [+0.002, +0.135]  
+       probe-centered    13   0.098     0.014  0.692   +0.043 [-0.020, +0.102]    +0.000 [-0.087, +0.035]
+       confidence        13   0.049     0.027  0.385   -0.007 [-0.052, +0.051]    -0.049 [-0.141, +0.000]
+       verbal-prob       13   0.098     0.055  0.538   +0.043 [-0.018, +0.134]    +0.000 [-0.107, +0.093]
+       disagreement      13   0.131     0.027  0.615   +0.075 [+0.021, +0.145]    +0.033 [-0.068, +0.096]
+   20% random (exp.)     27   0.111     0.099  0.455
+       probe             27   0.197     0.014  0.741   +0.085 [+0.006, +0.196]  
+       probe-centered    27   0.148     0.041  0.556   +0.036 [-0.021, +0.125]    -0.049 [-0.137, +0.028]
+       confidence        27   0.131     0.096  0.444   +0.020 [-0.052, +0.086]    -0.066 [-0.200, +0.036]
+       verbal-prob       27   0.197     0.082  0.593   +0.085 [+0.015, +0.179]    +0.000 [-0.119, +0.122]
+       disagreement      27   0.246     0.068  0.556   +0.134 [+0.046, +0.200]    +0.049 [-0.100, +0.140]
+   30% random (exp.)     40   0.167     0.148  0.455
+       probe             40   0.246     0.055  0.700   +0.079 [-0.005, +0.209]  
+       probe-centered    40   0.197     0.055  0.625   +0.030 [-0.043, +0.120]    -0.049 [-0.170, +0.018]
+       confidence        40   0.197     0.123  0.475   +0.030 [-0.049, +0.129]    -0.049 [-0.209, +0.081]
+       verbal-prob       40   0.295     0.123  0.575   +0.128 [+0.030, +0.225]    +0.049 [-0.089, +0.143]
+       disagreement      40   0.262     0.110  0.525   +0.095 [+0.009, +0.206]    +0.016 [-0.145, +0.136]
+  100% random (exp.)    134   0.557     0.493  0.455
+  escalating everything: 27/61 bugs still shipped, 36 false alarms, 134 extra test runs
+[23:57:22] RUN: python diagnose.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe.json > ../results/dscoder1b_analysis/diagnose.txt
+test-passing set: 82 missed bugs, 124 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n=  82  AUROC 0.472 [0.395, 0.555]  p(<=0.5)=0.744
+  edge-case-only (pass original, fail extra)   n=  45  AUROC 0.454 [0.340, 0.564]  p(<=0.5)=0.803
+  plain failures (fail original tests)         n=  37  AUROC 0.495 [0.385, 0.596]  p(<=0.5)=0.548
+  share of missed bugs that are edge-case-only: 54.9%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  23 pairs in 18 tasks; probe ranks the bug higher in 0.522 [0.318, 0.714]
+  missed bugs with NO test-passing correct sibling: 37 of 55 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.25)        n=  56  AUROC 0.493 [0.400, 0.578]  p(<=0.5)=0.549
+  unique mistake (disagreement > 0.25)         n=  23  AUROC 0.442 [0.296, 0.596]  p(<=0.5)=0.761
+[23:57:36] RUN: python diagnose.py --runs ../results/dscoder1b_he:humaneval ../results/dscoder1b_mbpp:mbpp --probe ../results/dscoder1b_analysis/probe.json --extra selftest_results_morecorrect.jsonl > ../results/dscoder1b_analysis/diagnose_allcorrect.txt
+extra own-test results: 1012 solutions, 358 with all own tests passing
+test-passing set: 82 missed bugs, 482 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n=  82  AUROC 0.468 [0.391, 0.543]  p(<=0.5)=0.780
+  edge-case-only (pass original, fail extra)   n=  45  AUROC 0.448 [0.336, 0.559]  p(<=0.5)=0.827
+  plain failures (fail original tests)         n=  37  AUROC 0.491 [0.384, 0.594]  p(<=0.5)=0.572
+  share of missed bugs that are edge-case-only: 54.9%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  56 pairs in 21 tasks; probe ranks the bug higher in 0.518 [0.326, 0.719]
+  missed bugs with NO test-passing correct sibling: 34 of 55 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.25)        n=  56  AUROC 0.489 [0.400, 0.572]  p(<=0.5)=0.590
+  unique mistake (disagreement > 0.25)         n=  23  AUROC 0.438 [0.283, 0.589]  p(<=0.5)=0.792
+[23:57:51] summary: ../results/dscoder1b_analysis/SUMMARY.txt
+[23:57:51] ===== DONE: dscoder1b. Full log: ../results/dscoder1b_log.txt =====

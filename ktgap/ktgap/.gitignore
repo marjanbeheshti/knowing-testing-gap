@@ -1,0 +1,10 @@
+results/*/hidden*/
+*.pt
+*.npy
+*.npz
+results/**/hidden/
+*.npz
+venv/
+**/venv/
+__pycache__/
+*.pyc

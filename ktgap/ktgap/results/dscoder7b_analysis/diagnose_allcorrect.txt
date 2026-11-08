@@ -1,0 +1,16 @@
+extra own-test results: 1353 solutions, 748 with all own tests passing
+test-passing set: 183 missed bugs, 975 correct (score: probe: logistic [task-centered])
+
+A1  bug type (each subset vs all test-passing correct solutions)
+  all missed bugs                              n= 183  AUROC 0.532 [0.486, 0.580]  p(<=0.5)=0.090
+  edge-case-only (pass original, fail extra)   n= 107  AUROC 0.499 [0.433, 0.563]  p(<=0.5)=0.496
+  plain failures (fail original tests)         n=  76  AUROC 0.579 [0.523, 0.639]  p(<=0.5)=0.005
+  share of missed bugs that are edge-case-only: 58.5%
+
+A2  true same-task comparisons (missed bug vs correct solution of the same task)
+  98 pairs in 30 tasks; probe ranks the bug higher in 0.643 [0.473, 0.796]
+  missed bugs with NO test-passing correct sibling: 51 of 81 tasks
+
+A3  shared vs unique mistakes (sibling disagreement of the missed bug)
+  shared mistake (disagreement <= 0.00)        n= 102  AUROC 0.604 [0.560, 0.653]  p(<=0.5)=0.000
+  unique mistake (disagreement > 0.00)         n=  81  AUROC 0.442 [0.364, 0.514]  p(<=0.5)=0.941

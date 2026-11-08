@@ -1,0 +1,15 @@
+== spec vs code
+  caught by a valid test: code 0.591 | spec 0.650
+  bug-confirming share of wrong asserts: code 0.125 | spec 0.071
+  caught drop (spec - code)                    +0.059  95% CI [+0.021, +0.100]  bootstrap p = 0.0022
+  bug-confirming increase (code - spec)        +0.053  95% CI [+0.021, +0.090]  bootstrap p = 0.0000
+== warn vs code
+  caught by a valid test: code 0.591 | spec 0.585
+  bug-confirming share of wrong asserts: code 0.125 | spec 0.132
+  caught drop (spec - code)                    -0.005  95% CI [-0.032, +0.021]  bootstrap p = 0.7206
+  bug-confirming increase (code - spec)        -0.007  95% CI [-0.026, +0.012]  bootstrap p = 0.4452
+== spec_first vs code
+  caught by a valid test: code 0.589 | spec 0.633
+  bug-confirming share of wrong asserts: code 0.125 | spec 0.136
+  caught drop (spec - code)                    +0.043  95% CI [+0.009, +0.078]  bootstrap p = 0.0114
+  bug-confirming increase (code - spec)        -0.011  95% CI [-0.036, +0.015]  bootstrap p = 0.4018

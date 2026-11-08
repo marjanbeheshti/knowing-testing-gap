@@ -1,0 +1,8 @@
+buggy solutions: 356 in 110 tasks
+  caught by a valid test: code 0.764 | spec 0.781
+  bug-confirming share of wrong asserts: code 0.084 | spec 0.078
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.017  95% CI [+0.003, +0.033]  bootstrap p = 0.0330
+  bug-confirming increase (code - spec)        +0.007  95% CI [-0.033, +0.051]  bootstrap p = 0.7262
+task-level sign-flip permutation test, caught: p = 0.0724

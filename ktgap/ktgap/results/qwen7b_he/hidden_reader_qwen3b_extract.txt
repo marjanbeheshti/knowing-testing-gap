@@ -1,0 +1,16 @@
+cross-model monitor: Qwen/Qwen2.5-Coder-3B-Instruct reads solutions written by ['Qwen/Qwen2.5-Coder-7B-Instruct']
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights:  11%|█         | 46/434 [00:00<00:00, 441.34it/s]Loading weights:  21%|██        | 91/434 [00:00<00:00, 376.72it/s]Loading weights:  31%|███       | 134/434 [00:00<00:00, 394.77it/s]Loading weights:  44%|████▍     | 192/434 [00:00<00:00, 457.28it/s]Loading weights:  55%|█████▌    | 239/434 [00:00<00:00, 421.97it/s]Loading weights:  67%|██████▋   | 291/434 [00:00<00:00, 448.73it/s]Loading weights:  78%|███████▊  | 337/434 [00:00<00:00, 445.92it/s]Loading weights:  88%|████████▊ | 383/434 [00:00<00:00, 425.40it/s]Loading weights: 100%|██████████| 434/434 [00:00<00:00, 479.21it/s]
+shard 1/13 saved (4s/shard, ~1 min left)
+shard 2/13 saved (3s/shard, ~1 min left)
+shard 3/13 saved (3s/shard, ~0 min left)
+shard 4/13 saved (3s/shard, ~0 min left)
+shard 5/13 saved (2s/shard, ~0 min left)
+shard 6/13 saved (2s/shard, ~0 min left)
+shard 7/13 saved (3s/shard, ~0 min left)
+shard 8/13 saved (3s/shard, ~0 min left)
+shard 9/13 saved (3s/shard, ~0 min left)
+shard 10/13 saved (3s/shard, ~0 min left)
+shard 11/13 saved (3s/shard, ~0 min left)
+shard 12/13 saved (3s/shard, ~0 min left)
+shard 13/13 saved (3s/shard, ~0 min left)
+done: 13 shards in ../results/qwen7b_he/hidden_reader_qwen3b

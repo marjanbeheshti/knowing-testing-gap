@@ -1,0 +1,23 @@
+train: mbpp (1890 solutions, 962 buggy) -> test: humaneval (820 solutions, 346 buggy; gap set 21 missed bugs vs 51 correct)
+selected on mbpp only: judge_end @ layer 19 (validation AUROC 0.737)
+
+AUROC on humaneval (never seen in training), 95% CI from a bootstrap over tasks
+method                                                                 ALL    GAP (missed vs test-passing correct)
+probe: logistic                                        0.704 [0.643,0.760]                     0.738 [0.580,0.886]
+probe: mean-diff                                       0.646 [0.579,0.706]                     0.655 [0.493,0.813]
+baseline: prompt-only probe                            0.623 [0.552,0.692]                     0.695 [0.547,0.829]
+baseline: verbal P(incorrect)                          0.428 [0.368,0.490]                     0.505 [0.327,0.663]
+baseline: low mean log-prob                            0.645 [0.605,0.682]                     0.754 [0.630,0.871]
+probe: logistic [task-centered]                        0.543 [0.509,0.578]                     0.476 [0.315,0.649]
+probe: mean-diff [task-centered]                       0.512 [0.476,0.546]                     0.329 [0.182,0.497]
+baseline: prompt-only probe [task-centered]            0.515 [0.480,0.551]                     0.543 [0.425,0.667]
+baseline: verbal P(incorrect) [task-centered]          0.535 [0.497,0.575]                     0.380 [0.240,0.525]
+baseline: low mean log-prob [task-centered]            0.541 [0.511,0.572]                     0.742 [0.616,0.868]
+
+paired: probe (logistic) minus verbal P(incorrect)
+  ALL  [raw]             +0.276 [+0.178, +0.366]
+  GAP  [raw]             +0.232 [-0.020, +0.492]
+  ALL  [task-centered]   +0.008 [-0.031, +0.047]
+  GAP  [task-centered]   +0.096 [-0.099, +0.291]
+
+saved ../results/dscoder1b_analysis/transfer_mbpp_to_he.json (usable as --probe for rq3.py on humaneval)
