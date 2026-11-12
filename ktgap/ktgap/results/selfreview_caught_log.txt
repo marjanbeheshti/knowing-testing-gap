@@ -1,0 +1,287 @@
+nohup: ignoring input
+../results/dscoder1b_mbpp caught bugs available: 897 -> sampled 200
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 28/219 [00:00<00:00, 261.59it/s]Loading weights:  26%|██▋       | 58/219 [00:00<00:00, 255.54it/s]Loading weights:  50%|█████     | 110/219 [00:00<00:00, 306.59it/s]Loading weights:  64%|██████▍   | 141/219 [00:00<00:00, 252.00it/s]Loading weights:  76%|███████▋  | 167/219 [00:00<00:00, 215.60it/s]Loading weights: 100%|██████████| 219/219 [00:00<00:00, 293.72it/s]
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 64/200 test sets
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 128/200 test sets
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 192/200 test sets
+  generated 8/8 prompts
+  generated 8/8 prompts
+saved 200/200 test sets
+wrote 200 test sets to ../results/dscoder1b_mbpp/selftests_judge_first_caught.jsonl in 477s (0 produced no parsable asserts)
+verdicts: 2 buggy, 143 correct, 55 unparsed
+DONE dscoder1b
+../results/qwen1_5b_mbpp caught bugs available: 772 -> sampled 200
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   4%|▎         | 12/338 [00:00<00:03, 105.19it/s]Loading weights:   7%|▋         | 23/338 [00:00<00:03, 98.81it/s] Loading weights:  29%|██▊       | 97/338 [00:00<00:00, 363.31it/s]Loading weights:  44%|████▍     | 149/338 [00:00<00:00, 420.93it/s]Loading weights:  57%|█████▋    | 193/338 [00:00<00:00, 421.93it/s]Loading weights:  72%|███████▏  | 243/338 [00:00<00:00, 445.61it/s]Loading weights:  86%|████████▌ | 289/338 [00:00<00:00, 389.96it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 420.83it/s]
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 64/200 test sets
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 128/200 test sets
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 192/200 test sets
+  generated 8/8 prompts
+  generated 8/8 prompts
+saved 200/200 test sets
+wrote 200 test sets to ../results/qwen1_5b_mbpp/selftests_judge_first_caught.jsonl in 407s (0 produced no parsable asserts)
+verdicts: 0 buggy, 56 correct, 144 unparsed
+DONE qwen1_5b
+../results/qwen3b_mbpp caught bugs available: 645 -> sampled 200
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights:   9%|▉         | 38/434 [00:00<00:01, 375.50it/s]Loading weights:  25%|██▍       | 107/434 [00:00<00:00, 543.00it/s]Loading weights:  37%|███▋      | 162/434 [00:00<00:00, 508.69it/s]Loading weights:  49%|████▉     | 213/434 [00:00<00:00, 497.35it/s]Loading weights:  61%|██████    | 263/434 [00:00<00:00, 473.95it/s]Loading weights:  74%|███████▍  | 323/434 [00:00<00:00, 491.57it/s]Loading weights:  87%|████████▋ | 376/434 [00:00<00:00, 502.91it/s]Loading weights:  98%|█████████▊| 427/434 [00:00<00:00, 504.43it/s]Loading weights: 100%|██████████| 434/434 [00:00<00:00, 504.65it/s]
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 64/200 test sets
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 128/200 test sets
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+  generated 8/64 prompts
+  generated 16/64 prompts
+  generated 24/64 prompts
+  generated 32/64 prompts
+  generated 40/64 prompts
+  generated 48/64 prompts
+  generated 56/64 prompts
+  generated 64/64 prompts
+saved 192/200 test sets
+  generated 8/8 prompts
+  generated 8/8 prompts
+saved 200/200 test sets
+wrote 200 test sets to ../results/qwen3b_mbpp/selftests_judge_first_caught.jsonl in 442s (0 produced no parsable asserts)
+verdicts: 2 buggy, 181 correct, 17 unparsed
+DONE qwen3b
+../results/qwen7b_mbpp caught bugs available: 497 -> sampled 200
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  14%|█▍        | 47/339 [00:00<00:00, 371.89it/s]Loading weights:  26%|██▌       | 87/339 [00:00<00:00, 321.97it/s]Loading weights:  40%|███▉      | 134/339 [00:00<00:00, 370.67it/s]Loading weights:  57%|█████▋    | 193/339 [00:00<00:00, 445.74it/s]Loading weights:  72%|███████▏  | 245/339 [00:00<00:00, 466.43it/s]Loading weights:  86%|████████▋ | 293/339 [00:00<00:00, 466.49it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 426.85it/s]
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 64/200 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 128/200 test sets
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+  generated 4/64 prompts
+  generated 8/64 prompts
+  generated 12/64 prompts
+  generated 16/64 prompts
+  generated 20/64 prompts
+  generated 24/64 prompts
+  generated 28/64 prompts
+  generated 32/64 prompts
+  generated 36/64 prompts
+  generated 40/64 prompts
+  generated 44/64 prompts
+  generated 48/64 prompts
+  generated 52/64 prompts
+  generated 56/64 prompts
+  generated 60/64 prompts
+  generated 64/64 prompts
+saved 192/200 test sets
+  generated 4/8 prompts
+  generated 8/8 prompts
+  generated 4/8 prompts
+  generated 8/8 prompts
+saved 200/200 test sets
+wrote 200 test sets to ../results/qwen7b_mbpp/selftests_judge_first_caught.jsonl in 680s (0 produced no parsable asserts)
+verdicts: 3 buggy, 173 correct, 24 unparsed
+DONE qwen7b
