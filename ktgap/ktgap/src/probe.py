@@ -264,6 +264,7 @@ def main():
         oof_b, chosen["prompt-only"] = cross_validated_scores(feats, [BASELINE_POSITION], y, groups, args.folds,
                                                               args.c, args.seed)
         scores["baseline: prompt-only probe"] = oof_b["meandiff"]
+        scores["baseline: prompt-only probe (logistic)"] = oof_b["logistic"]
     for key, sign, name in [("mean_logprob", -1, "baseline: low mean log-prob"),
                             ("min_logprob", -1, "baseline: low min log-prob"),
                             ("code_chars", 1, "baseline: code length")]:
