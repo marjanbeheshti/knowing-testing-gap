@@ -40,17 +40,17 @@ say "===== $TAG: $MODEL (generation batch $GB, extraction batch $EB) ====="
 for PAIR in humaneval:he mbpp:mbpp; do
   DS=${PAIR%%:*}; R=$RES/${TAG}_${PAIR##*:}; mkdir -p "$R"
   step "$DS solutions" $R/solutions.jsonl \
-    python generate.py solutions --model "$MODEL" --dataset $DS --n 5 --batch-size $GB --out $R/solutions.jsonl
+    python generate.py solutions --backend ${BACKEND:-hf} --model "$MODEL" --dataset $DS --n 5 --batch-size $GB --out $R/solutions.jsonl
   step "$DS labels" $R/solutions_labeled.jsonl \
     python evaluate.py label --dataset $DS --solutions $R/solutions.jsonl --out $R/solutions_labeled.jsonl
   step "$DS own tests (code mode)" $R/selftests.jsonl \
-    python generate.py tests --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode code \
+    python generate.py tests --backend ${BACKEND:-hf} --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode code \
       --only-buggy-and-n-correct 1 --batch-size $GB --out $R/selftests.jsonl
   step "$DS run own tests" $R/selftest_results.jsonl \
     python evaluate.py run-tests --dataset $DS --solutions $R/solutions_labeled.jsonl --tests $R/selftests.jsonl \
       --out $R/selftest_results.jsonl
   step "$DS spec tests" $R/selftests_spec.jsonl \
-    python generate.py tests --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode spec \
+    python generate.py tests --backend ${BACKEND:-hf} --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode spec \
       --batch-size $GB --out $R/selftests_spec.jsonl
   step "$DS run spec tests" $R/selftest_results_spec.jsonl \
     python evaluate.py run-tests --dataset $DS --solutions $R/solutions_labeled.jsonl --tests $R/selftests_spec.jsonl \
@@ -62,7 +62,7 @@ rows=[json.loads(l) for l in open('$R/selftest_results.jsonl')]
 g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
 open('$R/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')"
   step "$DS spec_first tests (test-passing only)" $R/selftests_spec_first.jsonl \
-    python generate.py tests --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode spec_first \
+    python generate.py tests --backend ${BACKEND:-hf} --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode spec_first \
       --only-ids $R/green_ids.jsonl --batch-size $GB --out $R/selftests_spec_first.jsonl
   step "$DS run spec_first tests" $R/selftest_results_spec_first.jsonl \
     python evaluate.py run-tests --dataset $DS --solutions $R/solutions_labeled.jsonl \
@@ -88,7 +88,7 @@ ids=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in map(json.loads
      if r['correct'] and (r['task_id'],r['sample_id']) not in done]
 open('$R/more_correct_ids.jsonl','w').write(''.join(json.dumps(x)+'\\n' for x in ids)); print(len(ids), 'correct solutions to test')"
     step "$DS own tests, remaining correct solutions" $R/selftests_morecorrect.jsonl \
-      python generate.py tests --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode code \
+      python generate.py tests --backend ${BACKEND:-hf} --model "$MODEL" --dataset $DS --solutions $R/solutions_labeled.jsonl --mode code \
         --only-ids $R/more_correct_ids.jsonl --batch-size $GB --out $R/selftests_morecorrect.jsonl
     step "$DS run own tests, remaining correct solutions" $R/selftest_results_morecorrect.jsonl \
       python evaluate.py run-tests --dataset $DS --solutions $R/solutions_labeled.jsonl \

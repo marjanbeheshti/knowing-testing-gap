@@ -7,7 +7,7 @@ MODEL=${1:?model}; TAG=${2:?tag}; B=${3:-8}
 R=../results/${TAG}_mbpp; OUT=$R/selftests_judge_first.jsonl
 [ -e "$R/green_ids.jsonl" ] || { echo "missing $R/green_ids.jsonl (run run_model.sh first)"; exit 1; }
 if [ ! -e "$OUT" ]; then
-  python generate.py tests --model "$MODEL" --dataset mbpp --solutions $R/solutions_labeled.jsonl --mode judge_first \
+  python generate.py tests --backend ${BACKEND:-hf} --model "$MODEL" --dataset mbpp --solutions $R/solutions_labeled.jsonl --mode judge_first \
     --only-ids $R/green_ids.jsonl --batch-size $B --out $OUT || exit 1
 fi
 python - "$R" "$TAG" <<'EOF' | tee ../results/${TAG}_analysis/selfreview.txt

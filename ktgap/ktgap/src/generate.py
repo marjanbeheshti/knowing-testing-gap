@@ -230,8 +230,114 @@ class VLLMBackend:
         return [[o.text for o in r.outputs] for r in results]
 
 
+
+
+class APIBackend:
+
+    """OpenAI-compatible chat API (OpenAI, Jetstream2 inference service, OpenRouter, ...). No hidden states.
+
+    Env: KTGAP_API_BASE (e.g. https://api.openai.com/v1), KTGAP_API_KEY,
+
+         KTGAP_API_USE_N=0 if the API rejects n>1, KTGAP_API_NO_TOP_P=1 if it rejects top_p with temperature."""
+
+
+
+    def __init__(self, model_name, seed, batch_size):
+
+        import os
+
+        self.model = model_name
+
+        self.base = os.environ["KTGAP_API_BASE"].rstrip("/")
+
+        self.key = os.environ.get("KTGAP_API_KEY", "")
+
+        self.workers = max(1, batch_size)
+
+        self.use_n = os.environ.get("KTGAP_API_USE_N", "1") == "1"
+
+        self.send_top_p = os.environ.get("KTGAP_API_NO_TOP_P", "0") != "1"
+
+
+
+    def chat_text(self, user_msg, history=None):
+
+        # same messages as the HF/vLLM backends, sent as a list instead of templated text
+
+        return [{"role": "system", "content": SYSTEM}] + (history or []) + [{"role": "user", "content": user_msg}]
+
+
+
+    def _call(self, msgs, n, temperature, top_p, max_new_tokens):
+
+        import requests, time
+
+        body = {"model": self.model, "messages": msgs, "max_tokens": max_new_tokens, "temperature": temperature}
+        import json as _j, os as _o
+        body.update(_j.loads(_o.environ.get("KTGAP_API_EXTRA", "{}")))  # e.g. disable thinking
+
+        if self.send_top_p and temperature > 0:
+
+            body["top_p"] = top_p
+
+        outs = []
+
+        while len(outs) < n:
+
+            k = n - len(outs) if self.use_n else 1
+
+            if k > 1: body["n"] = k
+
+            else: body.pop("n", None)
+
+            for attempt in range(8):
+
+                try:
+
+                    r = requests.post(self.base + "/chat/completions", json=body, timeout=300,
+
+                                      headers={"Authorization": f"Bearer {self.key}"})
+
+                    if r.status_code == 200:
+
+                        outs += [(c["message"].get("content") or "") for c in r.json()["choices"]]
+
+                        break
+
+                    if r.status_code in (408, 429, 500, 502, 503, 504):
+
+                        time.sleep(min(60, 2 ** attempt)); continue
+
+                    raise RuntimeError(f"API error {r.status_code}: {r.text[:300]}")
+
+                except requests.exceptions.RequestException:
+
+                    time.sleep(min(60, 2 ** attempt))
+
+            else:
+
+                raise RuntimeError("API: too many retries")
+
+        return outs[:n]
+
+
+
+    def generate(self, prompts, n, temperature, top_p, max_new_tokens):
+
+        from concurrent.futures import ThreadPoolExecutor
+
+        with ThreadPoolExecutor(self.workers) as ex:
+
+            outs = list(ex.map(lambda m: self._call(m, n, temperature, top_p, max_new_tokens), prompts))
+
+        print(f"  generated {len(prompts)}/{len(prompts)} prompts", flush=True)
+
+        return outs
+
+
+
 def make_backend(args):
-    cls = VLLMBackend if args.backend == "vllm" else HFBackend
+    cls = {"vllm": VLLMBackend, "api": APIBackend}.get(args.backend, HFBackend)
     return cls(args.model, args.seed, args.batch_size)
 
 # ---------------------------------------------------------------- stages
@@ -371,7 +477,7 @@ def main():
     ap.add_argument("stage", choices=["solutions", "tests"])
     ap.add_argument("--model", required=True)
     ap.add_argument("--dataset", choices=["humaneval", "mbpp"], default="humaneval")
-    ap.add_argument("--backend", choices=["hf", "vllm"], default="hf")
+    ap.add_argument("--backend", choices=["hf", "vllm", "api"], default="hf")
     ap.add_argument("--out", required=True)
     ap.add_argument("--limit", type=int, default=None, help="first N problems only")
     ap.add_argument("--task-ids", nargs="*", default=None)

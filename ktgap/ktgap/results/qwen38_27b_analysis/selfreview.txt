@@ -1,0 +1,3 @@
+##### self-review, qwen38_27b, green MBPP+ solutions
+missed bugs            n= 267  'correct'   19  'buggy'    0  no verdict  248  flagged buggy: 0.0% of parsed
+green correct          n= 277  'correct'   80  'buggy'    2  no verdict  195  flagged buggy: 2.4% of parsed

@@ -1,0 +1,295 @@
+[21:16:02] ===== qwen38_27b: Qwen/Qwen3.8-27B (generation batch 8, extraction batch 4) =====
+[21:16:02] START humaneval solutions
+[21:16:02] RUN: python generate.py solutions --backend api --model Qwen/Qwen3.8-27B --dataset humaneval --n 5 --batch-size 8 --out ../results/qwen38_27b_he/solutions.jsonl
+  generated 64/64 prompts
+saved 64/164 tasks
+  generated 64/64 prompts
+saved 128/164 tasks
+  generated 36/36 prompts
+saved 164/164 tasks
+wrote 820 solutions to ../results/qwen38_27b_he/solutions.jsonl in 189s
+[21:19:12] START humaneval labels
+[21:19:12] RUN: python evaluate.py label --dataset humaneval --solutions ../results/qwen38_27b_he/solutions.jsonl --out ../results/qwen38_27b_he/solutions_labeled.jsonl
+Load from ground-truth from /home/exouser/.cache/evalplus/fe585eb4df8c88d844eeb463ea4d0302.pkl
+labeled 820 solutions: 708 correct, 112 buggy (28 buggy ones pass the original tests but fail EvalPlus extra tests)
+[21:19:59] START humaneval own tests (code mode)
+[21:19:59] RUN: python generate.py tests --backend api --model Qwen/Qwen3.8-27B --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 8 --out ../results/qwen38_27b_he/selftests.jsonl
+  generated 64/64 prompts
+saved 64/263 test sets
+  generated 64/64 prompts
+saved 128/263 test sets
+  generated 64/64 prompts
+saved 192/263 test sets
+  generated 64/64 prompts
+saved 256/263 test sets
+  generated 7/7 prompts
+saved 263/263 test sets
+wrote 263 test sets to ../results/qwen38_27b_he/selftests.jsonl in 61s (0 produced no parsable asserts)
+[21:21:01] START humaneval run own tests
+[21:21:01] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --tests ../results/qwen38_27b_he/selftests.jsonl --out ../results/qwen38_27b_he/selftest_results.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 263/263 (100.0%)
+assert validity (passes on reference solution): 1245/1314 (94.7%)
+buggy solutions whose tests are all green (MISSED BUGS): 32/112 (28.6%)
+buggy solutions caught by at least one valid assert: 79/112 (70.5%)
+correct solutions with a failing test (false alarms): 17/151 (11.3%)
+[21:21:07] START humaneval spec tests
+[21:21:08] RUN: python generate.py tests --backend api --model Qwen/Qwen3.8-27B --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --mode spec --batch-size 8 --out ../results/qwen38_27b_he/selftests_spec.jsonl
+  generated 64/64 prompts
+saved 64/164 test sets
+  generated 64/64 prompts
+saved 128/164 test sets
+  generated 36/36 prompts
+saved 164/164 test sets
+wrote 164 test sets to ../results/qwen38_27b_he/selftests_spec.jsonl in 46s (1 produced no parsable asserts)
+[21:21:55] START humaneval run spec tests
+[21:21:55] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --tests ../results/qwen38_27b_he/selftests_spec.jsonl --out ../results/qwen38_27b_he/selftest_results_spec.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 815/820 (99.4%)
+assert validity (passes on reference solution): 3925/4075 (96.3%)
+buggy solutions whose tests are all green (MISSED BUGS): 30/107 (28.0%)
+buggy solutions caught by at least one valid assert: 77/107 (72.0%)
+correct solutions with a failing test (false alarms): 82/708 (11.6%)
+[21:22:07] START humaneval test-passing ids
+[21:22:07] RUN: python -c 
+import json
+rows=[json.loads(l) for l in open('../results/qwen38_27b_he/selftest_results.jsonl')]
+g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
+open('../results/qwen38_27b_he/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')
+166 test-passing solutions
+[21:22:07] START humaneval spec_first tests (test-passing only)
+[21:22:07] RUN: python generate.py tests --backend api --model Qwen/Qwen3.8-27B --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --mode spec_first --only-ids ../results/qwen38_27b_he/green_ids.jsonl --batch-size 8 --out ../results/qwen38_27b_he/selftests_spec_first.jsonl
+  generated 64/64 prompts
+saved 64/166 test sets
+  generated 64/64 prompts
+saved 128/166 test sets
+  generated 38/38 prompts
+saved 166/166 test sets
+wrote 166 test sets to ../results/qwen38_27b_he/selftests_spec_first.jsonl in 64s (1 produced no parsable asserts)
+[21:23:12] START humaneval run spec_first tests
+[21:23:12] RUN: python evaluate.py run-tests --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --tests ../results/qwen38_27b_he/selftests_spec_first.jsonl --out ../results/qwen38_27b_he/selftest_results_spec_first.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 165/166 (99.4%)
+assert validity (passes on reference solution): 795/805 (98.8%)
+buggy solutions whose tests are all green (MISSED BUGS): 29/32 (90.6%)
+buggy solutions caught by at least one valid assert: 3/32 (9.4%)
+correct solutions with a failing test (false alarms): 3/133 (2.3%)
+[21:23:17] START humaneval hidden states
+[21:23:17] RUN: bash -c python extract.py --model 'Qwen/Qwen3.8-27B' --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --framings gen,judge --batch-size 4 --out-dir ../results/qwen38_27b_he/hidden && touch ../results/qwen38_27b_he/hidden/DONE
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 2108.76 MB. The target location /media/volume/ktgap-data/hf_cache/hub/models--Qwen--Qwen3.8-27B/blobs only has 2019.75 MB free disk space.
+  warnings.warn(
+Fetching 18 files:   0%|          | 0/18 [01:20<?, ?it/s]
+Traceback (most recent call last):
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/extract.py", line 281, in <module>
+    main()
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/src/extract.py", line 206, in main
+    model = AutoModelForCausalLM.from_pretrained(args.model, dtype=dtype).to(device).eval()
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 411, in from_pretrained
+    return model_class.from_pretrained(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4242, in from_pretrained
+    checkpoint_files, sharded_metadata = _get_resolved_checkpoint_files(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 793, in _get_resolved_checkpoint_files
+    checkpoint_files, sharded_metadata = get_checkpoint_shard_files(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/utils/hub.py", line 980, in get_checkpoint_shard_files
+    cached_filenames = cached_files(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/utils/hub.py", line 634, in cached_files
+    raise e
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/transformers/utils/hub.py", line 552, in cached_files
+    snapshot_download(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+    return fn(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+    hf_thread_map(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+    results[future_to_index[future]] = future.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+    hf_hub_download(  # type: ignore
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+    return fn(*args, **kwargs)
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+    xet_get(
+  File "/media/volume/ktgap-data/knowing-testing-gap/ktgap/ktgap/venv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+    with session.new_file_download_group(
+RuntimeError: Task error: File reconstruction error: Internal Writer Error: Background writer channel closed
+[21:24:49] FAILED (exit 1): bash -c python extract.py --model 'Qwen/Qwen3.8-27B' --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --framings gen,judge --batch-size 4 --out-dir ../results/qwen38_27b_he/hidden && touch ../results/qwen38_27b_he/hidden/DONE
+[21:24:49] fix the problem, then re-run the same command; finished steps are skipped
+[21:35:29] ===== qwen38_27b: Qwen/Qwen3.8-27B (generation batch 8, extraction batch 4) =====
+[21:35:29] skip  humaneval solutions (../results/qwen38_27b_he/solutions.jsonl exists)
+[21:35:29] skip  humaneval labels (../results/qwen38_27b_he/solutions_labeled.jsonl exists)
+[21:35:29] skip  humaneval own tests (code mode) (../results/qwen38_27b_he/selftests.jsonl exists)
+[21:35:29] skip  humaneval run own tests (../results/qwen38_27b_he/selftest_results.jsonl exists)
+[21:35:29] skip  humaneval spec tests (../results/qwen38_27b_he/selftests_spec.jsonl exists)
+[21:35:29] skip  humaneval run spec tests (../results/qwen38_27b_he/selftest_results_spec.jsonl exists)
+[21:35:29] skip  humaneval test-passing ids (../results/qwen38_27b_he/green_ids.jsonl exists)
+[21:35:29] skip  humaneval spec_first tests (test-passing only) (../results/qwen38_27b_he/selftests_spec_first.jsonl exists)
+[21:35:29] skip  humaneval run spec_first tests (../results/qwen38_27b_he/selftest_results_spec_first.jsonl exists)
+[21:35:29] skip  humaneval hidden states (../results/qwen38_27b_he/hidden/DONE exists)
+[21:35:29] skip  humaneval verbal yes/no (../results/qwen38_27b_he/hidden_yesno/DONE exists)
+[21:35:29] START humaneval sibling disagreement
+[21:35:29] RUN: python disagree.py --dataset humaneval --solutions ../results/qwen38_27b_he/solutions_labeled.jsonl --tests ../results/qwen38_27b_he/selftests_spec.jsonl --out ../results/qwen38_27b_he/disagree.jsonl
+scored 815/820 solutions (163 tasks with inputs)
+sanity: AUROC of disagreement for buggy vs correct (all solutions) = 0.794
+[21:35:35] START mbpp solutions
+[21:35:35] RUN: python generate.py solutions --backend api --model Qwen/Qwen3.8-27B --dataset mbpp --n 5 --batch-size 8 --out ../results/qwen38_27b_mbpp/solutions.jsonl
+  generated 64/64 prompts
+saved 64/378 tasks
+  generated 64/64 prompts
+saved 128/378 tasks
+  generated 64/64 prompts
+saved 192/378 tasks
+  generated 64/64 prompts
+saved 256/378 tasks
+  generated 64/64 prompts
+saved 320/378 tasks
+  generated 58/58 prompts
+saved 378/378 tasks
+wrote 1890 solutions to ../results/qwen38_27b_mbpp/solutions.jsonl in 301s
+[21:40:38] START mbpp labels
+[21:40:38] RUN: python evaluate.py label --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions.jsonl --out ../results/qwen38_27b_mbpp/solutions_labeled.jsonl
+Load from ground-truth from /home/exouser/.cache/evalplus/ee43ecabebf20deef4bb776a405ac5b1.pkl
+labeled 1890 solutions: 1426 correct, 464 buggy (249 buggy ones pass the original tests but fail EvalPlus extra tests)
+[21:44:00] START mbpp own tests (code mode)
+[21:44:00] RUN: python generate.py tests --backend api --model Qwen/Qwen3.8-27B --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --mode code --only-buggy-and-n-correct 1 --batch-size 8 --out ../results/qwen38_27b_mbpp/selftests.jsonl
+  generated 64/64 prompts
+saved 64/778 test sets
+  generated 64/64 prompts
+saved 128/778 test sets
+  generated 64/64 prompts
+saved 192/778 test sets
+  generated 64/64 prompts
+saved 256/778 test sets
+  generated 64/64 prompts
+saved 320/778 test sets
+  generated 64/64 prompts
+saved 384/778 test sets
+  generated 64/64 prompts
+saved 448/778 test sets
+  generated 64/64 prompts
+saved 512/778 test sets
+  generated 64/64 prompts
+saved 576/778 test sets
+  generated 64/64 prompts
+saved 640/778 test sets
+  generated 64/64 prompts
+saved 704/778 test sets
+  generated 64/64 prompts
+saved 768/778 test sets
+  generated 10/10 prompts
+saved 778/778 test sets
+wrote 778 test sets to ../results/qwen38_27b_mbpp/selftests.jsonl in 173s (0 produced no parsable asserts)
+[21:46:55] START mbpp run own tests
+[21:46:55] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --tests ../results/qwen38_27b_mbpp/selftests.jsonl --out ../results/qwen38_27b_mbpp/selftest_results.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 778/778 (100.0%)
+assert validity (passes on reference solution): 3208/3880 (82.7%)
+buggy solutions whose tests are all green (MISSED BUGS): 267/464 (57.5%)
+buggy solutions caught by at least one valid assert: 168/464 (36.2%)
+correct solutions with a failing test (false alarms): 37/314 (11.8%)
+[21:47:17] START mbpp spec tests
+[21:47:17] RUN: python generate.py tests --backend api --model Qwen/Qwen3.8-27B --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --mode spec --batch-size 8 --out ../results/qwen38_27b_mbpp/selftests_spec.jsonl
+  generated 64/64 prompts
+saved 64/378 test sets
+  generated 64/64 prompts
+saved 128/378 test sets
+  generated 64/64 prompts
+saved 192/378 test sets
+  generated 64/64 prompts
+saved 256/378 test sets
+  generated 64/64 prompts
+saved 320/378 test sets
+  generated 58/58 prompts
+saved 378/378 test sets
+wrote 378 test sets to ../results/qwen38_27b_mbpp/selftests_spec.jsonl in 80s (0 produced no parsable asserts)
+[21:48:39] START mbpp run spec tests
+[21:48:39] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --tests ../results/qwen38_27b_mbpp/selftests_spec.jsonl --out ../results/qwen38_27b_mbpp/selftest_results_spec.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 1890/1890 (100.0%)
+assert validity (passes on reference solution): 8425/9420 (89.4%)
+buggy solutions whose tests are all green (MISSED BUGS): 206/464 (44.4%)
+buggy solutions caught by at least one valid assert: 195/464 (42.0%)
+correct solutions with a failing test (false alarms): 268/1426 (18.8%)
+[21:49:05] START mbpp test-passing ids
+[21:49:05] RUN: python -c 
+import json
+rows=[json.loads(l) for l in open('../results/qwen38_27b_mbpp/selftest_results.jsonl')]
+g=[{'task_id':r['task_id'],'sample_id':r['sample_id']} for r in rows if r['n_asserts']>0 and r['tests_all_pass']]
+open('../results/qwen38_27b_mbpp/green_ids.jsonl','w').write('\n'.join(json.dumps(x) for x in g)+'\n'); print(len(g), 'test-passing solutions')
+544 test-passing solutions
+[21:49:05] START mbpp spec_first tests (test-passing only)
+[21:49:05] RUN: python generate.py tests --backend api --model Qwen/Qwen3.8-27B --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --mode spec_first --only-ids ../results/qwen38_27b_mbpp/green_ids.jsonl --batch-size 8 --out ../results/qwen38_27b_mbpp/selftests_spec_first.jsonl
+  generated 64/64 prompts
+saved 64/544 test sets
+  generated 64/64 prompts
+saved 128/544 test sets
+  generated 64/64 prompts
+saved 192/544 test sets
+  generated 64/64 prompts
+saved 256/544 test sets
+  generated 64/64 prompts
+saved 320/544 test sets
+  generated 64/64 prompts
+saved 384/544 test sets
+  generated 64/64 prompts
+saved 448/544 test sets
+  generated 64/64 prompts
+saved 512/544 test sets
+  generated 32/32 prompts
+saved 544/544 test sets
+wrote 544 test sets to ../results/qwen38_27b_mbpp/selftests_spec_first.jsonl in 219s (3 produced no parsable asserts)
+[21:52:45] START mbpp run spec_first tests
+[21:52:45] RUN: python evaluate.py run-tests --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --tests ../results/qwen38_27b_mbpp/selftests_spec_first.jsonl --out ../results/qwen38_27b_mbpp/selftest_results_spec_first.jsonl
+
+=== summary ===
+pairs with at least one parsable assert: 541/544 (99.4%)
+assert validity (passes on reference solution): 2324/2628 (88.4%)
+buggy solutions whose tests are all green (MISSED BUGS): 256/267 (95.9%)
+buggy solutions caught by at least one valid assert: 4/267 (1.5%)
+correct solutions with a failing test (false alarms): 10/274 (3.6%)
+[21:52:58] skip  mbpp hidden states (../results/qwen38_27b_mbpp/hidden/DONE exists)
+[21:52:58] skip  mbpp verbal yes/no (../results/qwen38_27b_mbpp/hidden_yesno/DONE exists)
+[21:52:58] START mbpp sibling disagreement
+[21:52:58] RUN: python disagree.py --dataset mbpp --solutions ../results/qwen38_27b_mbpp/solutions_labeled.jsonl --tests ../results/qwen38_27b_mbpp/selftests_spec.jsonl --out ../results/qwen38_27b_mbpp/disagree.jsonl
+scored 1890/1890 solutions (378 tasks with inputs)
+sanity: AUROC of disagreement for buggy vs correct (all solutions) = 0.704
+[21:53:12] START analysis -> ../results/qwen38_27b_analysis
+[21:53:12] RUN: python stats.py modes --code ../results/qwen38_27b_he/selftest_results.jsonl --spec ../results/qwen38_27b_he/selftest_results_spec.jsonl > ../results/qwen38_27b_analysis/stats_he.txt
+buggy solutions: 107 in 37 tasks
+  caught by a valid test: code 0.692 | spec 0.720
+  bug-confirming share of wrong asserts: code 0.171 | spec 0.000
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.028  95% CI [+0.000, +0.066]  bootstrap p = 0.0844
+  bug-confirming increase (code - spec)        +0.171  95% CI [+0.049, +0.435]  bootstrap p = 0.0028
+task-level sign-flip permutation test, caught: p = 0.2472
+[21:53:12] RUN: python stats.py modes --code ../results/qwen38_27b_mbpp/selftest_results.jsonl --spec ../results/qwen38_27b_mbpp/selftest_results_spec.jsonl > ../results/qwen38_27b_analysis/stats_mbpp.txt
+buggy solutions: 464 in 132 tasks
+  caught by a valid test: code 0.362 | spec 0.420
+  bug-confirming share of wrong asserts: code 0.729 | spec 0.446
+
+task-level bootstrap (positive = worse when the model sees its own code):
+  caught drop (spec - code)                    +0.058  95% CI [+0.023, +0.100]  bootstrap p = 0.0000
+  bug-confirming increase (code - spec)        +0.283  95% CI [+0.175, +0.389]  bootstrap p = 0.0000
+task-level sign-flip permutation test, caught: p = 0.0015
+[21:53:13] RUN: python probe.py --runs ../results/qwen38_27b_he:humaneval ../results/qwen38_27b_mbpp:mbpp --out ../results/qwen38_27b_analysis/probe.json > ../results/qwen38_27b_analysis/probe.txt
+no hidden-state shards in ../results/qwen38_27b_he/hidden (run extract.py first)
+[21:53:14] FAILED (exit 1): python probe.py --runs ../results/qwen38_27b_he:humaneval ../results/qwen38_27b_mbpp:mbpp --out ../results/qwen38_27b_analysis/probe.json
