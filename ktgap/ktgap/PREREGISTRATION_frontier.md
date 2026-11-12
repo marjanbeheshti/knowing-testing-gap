@@ -25,3 +25,16 @@ Reporting: results will be reported in the paper whatever they show, including a
 
 or too few buggy solutions to test.
 
+
+
+
+## Amendment (before the self-review rerun)
+
+The self-review step uses a fixed 256-token limit for the review. For Qwen3.8-27B, 443 of 544
+
+reviews were cut off before the verdict line (353 end mid-sentence). We therefore rerun the
+
+self-review with a 1024-token limit, keeping everything else identical, and will report both
+
+runs (256 tokens: 101 parsed verdicts; 1024 tokens: as observed). RQ1 is unaffected.
+
