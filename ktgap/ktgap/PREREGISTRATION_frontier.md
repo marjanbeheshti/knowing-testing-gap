@@ -5,7 +5,7 @@ Written before any frontier-model results were generated.
 
 
 
-Model: <filled in in step 2, before running>
+Model: Qwen/Qwen3.8-27B via the Jetstream2 inference service (thinking disabled), chosen before running.
 
 Protocol: identical to the four open models (same prompts, 5 solutions per task at T=0.8,
 
